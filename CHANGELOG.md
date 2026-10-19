@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.24 — First-visit trail and UI declutter
+
+- Added a derived **Suggested next move** panel for first-time orientation.
+- Starter progression covers selection, bridge creation, first migration cycle, resonance building, germination, and handoff to Field Questions.
+- No new persisted tutorial state or schema bump.
+- Collapsed advanced ecology panels by default to reduce mobile/sidebar overload.
+- Kept Last Cycle Report and Field Questions prominent.
+- Added invariant coverage for every starter-guide stage.
+- Extended the real Chrome smoke to require starter guidance on the deployed page and verify that it advances after bridge creation.
+- Canonical browser verification now polls for the exact deployed version/schema before exercising the live page.
+
+
 ## v0.23 — Transplant provenance
 
 - Added a bounded world-level SG1 transplant-hop count, capped at 99.
