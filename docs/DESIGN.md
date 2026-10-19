@@ -100,6 +100,28 @@ New islands:
 
 The first successful birth unlocks **New Land**. Filling all seven stable sites unlocks **Seven-Island Sky**.
 
+## Junction ecologies
+
+Mature route bonds can interact when they meet at one island.
+
+Junction state is **derived**, not persisted. It is recomputed from the currently active mature bonds incident to each island, so severing or changing routes changes the junction immediately.
+
+Current junction ecologies:
+
+- **Scribe Orchard** — Rootway + Echo Span; pulses +1 life and +1 memory to the center island each cycle.
+- **Prism Nursery** — Rootway + Fold Thread; pulses +1 life and +1 strangeness.
+- **Dream Estuary** — Echo Span + Fold Thread; pulses +1 memory and +1 strangeness.
+- **Confluence Knot** — a Braided Bond meets at least one other mature bond; pulses +1 to all three traits.
+- **Triune Loom** — Rootway + Echo Span + Fold Thread converge on one island; pulses +1 to all three traits.
+
+Junction pulses happen after ordinary island evolution and before macro-climate is recorded for the cycle. This means relationship structure can alter climate and later role history without being a separate stored resource.
+
+The first observation of each junction ecology becomes a discovery. The Last Cycle Report lists every junction ecology that pulsed during the cycle.
+
+The canvas marks active junction centers nonessentially; the sidebar exposes the same information textually.
+
+Field Questions include a twelfth optional prompt: create a **Triune Loom** by converging all three specialized bond families on one island.
+
 ## Typed route bonds
 
 Route memory now records **what** crossed a relationship, not only how many total crossings occurred.
@@ -360,7 +382,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **eleven** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **twelve** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -374,7 +396,8 @@ Current questions ask whether a visitor can:
 - sustain one macro-climate long enough to trigger a sky phenomenon;
 - accumulate enough typed migration history for a newborn island to inherit an echo lineage;
 - guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind;
-- develop one route into a Braided Bond by building substantial history in all three signal families.
+- develop one route into a Braided Bond by building substantial history in all three signal families;
+- converge Rootway, Echo Span, and Fold Thread on one island to form a Triune Loom.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
