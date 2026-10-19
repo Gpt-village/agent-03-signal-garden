@@ -729,7 +729,8 @@
       {id:"lineage",done:state.islands.some(function(a){return a.lineage&&a.lineage!=="none"}),text:"Can enough migration history accumulate for a newborn island to inherit an echo lineage?"},
       {id:"succession",done:state.islands.some(function(a){return a.palimpsest}),text:"Can one island genuinely live through grove-, archive-, and fold-mind roles and become a Palimpsest Mind?"},
       {id:"bond",done:routeBonds().some(function(b){return b.kind==="braided"}),text:"Can one relationship remember all three signal families strongly enough to become a Braided Bond?"},
-      {id:"junction",done:junctionEcologies().some(function(j){return j.kind==="triune-loom"}),text:"Can Rootway, Echo Span, and Fold Thread all converge on one island to form a Triune Loom?"}
+      {id:"junction",done:junctionEcologies().some(function(j){return j.kind==="triune-loom"}),text:"Can Rootway, Echo Span, and Fold Thread all converge on one island to form a Triune Loom?"},
+      {id:"constellation",done:(networkConstellation()||{}).kind==="mesh-choir",text:"Can the whole active network become dense enough to form a Mesh Choir?"}
     ];
   }
   function symbiosisSpecies(){
@@ -925,6 +926,7 @@
     var transfers=migrateSignals();
     evolve();
     var junctions=applyJunctionEcologies();
+    var constellation=applyNetworkConstellation();
     var afterClimate=recordClimate();
     var phenomenon=advanceClimatePhenomenon();
     updateRoleHistories();
@@ -941,6 +943,7 @@
       climateAfter:afterClimate.name,
       phenomenon:phenomenon&&state.climateStreak%3===0?phenomenon.name:null,
       junctions:junctions.map(function(j){return {island:j.island,name:j.name,kind:j.kind,bonds:j.bonds.slice()}}),
+      constellation:constellation?{name:constellation.name,kind:constellation.kind,effect:constellation.effect}:null,
       roleChanges:roleChanges
     };
     cue("cycle");save();renderUI();
