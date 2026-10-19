@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.32 — Resource-gated action explanations
+
+- Germination now exposes a nearby status explaining exactly which resources are missing.
+- Germination reports a distinct full-capacity state once all seven stable sites are occupied.
+- Root / Echo / Fold and Clear glyph controls now expose their different costs explicitly.
+- Glyph status distinguishes no selection, insufficient focus, insufficient resonance, available changes, and already-selected no-op states.
+- Selected/no-op glyph actions are disabled rather than allowing accidental resource use.
+- Relevant controls reference the explanatory status text.
+- No schema bump: this is interface/usability state only.
+- Canonical invariants, Pages deployment, and deployed Chrome smoke passed for the v0.32 head.
+
+
 ## v0.31 — Forced-colors / high-contrast support
 
 - Added a visible **Contrast · custom / forced** HUD indicator.
