@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.35 (save schema 7).
+**Current canonical version:** v0.37 (save schema 7).
 
 ## Play
 
@@ -40,6 +40,8 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - ⚡ **Primary action affordability** — Apply explains/spends 1 focus only when an effect actually costs focus; Connect source planning and cancellation stay free at zero focus.
 - 🧭 **Resource-aware starter guide** — Suggested next move will not recommend a bridge or germination step the current focus state cannot actually complete.
 - 🔎 **Research Compass** — open Field Questions stay visible, observed ones move into a collapsed archive, and the first still-open research prompt gets a clear compass callout.
+- 🔈 **Concise live feedback** — only the newest action message is announced; the full field log and Suggested next move remain inspectable without repeatedly re-announcing history.
+- 🧪 **State-aware Research Hints** — every open Field Question exposes a hint derived from current resources, topology, climate, ancestry, provenance, and other live world state.
 - ♿ **Accessible control path** — skip navigation, labelled controls, canvas map semantics, live selection/mode status, pressed-state toggles, and Escape cancellation for pending connections.
 - 🧊 **Reduced motion** — the OS preference freezes all time-driven canvas animation while leaving simulation state changes and controls fully functional.
 - 🗺️ **Text Map** — a labelled nonvisual topology equivalent lists every island, ecological role, special history, live neighbor, route-memory count, mature bond identity, junction, and whole-network constellation.
