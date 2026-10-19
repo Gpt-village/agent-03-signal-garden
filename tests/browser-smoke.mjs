@@ -183,7 +183,7 @@ try{
 
   await evaluate(`document.querySelector('#quickNav a[href="#actionsSection"]').focus()`);
   await key("Enter","Enter",13);
-  await waitFor("location.hash==='#actionsSection' && document.activeElement && document.activeElement.id==='actionsSection'","keyboard quick-nav destination focus");
+  await waitFor("location.hash==='#actionsSection' && document.activeElement && document.activeElement.id==='actionsSection' && document.querySelector('#quickNav a[href=\"#actionsSection\"]').getAttribute('aria-current')==='location'","keyboard quick-nav destination focus and current state");
   const actionsFocusStyle=await evaluate(`(()=>{
     const e=document.getElementById('actionsSection'),cs=getComputedStyle(e);
     return {outlineStyle:cs.outlineStyle,outlineWidth:parseFloat(cs.outlineWidth),outlineOffset:parseFloat(cs.outlineOffset)};
@@ -195,7 +195,7 @@ try{
   assert.deepEqual(actionsCurrent.filter(x=>x[1]),[["#actionsSection","location"]],"keyboard fragment jump should mark only Actions as current");
 
   await evaluate(`document.querySelector('#quickNav a[href="#researchSection"]').click()`);
-  await waitFor("location.hash==='#researchSection'","Research section anchor navigation");
+  await waitFor("location.hash==='#researchSection' && document.activeElement && document.activeElement.id==='researchSection' && document.querySelector('#quickNav a[href=\"#researchSection\"]').getAttribute('aria-current')==='location'","Research section anchor navigation and current state");
   const researchTargetTop=Number(await evaluate("document.getElementById('researchSection').getBoundingClientRect().top"));
   assert.ok(researchTargetTop>=0&&researchTargetTop<844,"Research jump target should land visibly in the mobile viewport");
   const researchFocused=await evaluate("document.activeElement && document.activeElement.id");
@@ -205,7 +205,7 @@ try{
   const historyInitiallyOpen=await evaluate("document.getElementById('historySection').open");
   assert.equal(historyInitiallyOpen,false,"History should begin collapsed");
   await evaluate(`document.querySelector('#quickNav a[href="#historySection"]').click()`);
-  await waitFor("location.hash==='#historySection' && document.getElementById('historySection').open===true","History section reveal and anchor navigation");
+  await waitFor("location.hash==='#historySection' && document.getElementById('historySection').open===true && document.activeElement && document.activeElement.id==='historySection' && document.querySelector('#quickNav a[href=\"#historySection\"]').getAttribute('aria-current')==='location'","History section reveal, focus, and current state");
   const historyTargetTop=Number(await evaluate("document.getElementById('historySection').getBoundingClientRect().top"));
   assert.ok(historyTargetTop>=0&&historyTargetTop<844,"History jump target should land visibly in the mobile viewport");
   const historyFocused=await evaluate("document.activeElement && document.activeElement.id");
@@ -232,7 +232,7 @@ try{
   assert.ok(narrowPhone.scrollMargin>=narrowPhone.navHeight+8,"mobile fragment clearance should exceed the rendered sticky-nav height");
 
   await evaluate(`document.querySelector('#quickNav a[href="#specimenSection"]').click()`);
-  await waitFor("location.hash==='#specimenSection'","Specimen section small-phone anchor navigation");
+  await waitFor("location.hash==='#specimenSection' && document.activeElement && document.activeElement.id==='specimenSection' && document.querySelector('#quickNav a[href=\"#specimenSection\"]').getAttribute('aria-current')==='location'","Specimen section small-phone anchor navigation and current state");
   const narrowLanding=await evaluate(`(()=>{
     const nav=document.getElementById('quickNav').getBoundingClientRect();
     const target=document.getElementById('specimenSection').getBoundingClientRect();
@@ -245,7 +245,7 @@ try{
   assert.deepEqual(specimenCurrent,[["#specimenSection","location"]],"small-phone Specimen jump should mark Specimen current");
 
   await evaluate("history.back()");
-  await waitFor("location.hash==='#historySection'","native Back fragment navigation");
+  await waitFor("location.hash==='#historySection' && document.querySelector('#quickNav a[href=\"#historySection\"]').getAttribute('aria-current')==='location'","native Back fragment navigation and current state");
   const backCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).filter(a=>a.hasAttribute('aria-current')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
   assert.deepEqual(backCurrent,[["#historySection","location"]],"browser Back should restore aria-current through hashchange");
 
