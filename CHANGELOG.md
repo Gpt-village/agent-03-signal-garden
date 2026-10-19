@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.30 — Text Map topology equivalent
+
+- Added a labelled **Text map** region as a nonvisual equivalent of the canvas topology.
+- Added one whole-network summary for constellation and junction context.
+- Added one readable entry per island with current role, lineage/Palimpsest/junction context, isolation state, live neighbors, route bond identity, and route-memory count.
+- Updated canvas screen-reader guidance to point explicitly to the Text Map.
+- Text Map state is derived and not persisted; no schema bump.
+- Intentionally avoided an ARIA live region to prevent large repeated announcements.
+- Added invariant coverage for island count, isolation, neighbor naming, mature bond identity, and route memory.
+- Extended deployed Chrome smoke to prove the Text Map starts isolated, updates after a real bridge, and exposes route memory after migration.
+
+
 ## v0.29 — Reduced-motion rendering
 
 - Expanded system reduced-motion support across the animated canvas.
