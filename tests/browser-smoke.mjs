@@ -237,6 +237,23 @@ try{
   assert.equal(narrowPhone.navRows,2,"six quick links should occupy exactly two rows at 320px");
   assert.ok(narrowPhone.scrollMargin>=narrowPhone.navHeight+8,"mobile fragment clearance should exceed the rendered sticky-nav height");
 
+  const mobileTargets=await evaluate(`(()=>{
+    const nodes=Array.from(document.querySelectorAll('button,#quickNav a,summary'));
+    const visible=nodes.map((e,i)=>({e,i,r:e.getBoundingClientRect(),cs:getComputedStyle(e)})).filter(x=>x.cs.display!=="none"&&x.cs.visibility!=="hidden"&&x.r.width>0&&x.r.height>0);
+    return {
+      count:visible.length,
+      tooSmall:visible.filter(x=>x.r.width<24||x.r.height<24).map(x=>({
+        tag:x.e.tagName,
+        id:x.e.id||"",
+        text:(x.e.textContent||"").trim().slice(0,60),
+        width:x.r.width,
+        height:x.r.height
+      }))
+    };
+  })()`);
+  assert.ok(mobileTargets.count>=20,"320px target-size audit should inspect a meaningful set of visible controls");
+  assert.deepEqual(mobileTargets.tooSmall,[],"every visible button, quick-nav link, and summary should measure at least 24x24 CSS px");
+
   await evaluate(`document.querySelector('#quickNav a[href="#specimenSection"]').click()`);
   await waitFor("location.hash==='#specimenSection' && document.activeElement && document.activeElement.id==='specimenSection' && document.querySelector('#quickNav a[href=\"#specimenSection\"]').getAttribute('aria-current')==='location'","Specimen section small-phone anchor navigation and current state");
   const narrowLanding=await evaluate(`(()=>{
