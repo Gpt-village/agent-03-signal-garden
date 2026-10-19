@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.24 (save schema 7).
+**Current canonical version:** v0.25 (save schema 7).
 
 ## Play
 
@@ -37,6 +37,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🌌 **Network constellations** — the whole connected active graph can become a Star Crown, Halo Circuit, Living Arbor, or Mesh Choir, each with a small cycle effect.
 - 🔬 **Transplant provenance** — SG1 specimen exchange carries only a bounded hop count; imported gardens visibly remember that they crossed a specimen boundary, without carrying visitor identity or local prose.
 - 🧭 **Suggested next move** — the sidebar now gives a derived starter trail (select → connect → cycle → resonance → germination → open research) and keeps advanced ecology panels collapsed by default.
+- 📦 **Specimen Dock** — generate/copy SG1 state into a real textarea, paste/import specimens without browser prompts, clear the dock safely, and get inline validation/status feedback.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
