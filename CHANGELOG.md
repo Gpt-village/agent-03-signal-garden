@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.45 — Two-row mobile HUD
+
+- Bounded the compact mobile HUD to exactly two rows.
+- Uses a six-column grid at narrow widths.
+- Cycle / Focus / Resonance form the first row; Climate / Phenomenon form the second.
+- Long labels stay single-line and ellipsize rather than creating extra HUD rows.
+- No visible-status set change from v0.44.
+- No save-schema or simulation-rule changes.
+- Structural tests guard the grid/span contract.
+- Real Chrome coverage verifies exactly two HUD rows on the mobile viewport.
+- The v0.45 game code is green in invariants and deployed Chrome.
+
+
 ## v0.44 — Compact mobile HUD
 
 - Constrained the map HUD between explicit left/right canvas margins.
