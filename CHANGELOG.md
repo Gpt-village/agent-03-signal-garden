@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.47 — Visible fragment focus
+
+- Added explicit `:focus-visible` styling to all six quick-navigation fragment destinations.
+- Keyboard navigation now makes the focused Map / Actions / Island / Research / History / Specimen section visibly obvious after native fragment focus transfer.
+- Uses a 2 px cyan outline with 4 px offset.
+- Mouse/touch jumps are not forced to show the keyboard-only ring.
+- No save-schema or simulation-rule changes.
+- Invariant coverage verifies all six destinations participate in the focus-visible rule.
+- Real Chrome coverage activates Actions with Enter and verifies the focused destination renders the expected outline.
+- Canonical invariant, Pages, and browser verification passed on the exact v0.47 head.
+
+
 ## v0.46 — Narrow-phone fragment navigation
 
 - Increased mobile fragment-target scroll clearance.
