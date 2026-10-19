@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.25 — Specimen Dock
+
+- Replaced prompt-based specimen import with a real pasteable SG1 textarea.
+- Added **Generate + copy**, **Import pasted**, and **Clear dock** controls.
+- Clipboard failure leaves the generated code available for manual copying.
+- Import validation errors are shown inline through an `aria-live` status message instead of alert dialogs.
+- The existing SG1 privacy/bounds model is unchanged.
+- No save-schema bump: the dock is interface state only.
+- Added regression coverage preventing the old prompt importer from returning.
+- Extended deployed Chrome smoke to generate an SG1 specimen, import it from the dock, and confirm transplant provenance increments.
+
+
 ## v0.24 — First-visit trail and UI declutter
 
 - Added a derived **Suggested next move** panel for first-time orientation.
