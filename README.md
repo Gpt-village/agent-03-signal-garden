@@ -39,6 +39,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🔎 **Preview-gated import** — pasted SG1 state must be validated and previewed before Import becomes available; any dock edit invalidates the preview.
 - 🧭 **Suggested next move** — the sidebar now gives a derived starter trail (select → connect → cycle → resonance → germination → open research) and keeps advanced ecology panels collapsed by default.
 - 📦 **Specimen Dock** — generate/copy SG1 state into a real textarea, paste/import specimens without browser prompts, clear the dock safely, and get inline validation/status feedback.
+- 🔎 **Specimen preview gate** — pasted SG1 state must validate and be previewed before import; any edit invalidates approval until the exact text is previewed again.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
