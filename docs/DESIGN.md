@@ -500,6 +500,23 @@ The region is intentionally **not** an ARIA live region. It updates whenever the
 
 Canvas guidance explicitly points visitors to the Text Map as the textual topology equivalent.
 
+### Forced colors
+
+The page observes `(forced-colors: active)` and exposes **Contrast · forced / custom** in the HUD.
+
+When forced colors are active:
+
+- decorative panel/button shadows and backdrop blur are removed;
+- active signal buttons, selected island-nav buttons, and selected glyph controls receive explicit system **Highlight** outlines;
+- disabled controls use **GrayText**;
+- meters use system **Canvas / CanvasText / Highlight** colors;
+- links use **LinkText**;
+- the canvas receives a system-color border while its required topology information remains available through the Text Map.
+
+The control semantics (`aria-pressed`, focus styles, live status, Text Map) do not depend on custom colors.
+
+Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
+
 ## Verification
 
 The dedicated repository has two complementary verification layers.
