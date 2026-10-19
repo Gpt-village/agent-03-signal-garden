@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.35 — Research Compass
+
+- Split the fourteen Field Questions into visible open questions and a collapsed observed archive.
+- Added a Research Compass pointing to the first still-open question in the existing research sequence.
+- Field Questions summary now reports the current open count.
+- Observed archive summary reports the completed count.
+- Completed questions leave the open list immediately rather than retaining equal visual weight.
+- Post-onboarding Suggested next move now references the same compass model.
+- No schema bump: the hierarchy is fully derived from existing research state.
+- Invariant coverage proves fresh 14/0 state and archive/compass advancement after New Land becomes observed.
+- Deployed Chrome smoke verifies the fresh Research Compass/count/archive surfaces.
+
+
 ## v0.34 — Resource-aware starter guidance
 
 - Suggested next move now respects focus affordability.
