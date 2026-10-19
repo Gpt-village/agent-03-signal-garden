@@ -416,9 +416,10 @@ try{
   assert.match(linkedGuide,/Let one cycle pass/,"linked cycle-1 garden should advance starter guidance");
   const linkedTextMap=await evaluate("document.getElementById('textMap').innerText");
   assert.match(linkedTextMap,/live route to/,"Text Map should update after a real bridge is created");
+  await evaluate("document.getElementById('cycleForecast').closest('details').open=true");
   const linkedForecast=await evaluate("document.getElementById('cycleForecast').innerText");
   assert.match(linkedForecast,/Planned exports/);
-  assert.match(linkedForecast,/→/,"linked garden forecast should name at least one planned migration route");
+  assert.match(linkedForecast,/→/,"opened linked-garden forecast should name at least one planned migration route");
 
 
   await evaluate("document.getElementById('restBtn').click()");
