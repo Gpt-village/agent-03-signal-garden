@@ -568,6 +568,60 @@
     });
     return junctions;
   }
+  function networkConstellation(){
+    var active=state.islands.filter(function(a){return a.links.length>0});
+    if(active.length<3)return null;
+    var activeIds={};active.forEach(function(a){activeIds[a.id]=true});
+    var seen={},stack=[active[0].id];
+    while(stack.length){
+      var id=stack.pop();if(seen[id])continue;seen[id]=true;
+      var a=state.islands[id];
+      if(a)a.links.forEach(function(next){if(activeIds[next]&&!seen[next])stack.push(next)});
+    }
+    if(!active.every(function(a){return seen[a.id]}))return null;
+    var degrees=active.map(function(a){return {id:a.id,degree:a.links.filter(function(x){return activeIds[x]}).length}});
+    var edges=degrees.reduce(function(n,x){return n+x.degree},0)/2;
+    var n=active.length;
+    var hubs=degrees.filter(function(x){return x.degree===n-1});
+    var leaves=degrees.filter(function(x){return x.degree===1}).map(function(x){return x.id});
+    if(n>=4&&hubs.length===1&&leaves.length===n-1&&edges===n-1){
+      return {kind:"star-crown",name:"Star Crown",nodes:active.map(function(a){return a.id}),edges:edges,hub:hubs[0].id,text:"One island holds every active route while all others orbit as leaves. The center amplifies its present ecological role."};
+    }
+    if(degrees.every(function(x){return x.degree===2})&&edges===n){
+      return {kind:"halo-circuit",name:"Halo Circuit",nodes:active.map(function(a){return a.id}),edges:edges,text:"Every active island has two neighbors. Signals can circulate without an endpoint, strengthening shared memory."};
+    }
+    if(n>=4&&edges===n-1){
+      return {kind:"living-arbor",name:"Living Arbor",nodes:active.map(function(a){return a.id}),edges:edges,leaves:leaves,text:"The active network is one connected tree. Its endpoints behave like growing branch tips."};
+    }
+    if(n>=4&&edges>=n+1){
+      return {kind:"mesh-choir",name:"Mesh Choir",nodes:active.map(function(a){return a.id}),edges:edges,text:"The active network contains redundant cycles. Multiple routes hum together and produce extra resonance."};
+    }
+    return null;
+  }
+  function applyNetworkConstellation(){
+    var c=networkConstellation();if(!c)return null;
+    if(c.kind==="star-crown"){
+      var hub=state.islands[c.hub],trait=hub?dominantTrait(hub):null;
+      if(hub&&trait==="life")hub.life=clamp(hub.life+1);
+      if(hub&&trait==="memory")hub.memory=clamp(hub.memory+1);
+      if(hub&&trait==="strange")hub.strange=clamp(hub.strange+1);
+      c.effect="hub "+(trait||"signal")+" +1";
+    }
+    if(c.kind==="halo-circuit"){
+      c.nodes.forEach(function(id){var a=state.islands[id];if(a)a.memory=clamp(a.memory+1)});
+      c.effect="memory +1 to every active island";
+    }
+    if(c.kind==="living-arbor"){
+      c.leaves.forEach(function(id){var a=state.islands[id];if(a)a.life=clamp(a.life+1)});
+      c.effect="life +1 to each branch tip";
+    }
+    if(c.kind==="mesh-choir"){
+      state.resonance=Math.min(10000,state.resonance+1);
+      c.effect="garden resonance +1";
+    }
+    d("constellation-"+c.kind,c.name,c.text);
+    return c;
+  }
   function globalImprints(){
     var out={life:0,memory:0,strange:0,total:0};
     state.islands.forEach(function(a){
