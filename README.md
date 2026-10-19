@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.44 (save schema 7).
+**Current canonical version:** v0.45 (save schema 7).
 
 ## Play
 
@@ -39,6 +39,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - ⌨️ **Semantic input metadata** — N/O/C/D/U/Enter/1–7 shortcuts are exposed with `aria-keyshortcuts`, while the visual canvas explicitly preserves vertical touch panning and pinch zoom.
 - 📱 **Mobile section navigation** — a compact jump bar links Map / Actions / Island / Research / History / Specimen and becomes sticky on narrow layouts.
 - 🧭 **Compact mobile HUD** — narrow layouts keep Cycle / Focus / Resonance / Climate / Phenomenon visible while secondary chips move out of the map.
+- 📐 **Two-row mobile HUD** — those five essential chips are bounded to a predictable 3+2 grid so status cannot grow into a tall overlay.
 - 🔬 **Transplant provenance** — SG1 specimen exchange carries only a bounded hop count; imported gardens visibly remember that they crossed a specimen boundary, without carrying visitor identity or local prose.
 - 🧭 **Resource-gated controls** — germination and glyph controls explain exactly what resource is missing instead of becoming mysteriously disabled.
 - ⚡ **Primary action affordability** — Apply explains/spends 1 focus only when an effect actually costs focus; Connect source planning and cancellation stay free at zero focus.
