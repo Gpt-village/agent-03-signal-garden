@@ -148,7 +148,13 @@ assert.equal(api.chooseBootSeed(null,{seed:"bad seed with spaces"}),null,"invali
 setGraph([island(0),island(1),island(2),island(3)]);
 api.getState().islands[0].imprints={life:3,memory:1,strange:0};
 api.getState().islands[1].imprints={life:3,memory:0,strange:1};
-assert.deepEqual(api.globalImprints(),{life:6,memory:1,strange:1,total:8});
+{
+  const im=api.globalImprints();
+  assert.equal(im.life,6);
+  assert.equal(im.memory,1);
+  assert.equal(im.strange,1);
+  assert.equal(im.total,8);
+}
 assert.equal(api.ancestralSignal(),"life","strong migration ancestry should resolve to its dominant signal");
 
 api.getState().islands[0].imprints={life:4,memory:4,strange:0};
