@@ -135,6 +135,10 @@ try{
       secondaryHidden:ids.every(id=>getComputedStyle(document.getElementById(id)).display==="none"),
       essentialVisible:essentials.every(id=>getComputedStyle(document.getElementById(id)).display!=="none"),
       contained:hud.left>=canvas.left-1&&hud.right<=canvas.right+1,
+      display:getComputedStyle(document.querySelector('.hud')).display,
+      rowCount:new Set(essentials.map(id=>Math.round(document.getElementById(id).getBoundingClientRect().top))).size,
+      hudHeight:hud.height,
+      canvasHeight:canvas.height,
       hudWidth:hud.width,
       canvasWidth:canvas.width
     };
@@ -142,6 +146,10 @@ try{
   assert.equal(mobileHud.secondaryHidden,true,"mobile map should hide secondary HUD chips");
   assert.equal(mobileHud.essentialVisible,true,"mobile map should retain essential HUD chips");
   assert.equal(mobileHud.contained,true,"mobile HUD should stay horizontally within the canvas");
+  assert.equal(mobileHud.display,"grid","mobile HUD should use the compact grid layout");
+  assert.equal(mobileHud.rowCount,2,"essential mobile HUD chips should occupy exactly two rows");
+  assert.ok(mobileHud.hudHeight<=70,"mobile HUD should stay within a 70px vertical budget");
+  assert.ok(mobileHud.hudHeight/mobileHud.canvasHeight<0.14,"mobile HUD should occupy less than 14% of map height");
 
   await evaluate("if(document.activeElement) document.activeElement.blur()");
   await key("Tab","Tab",9);
