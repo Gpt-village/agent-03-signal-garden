@@ -672,6 +672,41 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Compact mobile HUD
+
+v0.44 reduces visual-map occlusion on narrow screens without removing information from the world.
+
+The canvas HUD is horizontally constrained with both left and right margins.
+
+At viewports up to 820 px wide, only the essential immediate-play status remains visible over the map:
+
+- cycle / season;
+- focus;
+- resonance;
+- macro-climate;
+- active sustained-climate phenomenon.
+
+Secondary map chips are hidden only on narrow layouts:
+
+- transit count;
+- route memory;
+- route bonds;
+- junction ecologies;
+- whole-network constellation;
+- specimen provenance;
+- research progress;
+- motion preference;
+- contrast preference;
+- app/save version.
+
+Those values remain available through the sidebar, textual topology/research panels, and normal controls; v0.44 changes presentation only.
+
+Desktop keeps the full HUD.
+
+No save-schema or simulation-rule changes occur.
+
+Invariant coverage checks the mobile/desktop chip classification and horizontal HUD constraint. Real Chrome coverage at 390 px verifies that every secondary chip is hidden, every essential chip remains visible, and the HUD rectangle stays within the canvas rectangle.
+
 ## Mobile section navigation
 
 v0.43 reduces long-sidebar navigation cost without hiding content.
