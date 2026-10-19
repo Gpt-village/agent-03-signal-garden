@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.26 — Specimen preview gate
+
+- Added an explicit **Preview pasted** step before specimen import.
+- Import begins disabled and is enabled only for the exact SG1 text that most recently passed bounded validation.
+- Preview exposes incoming seed, cycle, season, island count, live routes, focus, resonance, and resulting transplant hop.
+- Any textarea edit invalidates the preview immediately and disables import.
+- Generated local specimens are automatically previewed.
+- Invalid previews leave the current garden unchanged and report errors inline.
+- No save-schema or SG1-format bump: preview approval is ephemeral UI state.
+- Added source regressions for preview surfaces and exact-code gating.
+- Extended deployed Chrome smoke to prove edit invalidation, re-preview, and successful import after revalidation.
+
+
 ## v0.26 — Preview-gated specimen import
 
 - Import now begins disabled until the exact SG1 text has been successfully previewed.
