@@ -100,6 +100,43 @@ New islands:
 
 The first successful birth unlocks **New Land**. Filling all seven stable sites unlocks **Seven-Island Sky**.
 
+## Typed route bonds
+
+Route memory now records **what** crossed a relationship, not only how many total crossings occurred.
+
+Each canonical edge may carry bounded counters for:
+
+- life crossings;
+- memory crossings;
+- strange crossings.
+
+Old saves preserve their scalar route-memory totals but begin with zero typed history. The system deliberately does **not** invent signal composition retroactively.
+
+A route can mature into a bond when enough typed crossing history exists:
+
+- **Rootway** — life traffic is clearly dominant;
+- **Echo Span** — memory traffic is clearly dominant;
+- **Fold Thread** — strange traffic is clearly dominant;
+- **Braided Bond** — at least nine typed crossings with at least two from every signal family.
+
+Specialized bonds require at least six total typed crossings, at least four from the leading family, and a lead of at least two over the second-place family.
+
+Bond state is derived continuously from crossing history. Relationships may:
+
+- mature from no bond into a named bond;
+- transition from one named bond to another;
+- temporarily lose bond coherence as traffic becomes mixed without yet satisfying Braided Bond.
+
+All such transitions enter the Chronicle.
+
+A migration gets **+1 bond resonance** when its signal matches a specialized bond, or when it crosses a Braided Bond. The Last Cycle Report names the bond bonus explicitly.
+
+Bond identity also changes active and severed route rendering. Severing a route does not erase typed crossing history, so a historical relationship can remain legible as bond memory.
+
+SG1 specimen exchange preserves only bounded numeric typed-route counters; Chronicle prose remains local.
+
+Field Questions include an eleventh optional prompt: create a Braided Bond whose relationship has strongly remembered all three signal families.
+
 ## Role succession and Palimpsest Minds
 
 Each island records which dominant ecological roles it has actually inhabited:
@@ -173,7 +210,7 @@ These species are derived from the live graph and route history rather than plac
 
 The garden persists one current local world in browser `localStorage`.
 
-As of **v0.19 / save schema 5**:
+As of **v0.20 / save schema 6**:
 
 - an explicit `?seed=` URL intentionally takes precedence;
 - otherwise a valid persisted garden's own seed is reused before any new random seed is generated;
@@ -198,7 +235,7 @@ A **specimen code** instead captures a deliberately limited evolved phenotype:
 
 It intentionally omits the field log, milestone chronicle text, arbitrary localStorage contents, and unrelated browser data.
 
-Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, lineage enums, and 3-bit role-succession masks.
+Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, lineage enums, 3-bit role-succession masks, and per-route typed signal counters.
 
 Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
@@ -323,7 +360,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **ten** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **eleven** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -336,7 +373,8 @@ Current questions ask whether a visitor can:
 - sustain all three mixed-ecology bridge symbioses at once;
 - sustain one macro-climate long enough to trigger a sky phenomenon;
 - accumulate enough typed migration history for a newborn island to inherit an echo lineage;
-- guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind.
+- guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind;
+- develop one route into a Braided Bond by building substantial history in all three signal families.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
