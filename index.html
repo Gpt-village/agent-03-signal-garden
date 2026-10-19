@@ -527,6 +527,40 @@
     if(bond&&bond.kind==="braided")rgb="255,224,154";
     return "rgba("+rgb+","+alpha+")";
   }
+  function junctionEcologies(){
+    var active=routeBonds().filter(function(b){return b.active}),out=[];
+    state.islands.forEach(function(center){
+      var incident=active.filter(function(b){return b.a===center.id||b.b===center.id});
+      if(incident.length<2)return;
+      var kinds={};
+      incident.forEach(function(b){kinds[b.kind]=true});
+      var j=null;
+      if(kinds.rootway&&kinds["echo-span"]&&kinds["fold-thread"]){
+        j={kind:"triune-loom",name:"Triune Loom",life:1,memory:1,strange:1,text:"Rootway, Echo Span, and Fold Thread converge here. Three relationship histories weave one local ecology."};
+      }else if(kinds.braided){
+        j={kind:"confluence-knot",name:"Confluence Knot",life:1,memory:1,strange:1,text:"A Braided Bond meets another mature relationship, knotting several signal histories into one center."};
+      }else if(kinds.rootway&&kinds["echo-span"]){
+        j={kind:"scribe-orchard",name:"Scribe Orchard",life:1,memory:1,strange:0,text:"Growth-bearing and archive-bearing routes meet here, producing a grove that records its own branching."};
+      }else if(kinds.rootway&&kinds["fold-thread"]){
+        j={kind:"prism-nursery",name:"Prism Nursery",life:1,memory:0,strange:1,text:"Growth and unstable geometry meet here, germinating forms that develop along impossible angles."};
+      }else if(kinds["echo-span"]&&kinds["fold-thread"]){
+        j={kind:"dream-estuary",name:"Dream Estuary",life:0,memory:1,strange:1,text:"Memory and folded geometry drain into one center, where remembered patterns acquire impossible routes."};
+      }
+      if(j){j.island=center.id;j.bonds=incident.map(function(b){return b.key});out.push(j)}
+    });
+    return out;
+  }
+  function applyJunctionEcologies(){
+    var junctions=junctionEcologies();
+    junctions.forEach(function(j){
+      var a=state.islands[j.island];if(!a)return;
+      a.life=clamp(a.life+j.life);
+      a.memory=clamp(a.memory+j.memory);
+      a.strange=clamp(a.strange+j.strange);
+      d("junction-"+j.kind,j.name,j.text);
+    });
+    return junctions;
+  }
   function globalImprints(){
     var out={life:0,memory:0,strange:0,total:0};
     state.islands.forEach(function(a){
