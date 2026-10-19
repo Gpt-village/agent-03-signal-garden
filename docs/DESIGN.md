@@ -264,6 +264,28 @@ As of **v0.23 / save schema 7**:
 
 The **Copy garden seed** action shares only the procedural starting seed. It does not export the visitor's complete local history.
 
+## First-visit trail
+
+v0.24 adds a derived **Suggested next move** panel to make the existing simulation easier to enter without adding a separate tutorial save state.
+
+The guide reads only current garden state and advances through:
+
+1. select an island;
+2. create the first bridge;
+3. let one cycle pass so migration begins;
+4. build resonance;
+5. germinate new land;
+6. hand the visitor off to open Field Questions.
+
+No extra tutorial flags are persisted. If the world already contains progress, the guide immediately reflects that state.
+
+Advanced ecology panels now begin collapsed by default, while the starter guide, Last Cycle Report, and Field Questions remain easy to reach.
+
+The canonical browser smoke asserts that:
+- a fresh deployed garden exposes the selection step;
+- after creating a bridge on cycle 1, the guide advances to the cycle step;
+- the mobile-width page remains free of horizontal overflow.
+
 ## Transplant provenance
 
 Specimen exchange is now part of the ecology rather than invisible transport plumbing.
