@@ -10,10 +10,10 @@ assert.ok(html.includes('id="specimenStatus"'),"specimen dock should expose inli
 assert.ok(html.includes('id="specimenPreview"'),"v0.26 specimen dock should expose a preview surface");
 assert.ok(html.includes('id="previewSpecimenBtn"'),"specimen dock should expose an explicit preview action");
 assert.ok(html.includes('id="importBtn" disabled'),"specimen import should begin disabled until preview succeeds");
-assert.ok(source.includes("previewedSpecimenCode"),"specimen import should be gated by the exact previewed code");
 assert.ok(!html.includes('prompt("Paste a Signal Garden specimen code'),"specimen import must not regress to prompt-based input");
 
 let source = match[1];
+assert.ok(source.includes("previewedSpecimenCode"),"specimen import should be gated by the exact previewed code");
 const tail = "  renderUI();requestAnimationFrame(draw);";
 assert.ok(source.includes(tail), "expected game startup tail");
 source = source.replace(
