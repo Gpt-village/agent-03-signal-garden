@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.29 — Full reduced-motion canvas
+
+- Added a visible **Motion · standard / reduced** HUD indicator.
+- Observe `prefers-reduced-motion: reduce` through `matchMedia`, including live preference changes.
+- Freeze the canvas animation clock under reduced motion.
+- Star twinkle, Storm scan lines, island pulse/wobble, strange-island drift, selection/connect rings, and time-driven phenomenon visuals become static.
+- Suppress button hover movement and transitions under reduced motion.
+- Simulation actions, cycle progression, and all gameplay remain functional.
+- No schema bump: this is rendering/accessibility state, not garden phenotype.
+- Added source guards for the reduced-motion rendering contract.
+- Extended deployed Chrome smoke to emulate reduced motion, require the HUD acknowledgment, and compare two canvas data URLs over time for exact visual stability.
+
+## v0.28 — Explicit mode state and connection cancellation
+
+- Signal-mode buttons now expose live `aria-pressed` state.
+- Added a polite mode-status region that announces the active signal mode.
+- Pending Connect state announces its source island and destination instruction.
+- **Escape** cancels a pending connection source without spending resources or altering topology.
+- Glyph toggle state remains explicitly exposed through pressed-state semantics.
+- No schema bump: these are interaction/accessibility changes.
+- Added invariant guards for pressed state and Escape semantics.
+- Extended browser coverage for the real interaction path.
+
+
 ## v0.27 — Skip navigation and accessible map semantics
 
 - Added a first-focus **Skip to controls** link.
