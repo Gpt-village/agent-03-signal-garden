@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.37 — State-aware Research Hints
+
+- Research Compass now includes a live **Experiment hint** for the first open Field Question.
+- Every open Field Question now exposes its own state-aware hint.
+- Hints react to current resources, topology, arrivals, climate streak, ancestry, role history, route history, mature bond families, network density, and transplant status.
+- New Land guidance shows live resonance/focus progress rather than generic resource advice.
+- Suggested next move reuses the same Research Hint model after onboarding.
+- Hints remain suggestive rather than automating actions or exposing hidden implementation-only data.
+- No schema bump: all hinting is derived from existing game state.
+- Invariant coverage checks fresh hints, compass advancement, climate progress, lineage readiness, and transplant-aware guidance.
+- Deployed Chrome coverage proves the compass hint changes after a real Nurture action.
+- Canonical browser smoke now requires the exact deployed `index.html` fingerprint before running Chrome.
+
+## v0.36 — Concise live-region feedback
+
+- Removed `aria-live` from the full Suggested next move panel.
+- Removed `aria-live` from the rolling Field log.
+- Added one dedicated atomic `actionStatus` live region for the latest concise action message.
+- Full guide/log content remains inspectable without being re-announced on every render.
+- No schema bump.
+- Invariant coverage verifies the single concise action live region and quiet long-form surfaces.
+- Deployed Chrome coverage verifies Nurture produces one concise live announcement.
+
+
 ## v0.35 — Research Compass
 
 - Split the fourteen Field Questions into visible open questions and a collapsed observed archive.
