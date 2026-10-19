@@ -21,6 +21,8 @@ source = source.replace(
     recordClimate:recordClimate,
     phenomenonForClimate:phenomenonForClimate,
     advanceClimatePhenomenon:advanceClimatePhenomenon,
+    nextCycle:nextCycle,
+    getLastCycleReport:function(){return lastCycleReport},
     inscribeGlyph:inscribeGlyph,
     gardenSummary:gardenSummary,
     researchPrompts:researchPrompts,
@@ -297,6 +299,19 @@ assert.equal(api.getState().islands[1].arrivals, 1);
 assert.ok(api.getState().islands[1].memory >= memoryBeforeGlyphMigration + 2, "Echo glyph should add memory on incoming migration");
 
 setGraph([
+  island(0, [1], 80, 10, 5),
+  island(1, [0], 10, 80, 5),
+  island(2, [], 50, 20, 10),
+  island(3, [], 50, 20, 10)
+]);
+api.nextCycle();
+const cycleReport=api.getLastCycleReport();
+assert.ok(cycleReport,"advancing a cycle should produce a Last Cycle Report");
+assert.equal(cycleReport.cycle,3);
+assert.ok(Array.isArray(cycleReport.transfers)&&cycleReport.transfers.length===2,"report should include exact migration transfers");
+assert.ok(Array.isArray(cycleReport.roleChanges),"report should include a role-change list");
+
+setGraph([
   island(0, [1], 85, 10, 5),
   island(1, [0], 79, 80, 5)
 ]);
@@ -333,6 +348,7 @@ assert.deepEqual(Array.from(decoded.phenomena), ["seed-rain"]);
 assert.deepEqual(Array.from(decoded.streak), ["verdant",4,"seed-rain"]);
 assert.ok(!("log" in decoded), "specimen must not contain field-log text");
 assert.ok(!("chronicle" in decoded), "specimen must not contain chronicle text");
+assert.ok(!("lastCycleReport" in decoded), "specimen must not contain session-local cycle-report state");
 assert.throws(() => api.decodeSpecimen("SG1.not-valid-base64!"));
 
 setGraph([
