@@ -96,6 +96,10 @@ assert.ok(html.includes('.hud .chip{font-size:11px;padding:6px 7px;white-space:n
 });
 assert.ok(source.includes('document.getElementById("quickNav").addEventListener("click",function(e){'),"quick navigation should reveal collapsed details before native fragment navigation");
 assert.ok(source.includes('if(target&&target.tagName==="DETAILS")target.open=true'),"quick navigation should only auto-open details targets");
+assert.ok(source.includes('function syncQuickNavCurrent(){'),"quick navigation should derive current-fragment state");
+assert.ok(source.includes('window.addEventListener("hashchange",syncQuickNavCurrent)'),"quick navigation current state should follow native hash changes");
+assert.ok(source.includes('link.setAttribute("aria-current","location")'),"matching quick-nav link should expose aria-current=location");
+assert.ok(html.includes('.quick-nav a[aria-current="location"]{border-color:#9ee7ef;background:#173443;color:#eaf8ee}'),"current fragment should also have a visual quick-nav state");
 assert.ok(html.includes('#worldSection:focus-visible,#actionsSection:focus-visible,#islandSection:focus-visible,#researchSection:focus-visible,#historySection:focus-visible,#specimenSection:focus-visible{outline:2px solid #9ee7ef;outline-offset:4px}'),"keyboard-focused fragment destinations should have an explicit visible outline");
 assert.ok(source.includes("aria-keyshortcuts=\"'+(i+1)+'\""),"dynamic island navigator buttons should expose 1–7 shortcuts");
 assert.ok(source.includes('checkpointUndo("same-seed reset")'),"same-seed reset should be recoverable in-session");
