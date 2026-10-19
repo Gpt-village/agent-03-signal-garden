@@ -672,6 +672,37 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Session-only Undo
+
+v0.41 adds one reversible checkpoint for experimentation safety.
+
+Undo is deliberately **single-step** and **session-only**:
+
+- the newest meaningful world mutation replaces the previous checkpoint;
+- the checkpoint lives only in JavaScript memory;
+- it is never written to `localStorage`;
+- it is never included in SG1 specimen export;
+- a page reload clears the checkpoint while preserving the world itself.
+
+Meaningful mutations that create checkpoints:
+
+- Nurture / Observe / Distort;
+- completed Connect link creation or severing;
+- glyph inscription / clearing;
+- cycle advance;
+- island germination;
+- specimen import;
+- same-seed reset;
+- new-random-garden replacement.
+
+Selection, signal-mode changes, specimen previewing, sound toggles, free Connect source arming, and free Connect cancellation do **not** consume the Undo slot.
+
+Undo restores serialized world state, the prior Last Cycle Report, the garden seed/URL, and clears transient migration motes. The restored world is then saved normally, and the action log records the Undo itself.
+
+The UI exposes a disabled/enabled Undo button, an explanatory session-only status line, and the `U` shortcut when focus is outside native form controls.
+
+Invariant coverage exercises action, cycle, glyph, germination, import, free Connect planning, single-use behavior, and destructive-reset checkpoint guards. Real Chrome coverage proves exact life/focus restoration and verifies that reload clears the checkpoint while retaining the garden.
+
 ## Pointer-path and hit-test budget
 
 v0.40 removes work that was happening on the canvas interaction path without contributing to world behavior.
