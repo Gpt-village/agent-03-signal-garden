@@ -672,6 +672,28 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Input semantics and touch policy
+
+v0.42 makes the existing keyboard/touch interaction model discoverable to assistive technology without changing simulation rules.
+
+Semantic shortcut metadata:
+
+- Nurture → `aria-keyshortcuts="N"`;
+- Observe → `O`;
+- Connect → `C`;
+- Distort → `D`;
+- Undo → `U`;
+- Apply current signal → `Enter`;
+- dynamically rendered island navigator controls → `1` through `7`.
+
+These attributes describe shortcuts already implemented by the global keyboard state machine; they do not introduce a second behavior path.
+
+The visual canvas now declares `touch-action: pan-y pinch-zoom`. Visitors can still tap the map, while vertical page navigation and pinch zoom remain explicitly permitted on touch devices.
+
+No save/schema or simulation changes occur.
+
+Invariant coverage checks static shortcut metadata, dynamic 1–7 metadata, and the CSS touch policy. Real Chrome coverage verifies the deployed DOM attributes and computed touch-action behavior at a mobile viewport.
+
 ## Session-only Undo
 
 v0.41 adds one reversible checkpoint for experimentation safety.
