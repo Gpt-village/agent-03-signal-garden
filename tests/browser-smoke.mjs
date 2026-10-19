@@ -146,6 +146,12 @@ try{
 
   const initialGuide=await evaluate("document.getElementById('guidePanel').textContent");
   assert.match(initialGuide,/Select an island/,"fresh deployed garden should expose first-step guidance");
+  const guideLive=await evaluate("document.getElementById('guidePanel').getAttribute('aria-live')");
+  assert.equal(guideLive,null,"Suggested next move should not re-announce on every render");
+  const fieldLogLive=await evaluate("document.getElementById('log').getAttribute('aria-live')");
+  assert.equal(fieldLogLive,null,"full rolling field log should not be a live region");
+  const actionStatusRole=await evaluate("document.getElementById('actionStatus').getAttribute('role')");
+  assert.equal(actionStatusRole,"status","latest action feedback should have one dedicated status region");
   const researchSummary=await evaluate("document.getElementById('researchSummary').textContent");
   assert.match(researchSummary,/14 open/,"fresh deployed garden should expose the open research count");
   const researchCompass=await evaluate("document.getElementById('researchCompass').textContent");
@@ -173,6 +179,8 @@ try{
   await evaluate("document.getElementById('applySelectedBtn').click()");
   const lifeAfter=Number(await evaluate("document.getElementById('lifeStat').textContent"));
   assert.ok(lifeAfter>lifeBefore,"Nurture should increase selected-island life");
+  const actionAnnouncement=await evaluate("document.getElementById('actionStatus').textContent");
+  assert.match(actionAnnouncement,/Nurtured/,"latest action status should announce concise Nurture feedback");
 
   const nurturePressedInitially=await evaluate(`document.querySelector('[data-action="nurture"]').getAttribute('aria-pressed')`);
   assert.equal(nurturePressedInitially,"true","default nurture mode should expose pressed state");
@@ -321,7 +329,7 @@ try{
   assert.equal(exceptions.length,0,"uncaught browser exceptions: "+JSON.stringify(exceptions));
 
   console.log("Signal Garden canonical browser smoke passed.");
-  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,firstTabClass,controlsLabel,canvasRole,initialGuide,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,url:selectedUrl}));
+  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,firstTabClass,controlsLabel,canvasRole,initialGuide,guideLive,fieldLogLive,actionStatusRole,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,actionAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,url:selectedUrl}));
 }finally{
   if(ws)try{ws.close()}catch{}
   proc.kill("SIGTERM");
