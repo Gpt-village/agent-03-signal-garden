@@ -138,6 +138,14 @@ try{
   await waitFor("document.activeElement && document.activeElement.id==='controls'","skip-link focus transfer");
   const controlsLabel=await evaluate("document.getElementById('controls').getAttribute('aria-label')");
   assert.equal(controlsLabel,"Signal Garden controls");
+  const quickNavPosition=await evaluate("getComputedStyle(document.getElementById('quickNav')).position");
+  assert.equal(quickNavPosition,"sticky","390px layout should keep section navigation sticky");
+  const quickNavHrefs=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).map(a=>a.getAttribute('href'))`);
+  assert.deepEqual(quickNavHrefs,["#worldSection","#actionsSection","#islandSection","#researchSection","#historySection","#specimenSection"],"quick navigation should expose the six intended destinations");
+  await evaluate(`document.querySelector('#quickNav a[href="#researchSection"]').click()`);
+  await waitFor("location.hash==='#researchSection'","Research section anchor navigation");
+  const researchTargetTop=Number(await evaluate("document.getElementById('researchSection').getBoundingClientRect().top"));
+  assert.ok(researchTargetTop>=0&&researchTargetTop<844,"Research jump target should land visibly in the mobile viewport");
 
   const canvasRole=await evaluate("document.getElementById('garden').getAttribute('role')");
   assert.equal(canvasRole,"img","canvas should identify itself as a visual map rather than the only gameplay control");
@@ -408,7 +416,7 @@ try{
   assert.equal(exceptions.length,0,"uncaught browser exceptions: "+JSON.stringify(exceptions));
 
   console.log("Signal Garden canonical browser smoke passed.");
-  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,firstTabClass,controlsLabel,canvasRole,touchAction,shortcutMeta,initialGuide,guideLive,fieldLogLive,actionStatusRole,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,offscreenCanvasStable:offscreenCanvasA===offscreenCanvasB,offscreenSelectionDeferred:offscreenCanvasAfterSelection===offscreenCanvasB,resumeRenderedLatest:resumedCanvas!==offscreenCanvasAfterSelection,actionAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,focusBeforeUndo,undoInitiallyDisabled,undoLabel,lifeAfterUndo,focusAfterUndo,undoAnnouncement,lifeAfterRedo,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,undoAfterReloadDisabled,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,canvasArmedStatus,canvasCancelledStatus,url:selectedUrl}));
+  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,firstTabClass,controlsLabel,quickNavPosition,quickNavHrefs,researchTargetTop,canvasRole,touchAction,shortcutMeta,initialGuide,guideLive,fieldLogLive,actionStatusRole,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,offscreenCanvasStable:offscreenCanvasA===offscreenCanvasB,offscreenSelectionDeferred:offscreenCanvasAfterSelection===offscreenCanvasB,resumeRenderedLatest:resumedCanvas!==offscreenCanvasAfterSelection,actionAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,focusBeforeUndo,undoInitiallyDisabled,undoLabel,lifeAfterUndo,focusAfterUndo,undoAnnouncement,lifeAfterRedo,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,undoAfterReloadDisabled,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,canvasArmedStatus,canvasCancelledStatus,url:selectedUrl}));
 }finally{
   if(ws)try{ws.close()}catch{}
   proc.kill("SIGTERM");
