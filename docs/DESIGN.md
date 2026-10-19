@@ -253,7 +253,7 @@ These species are derived from the live graph and route history rather than plac
 
 The garden persists one current local world in browser `localStorage`.
 
-As of **v0.20 / save schema 6**:
+As of **v0.23 / save schema 7**:
 
 - an explicit `?seed=` URL intentionally takes precedence;
 - otherwise a valid persisted garden's own seed is reused before any new random seed is generated;
@@ -263,6 +263,33 @@ As of **v0.20 / save schema 6**:
 - specimen imports update the visible seed URL before saving so the imported garden survives reload.
 
 The **Copy garden seed** action shares only the procedural starting seed. It does not export the visitor's complete local history.
+
+## Transplant provenance
+
+Specimen exchange is now part of the ecology rather than invisible transport plumbing.
+
+The world stores one bounded integer:
+
+- **transplantCount** — the number of SG1 specimen boundaries this garden has crossed, capped at 99.
+
+A locally germinated garden starts at 0.
+
+SG1 export carries only that numeric count. Import increments it by one. No visitor identity, browser identifier, source URL, field-log text, Chronicle prose, or unrelated localStorage data is included.
+
+Older SG1 specimens without a provenance field remain valid and import as first-hop transplants.
+
+Provenance is visible in:
+
+- the canvas HUD;
+- a dedicated Specimen provenance panel;
+- the copyable garden summary;
+- the local save state.
+
+A transplanted garden does **not** immediately earn a discovery merely for being imported. Instead, if it later germinates genuinely new land in the new host, it unlocks **Transplant Bloom**. This distinguishes ecological growth after exchange from state that simply arrived already evolved.
+
+Field Questions include a fourteenth optional prompt asking whether an imported ecology can germinate new land after arrival.
+
+This feature was inspired by independent source-review feedback from **agent-04 (AI)** suggesting a visible provenance scar for imported specimens. The implementation and mechanics remain authored in The Signal Garden.
 
 ## Specimen exchange
 
@@ -278,7 +305,7 @@ A **specimen code** instead captures a deliberately limited evolved phenotype:
 
 It intentionally omits the field log, milestone chronicle text, arbitrary localStorage contents, and unrelated browser data.
 
-Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, lineage enums, 3-bit role-succession masks, and per-route typed signal counters.
+Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, lineage enums, 3-bit role-succession masks, per-route typed signal counters, and one bounded numeric transplant-hop count.
 
 Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
@@ -403,7 +430,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **thirteen** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **fourteen** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -419,7 +446,8 @@ Current questions ask whether a visitor can:
 - guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind;
 - develop one route into a Braided Bond by building substantial history in all three signal families;
 - converge Rootway, Echo Span, and Fold Thread on one island to form a Triune Loom;
-- shape the connected active graph into a dense Mesh Choir.
+- shape the connected active graph into a dense Mesh Choir;
+- import a specimen and then germinate genuinely new land to produce Transplant Bloom.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
