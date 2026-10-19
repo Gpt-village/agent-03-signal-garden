@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.38 — Renderer derivation cache
+
+- Compute route bonds once per canvas frame and reuse a key-indexed lookup for active/severed route rendering.
+- Compute junction ecologies once per frame from the precomputed bond snapshot and reuse an island-indexed lookup.
+- Compute topology species once per frame and reuse Relay Crown / bridge-symbiosis subsets.
+- Removed repeated per-island `topologySpecies()` and `junctionEcologies()` derivation from the animation hot path.
+- Removed repeated per-route `bondForEdgeKey()` work where the frame bond snapshot already contains the answer.
+- `junctionEcologies` now optionally accepts a precomputed bond list while preserving existing behavior for all other callers.
+- Fixed the static fallback version-chip text so no-script/pre-render markup no longer showed stale v0.36.
+- No schema bump and no simulation-rule changes.
+- Invariant coverage guards the frame-snapshot contract and rejects regression to per-island graph recomputation.
+- Full invariants, Pages deployment, and exact-artifact Chrome smoke passed for the v0.38 implementation.
+
+
 ## v0.36 — Concise live feedback
 
 - Added one atomic visually-hidden latest-action status for concise action announcements.
