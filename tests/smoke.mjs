@@ -16,6 +16,11 @@ assert.ok(html.includes('id="contrastChip"'),"v0.31 should expose the active for
 assert.ok(html.includes('@media(forced-colors:active)'),"v0.31 should include a forced-colors stylesheet");
 assert.ok(html.includes('outline:2px solid Highlight'),"forced colors should preserve selected state with an explicit system-color outline");
 assert.ok(html.includes('id="textMap" class="discoveries" role="region" aria-label="Text map of islands and live routes"'),"v0.30 should expose a labelled nonvisual topology map");
+assert.ok(html.includes('id="germinateBtn" disabled aria-describedby="germinateStatus"'),"v0.32 germination should begin disabled with a described reason");
+assert.ok(html.includes('id="germinateStatus"'),"germination availability text should exist");
+assert.ok(html.includes('id="glyphCostNote"'),"glyph costs should have a stable description");
+assert.ok(html.includes('id="glyphStatus"'),"glyph availability text should exist");
+assert.ok(html.includes('data-glyph="life" aria-pressed="false" aria-describedby="glyphCostNote glyphStatus"'),"glyph buttons should reference cost and availability descriptions");
 assert.ok(html.includes('A textual topology equivalent is available in the Text map panel.'),"canvas guidance should point to the text-map equivalent");
 assert.ok(html.includes('@media(prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}}'),"reduced-motion CSS should suppress button transition/hover movement");
 assert.ok(html.includes('id="modeStatus" role="status" aria-live="polite"'),"signal mode should expose a polite status line");
@@ -39,6 +44,8 @@ assert.ok(source.includes('var w=canvas.width,h=canvas.height,rt=reducedMotion?0
 assert.ok(source.includes('document.getElementById("motionChip").textContent=reducedMotion?"Motion · reduced":"Motion · standard"'),"HUD should expose whether reduced motion is active");
 assert.ok(source.includes('var contrastQuery=window.matchMedia?window.matchMedia("(forced-colors: active)"):null'),"rendering should observe the system forced-colors preference");
 assert.ok(source.includes('document.getElementById("contrastChip").textContent=forcedColors?"Contrast · forced":"Contrast · custom"'),"HUD should expose whether forced colors are active");
+assert.ok(source.includes('var germinationFull=state.islands.length>=7,germinationReady=!germinationFull&&state.resonance>=6&&state.focus>=2'),"germination availability should be derived before enabling the control");
+assert.ok(source.includes('var unavailable=!a||selected||(type!=="none"&&(state.resonance<3||state.focus<1))||(type==="none"&&(state.focus<1||a.glyph==="none"))'),"glyph availability should disable unaffordable and no-op choices");
 const tail = "  renderUI();requestAnimationFrame(draw);";
 assert.ok(source.includes(tail), "expected game startup tail");
 source = source.replace(
@@ -78,6 +85,7 @@ source = source.replace(
     applyNetworkConstellation:applyNetworkConstellation,
     suggestedMove:suggestedMove,
     textMapModel:textMapModel,
+    renderUI:renderUI,
     getState:function(){return state},
     setState:function(next){state=next;motes=[]}
   };`
@@ -118,14 +126,17 @@ const canvas = element({
 const ids = new Map();
 ids.set("garden", canvas);
 [
-  "seasonChip","focusChip","resChip","transitChip","historyChip","bondChip","junctionChip","constellationChip","provenanceChip","researchChip","climateChip","motionChip","contrastChip","germinateBtn",
+  "seasonChip","focusChip","resChip","transitChip","historyChip","bondChip","junctionChip","constellationChip","provenanceChip","researchChip","climateChip","motionChip","contrastChip","germinateBtn","germinateStatus",
   "islandNav","applySelectedBtn","selectedName","selectedLore","lifeStat",
   "memoryStat","strangeStat","linksStat","arrivalsStat","trafficStat","glyphStat","lineageStat","successionStat","lifeMeter",
-  "research","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","guidePanel","textMap","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
+  "research","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","guidePanel","textMap","glyphCostNote","glyphStatus","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
 ].forEach(id => ids.set(id, element()));
 
 const actionButtons = ["nurture","observe","connect","distort"].map(action =>
   element({ dataset: { action } })
+);
+const glyphButtons = ["life","memory","strange","none"].map(glyph =>
+  element({ dataset: { glyph } })
 );
 
 const store = new Map();
@@ -138,7 +149,7 @@ const sandbox = {
       if (!ids.has(id)) ids.set(id, element());
       return ids.get(id);
     },
-    querySelectorAll(sel) { return sel === "[data-action]" ? actionButtons : []; },
+    querySelectorAll(sel) { return sel === "[data-action]" ? actionButtons : sel === "[data-glyph]" ? glyphButtons : []; },
     addEventListener() {}
   },
   window: { matchMedia() { return { matches: true }; } },
@@ -196,6 +207,42 @@ function setGraph(islands, edgeMemory = {}, edgeSignals = {}) {
 
 assert.equal(api.edgeKey(4, 1), "1-4");
 assert.equal(api.edgeKey(1, 4), "1-4");
+
+setGraph([island(0),island(1),island(2),island(3)]);
+api.renderUI();
+assert.equal(ids.get("germinateBtn").disabled,true,"fresh garden should expose germination as disabled");
+assert.match(ids.get("germinateStatus").textContent,/6 more resonance/,"fresh germination status should explain the missing resource");
+assert.ok(glyphButtons.every(b=>b.disabled),"glyph controls should be unavailable until an island is selected");
+
+api.getState().selected=0;
+api.renderUI();
+assert.equal(glyphButtons[0].disabled,true);
+assert.equal(glyphButtons[3].disabled,true,"Clear should be disabled when the selected island has no glyph");
+assert.match(ids.get("glyphStatus").textContent,/3 more resonance/);
+
+api.getState().resonance=3;api.getState().focus=2;
+api.renderUI();
+assert.equal(glyphButtons[0].disabled,false,"affordable Root glyph should enable");
+assert.equal(glyphButtons[1].disabled,false,"affordable Echo glyph should enable");
+assert.equal(glyphButtons[2].disabled,false,"affordable Fold glyph should enable");
+assert.equal(glyphButtons[3].disabled,true,"Clear remains a no-op when there is no glyph");
+
+api.inscribeGlyph("life");
+assert.equal(glyphButtons[0].disabled,true,"currently selected glyph should become a disabled no-op");
+assert.equal(glyphButtons[0].getAttribute("aria-pressed"),"true");
+assert.equal(glyphButtons[3].disabled,false,"Clear should enable when a glyph exists and focus remains");
+assert.match(ids.get("glyphStatus").textContent,/Clear is available/);
+
+setGraph([island(0),island(1),island(2),island(3)]);
+api.getState().resonance=6;api.getState().focus=2;
+api.renderUI();
+assert.equal(ids.get("germinateBtn").disabled,false,"germination should enable exactly when resources are sufficient");
+assert.match(ids.get("germinateStatus").textContent,/Ready:/);
+
+api.getState().islands.push(island(4),island(5),island(6));
+api.renderUI();
+assert.equal(ids.get("germinateBtn").disabled,true,"seven-island sky should disable further germination");
+assert.match(ids.get("germinateStatus").textContent,/all seven stable island sites are occupied/);
 assert.equal(api.chooseBootSeed("urlseed",{seed:"savedseed"}),"urlseed","explicit URL seed should win");
 assert.equal(api.chooseBootSeed(null,{seed:"savedseed"}),"savedseed","saved seed should stabilize ordinary reloads");
 assert.equal(api.chooseBootSeed(null,{seed:"bad seed with spaces"}),null,"invalid saved seed should not be trusted");
