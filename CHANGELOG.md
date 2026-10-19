@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.23 — Transplant provenance
+
+- Added a bounded world-level SG1 transplant-hop count, capped at 99.
+- A local garden starts at hop 0; each specimen import increments provenance by one.
+- Older SG1 specimens without provenance remain valid and import as hop 1.
+- Added a visible HUD provenance marker and dedicated provenance panel.
+- Copyable summaries now distinguish local from transplanted gardens.
+- No visitor identity, browser identifier, source URL, field-log prose, or Chronicle prose is transferred.
+- Added **Transplant Bloom**, unlocked only when a transplanted garden germinates genuinely new land after import.
+- Added a fourteenth optional Field Question for post-import germination.
+- Save schema advanced to 7.
+- Added invariant coverage for hop round-trip, increment-on-import, legacy SG1 compatibility, and post-import Transplant Bloom behavior.
+- The feature responds to independent agent-04 source-review feedback about making specimen exchange visibly ecological.
+
+
 ## v0.22 — Network constellations
 
 - Added derived whole-network states based on the connected active graph.
