@@ -77,7 +77,7 @@
         <span class="chip" id="researchChip">Research 0/8</span>
         <span class="chip" id="climateChip">Climate · Braided Sky</span>
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
-        <span class="chip" id="versionChip">v0.16 · save 3</span>
+        <span class="chip" id="versionChip">v0.17 · save 3</span>
       </div>
     </section>
 
@@ -138,6 +138,11 @@
       </details>
 
       <details open>
+        <summary>Last cycle report</summary>
+        <div class="discoveries" id="cycleReport"></div>
+      </details>
+
+      <details open>
         <summary>Field questions</summary>
         <div class="discoveries" id="research"></div>
       </details>
@@ -181,7 +186,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.16",SAVE_SCHEMA=3;
+  var APP_VERSION="0.17",SAVE_SCHEMA=3;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -277,6 +282,7 @@
   function clampEarly(v){return Math.max(0,Math.min(100,Number(v)||0))}
   var mouse={x:0,y:0};
   var motes=[];
+  var lastCycleReport=null;
   var audioOn=false,audioCtx=null;
   var reducedMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var stars=[];
@@ -616,6 +622,7 @@
       state.log=state.log.slice(0,20);
       if(state.islands.every(function(x){return x.arrivals>0}))d("cross-pollinated","Cross-Pollinated Archipelago","Every island has received a signal born somewhere else. The garden no longer has truly isolated histories.");
     }
+    return transfers;
   }
   function evolve(){
     state.islands.forEach(function(a){
@@ -644,12 +651,32 @@
     });
   }
   function nextCycle(){
+    var beforeRoles={};
+    state.islands.forEach(function(a){beforeRoles[a.id]=dominantTrait(a)});
+    var beforeClimate=macroClimate();
     state.cycle++;
     state.focus=Math.min(8,state.focus+3);
     var n=state.cycle%8;
     state.mode=n===0?"Storm":n===4?"Bloom":n===6?"Static":"Quiet";
-    migrateSignals();
-    evolve();recordClimate();advanceClimatePhenomenon();cue("cycle");save();renderUI();
+    var transfers=migrateSignals();
+    evolve();
+    var afterClimate=recordClimate();
+    var phenomenon=advanceClimatePhenomenon();
+    var roleChanges=[];
+    state.islands.forEach(function(a){
+      var after=dominantTrait(a),before=beforeRoles[a.id];
+      if(before&&before!==after)roleChanges.push({id:a.id,name:a.name,from:before,to:after});
+    });
+    lastCycleReport={
+      cycle:state.cycle,
+      mode:state.mode,
+      transfers:transfers,
+      climateBefore:beforeClimate.name,
+      climateAfter:afterClimate.name,
+      phenomenon:phenomenon&&state.climateStreak%3===0?phenomenon.name:null,
+      roleChanges:roleChanges
+    };
+    cue("cycle");save();renderUI();
   }
   function pickIsland(px,py){
     var rect=canvas.getBoundingClientRect(),sx=canvas.width/rect.width,sy=canvas.height/rect.height;
@@ -742,6 +769,19 @@
     var seenPhenomena=Object.keys(state.phenomenaSeen).filter(function(k){return state.phenomenaSeen[k]}).map(function(k){return phenomenonForClimate(k==="seed-rain"?"verdant":k==="memory-dew"?"echo":k==="parallax-bloom"?"fracture":"braided").name});
     pp.innerHTML=activePhenomenon?'<div class="discovery"><b>'+esc(activePhenomenon.name)+'</b><br>'+esc(activePhenomenon.text)+' <span class="small">streak '+state.climateStreak+'</span></div>':'<p class="small">No sustained-climate phenomenon is active. Hold one macro-climate for three cycles.</p>';
     if(seenPhenomena.length)pp.innerHTML+='<div class="discovery"><b>Observed</b><br>'+esc(seenPhenomena.join(" · "))+'</div>';
+    var cr=document.getElementById("cycleReport");
+    if(!lastCycleReport)cr.innerHTML='<p class="small">Advance one cycle to generate a causal report.</p>';
+    else{
+      var transferText=lastCycleReport.transfers.length?lastCycleReport.transfers.map(function(x){
+        var from=state.islands[x.from],to=state.islands[x.to];
+        return (from?from.name:"island "+x.from)+" → "+(to?to.name:"island "+x.to)+": "+x.type+" +"+x.amount;
+      }).join("<br>"):"No migrations crossed live routes.";
+      var roleText=lastCycleReport.roleChanges.length?lastCycleReport.roleChanges.map(function(x){return esc(x.name)+": "+x.from+" → "+x.to}).join("<br>"):"No island changed dominant role.";
+      var climateText=lastCycleReport.climateBefore===lastCycleReport.climateAfter?lastCycleReport.climateAfter:lastCycleReport.climateBefore+" → "+lastCycleReport.climateAfter;
+      cr.innerHTML='<div class="discovery"><b>Cycle '+lastCycleReport.cycle+' · '+esc(lastCycleReport.mode)+'</b><br><b>Climate:</b> '+esc(climateText)+(lastCycleReport.phenomenon?'<br><b>Phenomenon:</b> '+esc(lastCycleReport.phenomenon):'')+'</div>'+
+        '<div class="discovery"><b>Migrations</b><br>'+transferText+'</div>'+
+        '<div class="discovery"><b>Role changes</b><br>'+roleText+'</div>';
+    }
     var rq=document.getElementById("research");
     rq.innerHTML=questions.map(function(q){return '<div class="discovery"><b>'+(q.done?'✓ observed':'◇ open')+'</b><br>'+esc(q.text)+'</div>'}).join("");
     var sp=document.getElementById("species"), residents=topologySpecies();
