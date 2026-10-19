@@ -74,7 +74,7 @@ assert.ok(source.includes('var germinationFull=state.islands.length>=7,germinati
 assert.ok(source.includes('var unavailable=!a||selected||(type!=="none"&&(state.resonance<3||state.focus<1))||(type==="none"&&(state.focus<1||a.glyph==="none"))'),"glyph availability should disable unaffordable and no-op choices");
 assert.ok(source.includes('var freeConnectStep=state.action==="connect"&&a&&(!connectSource||connectSource.id===a.id)'),"Apply availability should preserve free Connect planning/cancellation at zero focus");
 assert.ok(source.includes('Completing or rewiring a connection needs 1 focus. The source remains armed.'),"blocked Connect completion should explain why it cannot proceed");
-const tail = "  renderUI();scheduleDraw();";
+const tail = "  renderUI();scheduleDraw();\n})();";
 assert.ok(source.includes(tail), "expected adaptive game startup tail");
 source = source.replace(
   tail,
@@ -120,7 +120,8 @@ source = source.replace(
     renderUI:renderUI,
     getState:function(){return state},
     setState:function(next){state=next;motes=[]}
-  };`
+  };
+})();`
 );
 
 function element(extra = {}) {
