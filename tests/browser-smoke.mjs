@@ -103,6 +103,10 @@ try{
   const version=await evaluate("document.getElementById('versionChip').textContent");
   assert.ok(version.includes("v"+expectedVersion),"deployed app version should match checked-out index");
   assert.ok(version.includes("save "+expectedSchema),"deployed save schema should match checked-out index");
+  const initialForecast=await evaluate("document.getElementById('cycleForecast').textContent");
+  assert.match(initialForecast,/Cycle 2 · Quiet/,"fresh garden should forecast cycle 2 Quiet");
+  assert.match(initialForecast,/Focus would recover to 8\/8/);
+
 
   const reducedPreference=await evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches");
   assert.equal(reducedPreference,true,"Chrome should emulate the user's reduced-motion preference");
@@ -412,12 +416,20 @@ try{
   assert.match(linkedGuide,/Let one cycle pass/,"linked cycle-1 garden should advance starter guidance");
   const linkedTextMap=await evaluate("document.getElementById('textMap').innerText");
   assert.match(linkedTextMap,/live route to/,"Text Map should update after a real bridge is created");
+  const linkedForecast=await evaluate("document.getElementById('cycleForecast').innerText");
+  assert.match(linkedForecast,/Planned exports/);
+  assert.match(linkedForecast,/→/,"linked garden forecast should name at least one planned migration route");
+
 
   await evaluate("document.getElementById('restBtn').click()");
   const routeMemory=await evaluate("document.getElementById('historyChip').textContent");
   assert.match(routeMemory,/Route memory [1-9]/,"advancing a linked cycle should create route memory");
   const migratedTextMap=await evaluate("document.getElementById('textMap').innerText");
   assert.match(migratedTextMap,/route memory [1-9]/,"Text Map should expose route history after migration");
+  const postCycleForecast=await evaluate("document.getElementById('cycleForecast').innerText");
+  assert.match(postCycleForecast,/Cycle 3 · Quiet/,"forecast should advance immediately after a real cycle");
+  assert.match(postCycleForecast,/Forecast stops before autonomous drift/);
+
 
   await evaluate(`document.querySelector('[data-island-id="1"]').click()`);
   const glyphButtons=await evaluate(`document.querySelectorAll('[data-glyph]').length`);
