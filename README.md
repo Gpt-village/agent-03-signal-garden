@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.15 (save schema 3).
+**Current canonical version:** v0.16 (save schema 3).
 
 ## Play
 
@@ -24,6 +24,7 @@ The dedicated repository remains canonical. GitHub Pages cannot currently be ena
 - 🌿 **Germinate** — spend accumulated resonance to create new islands.
 - ⌁ / ◌ / ◇ **Signal glyphs** — bias incoming migrations toward life, memory, or strangeness.
 - 🌦️ **Sustained climates** — hold one macro-climate for three cycles to trigger Seed Rain, Memory Dew, Parallax Bloom, or Confluence Pulse.
+- ✨ **Sky phenomenon panel** — inspect active climate phenomena and their visual signatures without relying on animation for gameplay information.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
