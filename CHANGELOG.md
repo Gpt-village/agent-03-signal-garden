@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.46 — Narrow-phone fragment navigation
+
+- Increased mobile fragment-target scroll clearance.
+- At ≤360 px, quick navigation switches to a deterministic 3×2 grid.
+- Prevents the six jump links from wrapping into an unpredictable third sticky row.
+- Native fragment history/focus behavior remains intact.
+- No save-schema or simulation-rule changes.
+- Invariant coverage checks expanded mobile scroll margin and the narrow-phone grid rule.
+- Real Chrome at 320×568 verifies no horizontal overflow, exactly two quick-nav rows, sticky behavior, rendered-nav clearance, visible landing, and native focus transfer.
+- Canonical invariants, Pages deployment, and browser smoke passed on the exact v0.46 head.
+
+
 ## v0.45 — Two-row mobile HUD
 
 - Bounded the compact mobile HUD to exactly two rows.
