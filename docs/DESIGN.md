@@ -53,6 +53,19 @@ This makes network topology reversible rather than a permanent accumulation.
 ### Let one cycle pass
 Advances the world's autonomous clock, restores some focus, changes seasonal mode, evolves island state, and triggers migration.
 
+## Primary action affordability
+
+Primary island actions expose their resource semantics before a visitor commits them.
+
+- **Nurture / Observe / Distort** — require **1 focus**. When focus is 0, Apply is disabled and the mode status explains the missing focus.
+- **Connect: choose source** — free. A visitor may still enter planning mode at 0 focus.
+- **Connect: cancel source** — free. Applying Connect to the armed source again, or pressing Escape, cancels without spending focus.
+- **Connect: complete link / cut** — requires **1 focus**. At 0 focus the source remains armed, topology is unchanged, and the mode status explains that completion needs focus.
+
+The Apply control references the stable action-cost note and current mode status through `aria-describedby`.
+
+This is intentionally one state machine shared by button, keyboard, and canvas interaction paths rather than separate affordability rules for each input method.
+
 ## Seasonal modes
 
 The cycle clock periodically enters:
