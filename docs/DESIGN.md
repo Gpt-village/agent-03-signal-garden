@@ -98,6 +98,38 @@ New islands:
 
 The first successful birth unlocks **New Land**. Filling all seven stable sites unlocks **Seven-Island Sky**.
 
+## Role succession and Palimpsest Minds
+
+Each island records which dominant ecological roles it has actually inhabited:
+
+- **grove** / life;
+- **archive** / memory;
+- **fold** / strangeness.
+
+This record is historical rather than a snapshot. Changing away from a role does not erase that role from the island's lived succession.
+
+Once one island has genuinely occupied **all three roles**, it becomes a **Palimpsest Mind**.
+
+A Palimpsest Mind:
+
+- remains visually and numerically in its current dominant role;
+- keeps its three-role succession history permanently;
+- exports a remembered self instead of always exporting its current dominant trait;
+- rotates deterministically through life → memory → strangeness according to `(cycle + island id) mod 3`;
+- marks those transfers in the Last Cycle Report as coming from a remembered self.
+
+The transition to Palimpsest Mind enters the Chronicle and unlocks the **Palimpsest Mind** discovery.
+
+Field Questions include a tenth optional observation asking whether one island can live through all three ecological roles.
+
+SG1 specimens preserve succession as a bounded three-bit mask:
+
+- bit 1 = life role observed;
+- bit 2 = memory role observed;
+- bit 4 = strangeness role observed.
+
+Valid masks therefore range from 0 to 7. Imported older specimens with no succession field initialize from the island's current role rather than fabricating history.
+
 ## Migration ancestry and echo lineages
 
 Every received migration increments a typed ancestry imprint on the destination island:
