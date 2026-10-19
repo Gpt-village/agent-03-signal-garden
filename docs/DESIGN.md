@@ -451,6 +451,33 @@ The deployed Chrome smoke uses real **Tab** and **Enter** input to verify the sk
 
 No save-schema bump is required.
 
+## Primary signal affordability
+
+v0.33 extends resource explanation to the four primary signal modes.
+
+Costs:
+
+- **Nurture** — 1 focus when applied.
+- **Observe** — 1 focus when applied.
+- **Distort** — 1 focus when applied.
+- **Connect** — selecting/arming the source is free; cancelling the armed source is free; completing a new link or severing an existing link costs 1 focus.
+
+Mode selection itself remains free so visitors can inspect/plan future actions.
+
+The **Apply current signal** control is state-aware:
+
+- no selected island → disabled;
+- unaffordable Nurture / Observe / Distort → disabled with a needs-1-focus explanation;
+- unarmed Connect → enabled even at 0 focus so a source can be planned;
+- armed Connect on the same source → enabled at 0 focus so cancellation is always possible;
+- armed Connect on a different destination → disabled at 0 focus because topology mutation would spend 1 focus.
+
+The underlying `apply()` state machine enforces the same semantics for canvas and keyboard paths, so the UI is explanatory rather than being the only guard.
+
+This fixes the earlier behavior where a global zero-focus check prevented even free Connect planning/cancellation.
+
+No schema bump.
+
 ## Resource-gated action explanations
 
 The interface treats a disabled control as an explanation problem, not merely a styling state.
