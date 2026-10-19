@@ -402,6 +402,21 @@ Current bounded specimen data also includes island glyph enums, observed macro-c
 
 Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
+## Skip navigation and map semantics
+
+v0.27 tightens the document-level keyboard and screen-reader path without changing simulation state.
+
+- A visually hidden **Skip to controls** link is the first focusable page control and becomes visible when focused.
+- Activating it moves focus to the labelled `Signal Garden controls` landmark.
+- The controls landmark uses `tabindex="-1"` so fragment navigation can focus it without adding another ordinary Tab stop.
+- The canvas exposes `role="img"` and a concise visual-map label.
+- A screen-reader-only canvas description explicitly states that every gameplay action is also available through the keyboard-accessible controls and Island navigator.
+- Selected-island name/lore is wrapped in one polite, atomic status region so changes are announced without making the entire sidebar live.
+
+The deployed Chrome smoke uses real **Tab** and **Enter** input to verify the skip path, inspects the canvas semantics, and confirms the selected-island status changes.
+
+No save-schema bump is required.
+
 ## Accessibility
 
 The canvas is not the only control surface.
