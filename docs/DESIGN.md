@@ -520,6 +520,25 @@ As of v0.32:
 
 This is an interface-only behavior layer; it does not alter save state or simulation balance.
 
+## Concise live feedback
+
+v0.36 reduces assistive-technology announcement noise.
+
+Before this change, both the full rolling Field log and Suggested next move were polite live regions. Because both can update during ordinary renders, a screen reader could repeatedly hear large amounts of secondary text.
+
+The revised contract:
+
+- **Latest action status** — one visually hidden, atomic polite status announces only the newest field-log message.
+- **Field log** — remains fully visible/inspectable, but is no longer a live region.
+- **Suggested next move** — remains visible guidance, but is no longer a live region.
+- **Mode status** — remains a polite status because it reflects explicit signal-mode changes and pending Connect state.
+- **Selection status** — remains atomic/polite because it reflects the island the visitor intentionally selected.
+- **Specimen status** — remains polite because it communicates preview/import validation state.
+
+This keeps immediate action feedback while preventing historical log/guidance text from re-announcing on every render.
+
+No schema bump.
+
 ## Accessibility
 
 The canvas is not the only control surface.
@@ -715,6 +734,40 @@ The ordinary field log keeps short-lived operational events. The **Chronicle** k
 - glyph inscriptions and glyph-driven role changes.
 
 Chronicle text is local history and is intentionally excluded from specimen exchange.
+
+## State-aware Research Hints
+
+v0.37 extends the Research Compass from “what is still open?” to “what experiment makes sense from the garden's current state?”
+
+Every Field Question has a derived hint function. Hints may inspect current:
+
+- focus and resonance;
+- island count and germination capacity;
+- topology degree/endpoints/connectivity;
+- foreign arrival counts;
+- route memory and typed route history;
+- ecological roles and succession history;
+- climate history and climate streak;
+- migration ancestry and inherited-lineage readiness;
+- active bond families / junction prerequisites;
+- constellation density;
+- transplant provenance.
+
+Hints do not mutate the world and are not persisted.
+
+Examples:
+
+- **New Land** reports live resonance/focus progress and changes after real resource gains.
+- **Ring** reports endpoints/branches that prevent an endpoint-free circuit.
+- **Phenomenon** reports current climate plus sustained-cycle progress.
+- **Lineage** distinguishes insufficient ancestry, tied ancestry, ready ancestry, full germination capacity, and resource readiness.
+- **Transplant Bloom** distinguishes local gardens, full transplanted gardens, under-resourced transplants, and ready transplants.
+
+The Research Compass shows the hint for its first open question, and every visible open question includes its own state-aware hint.
+
+The post-onboarding Suggested next move uses the same compass + hint model, so starter guidance and research guidance share one source of truth.
+
+No schema bump.
 
 ## Research Compass
 
