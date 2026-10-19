@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.30 (save schema 7).
+**Current canonical version:** v0.31 (save schema 7).
 
 ## Play
 
@@ -39,6 +39,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - ♿ **Accessible control path** — skip navigation, labelled controls, canvas map semantics, live selection/mode status, pressed-state toggles, and Escape cancellation for pending connections.
 - 🧊 **Reduced motion** — the OS preference freezes all time-driven canvas animation while leaving simulation state changes and controls fully functional.
 - 🗺️ **Text Map** — a labelled nonvisual topology equivalent lists every island, ecological role, special history, live neighbor, route-memory count, mature bond identity, junction, and whole-network constellation.
+- ⚫⚪ **Forced colors** — system high-contrast palettes remove decorative shadows, preserve selected/pressed states with explicit Highlight outlines, and keep controls/meters/links legible.
 - 🔎 **Preview-gated import** — pasted SG1 state must be validated and previewed before Import becomes available; any dock edit invalidates the preview.
 - ♿ **Skip navigation + equivalent controls** — first-tab access jumps directly to the labelled control landmark; the canvas identifies itself as a visual map and points to keyboard-accessible equivalents.
 - 🎛️ **ARIA mode state** — signal and glyph choices expose `aria-pressed`; pending Connect sources are announced and Escape cancels them without spending focus.
