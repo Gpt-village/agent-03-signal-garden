@@ -32,6 +32,10 @@ source = source.replace(
     globalImprints:globalImprints,
     ancestralSignal:ancestralSignal,
     spawnIsland:spawnIsland,
+    roleMask:roleMask,
+    roleHistoryLabel:roleHistoryLabel,
+    recordRoleHistory:recordRoleHistory,
+    exportTrait:exportTrait,
     getState:function(){return state},
     setState:function(next){state=next;motes=[]}
   };`
@@ -70,7 +74,7 @@ ids.set("garden", canvas);
 [
   "seasonChip","focusChip","resChip","transitChip","historyChip","researchChip","climateChip","germinateBtn",
   "islandNav","applySelectedBtn","selectedName","selectedLore","lifeStat",
-  "memoryStat","strangeStat","linksStat","arrivalsStat","trafficStat","glyphStat","lineageStat","lifeMeter",
+  "memoryStat","strangeStat","linksStat","arrivalsStat","trafficStat","glyphStat","lineageStat","successionStat","lifeMeter",
   "research","species","discoveries","chronicle","log","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
 ].forEach(id => ids.set(id, element()));
 
@@ -114,7 +118,10 @@ const api = sandbox.__gardenTest;
 assert.ok(api, "test API should be exposed");
 
 function island(id, links = [], life = 50, memory = 20, strange = 10) {
-  return { id, links: [...links], life, memory, strange, arrivals: 0, glyph: "none", imprints:{life:0,memory:0,strange:0}, lineage:"none" };
+  const trait = strange >= life && strange >= memory ? "strange" : memory >= life ? "memory" : "life";
+  const rolesSeen={life:false,memory:false,strange:false};
+  rolesSeen[trait]=true;
+  return { id, links: [...links], life, memory, strange, arrivals: 0, glyph: "none", imprints:{life:0,memory:0,strange:0}, lineage:"none", rolesSeen, palimpsest:false };
 }
 function setGraph(islands, edgeMemory = {}) {
   api.setState({
@@ -160,6 +167,23 @@ assert.equal(api.ancestralSignal(),"life","strong migration ancestry should reso
 api.getState().islands[0].imprints={life:4,memory:4,strange:0};
 api.getState().islands[1].imprints={life:0,memory:0,strange:0};
 assert.equal(api.ancestralSignal(),"none","tied ancestry should not invent a lineage");
+
+setGraph([island(0),island(1),island(2),island(3)]);
+const successionIsland=api.getState().islands[0];
+successionIsland.life=80;successionIsland.memory=10;successionIsland.strange=5;
+api.recordRoleHistory(successionIsland);
+successionIsland.life=10;successionIsland.memory=80;successionIsland.strange=5;
+api.recordRoleHistory(successionIsland);
+assert.equal(successionIsland.palimpsest,false,"two lived roles should not be enough for Palimpsest");
+successionIsland.life=10;successionIsland.memory=5;successionIsland.strange=80;
+const becamePalimpsest=api.recordRoleHistory(successionIsland);
+assert.equal(becamePalimpsest,true,"third lived role should create Palimpsest exactly once");
+assert.equal(successionIsland.palimpsest,true);
+assert.equal(api.roleMask(successionIsland),7);
+assert.equal(api.researchPrompts().find(x=>x.id==="succession").done,true,"Palimpsest should complete succession Field Question");
+api.getState().cycle=4;
+assert.equal(api.exportTrait(successionIsland),"memory","Palimpsest export rotation should be deterministic from cycle and island id");
+assert.equal(api.recordRoleHistory(successionIsland),false,"already-Palimpsest island should not retrigger the transition");
 
 setGraph([
   island(0, [], 80, 20, 10),
@@ -316,7 +340,15 @@ const lineageTransfers=api.migrateSignals();
 const lineageArrival=lineageTransfers.find(x=>x.to===1&&x.type==="life");
 assert.ok(lineageArrival,"life migration should reach the lineage test receiver");
 assert.equal(lineageArrival.lineageBonus,1,"matching echo lineage should add exactly one migration strength");
-assert.equal(api.getState().edgeMemory["0-1"], 2, "two linked islands should each record one crossing in a cycle");
+api.getState().islands[0].rolesSeen={life:true,memory:true,strange:true};
+api.getState().islands[0].palimpsest=true;
+api.getState().cycle=2;
+const rememberedTransfers=api.migrateSignals();
+const remembered=rememberedTransfers.find(x=>x.from===0);
+assert.ok(remembered&&remembered.sourcePalimpsest,"Palimpsest migration should identify its remembered-self source");
+assert.equal(remembered.type,"strange","cycle 2 / island 0 should rotate Palimpsest export to strange");
+assert.equal(api.getState().edgeMemory["0-1"], 4, "two migration pulses should accumulate four total directed crossings");
+
 assert.equal(api.getState().islands[0].arrivals, 1);
 assert.equal(api.getState().islands[1].arrivals, 1);
 assert.equal(api.getState().islands[0].imprints.memory,1,"receiving a memory migration should increment memory ancestry");
@@ -374,6 +406,8 @@ api.getState().climateStreak = 4;
 api.getState().activePhenomenon = "seed-rain";
 api.getState().islands[0].imprints={life:8,memory:2,strange:1};
 api.getState().islands[0].lineage="life";
+api.getState().islands[0].rolesSeen={life:true,memory:true,strange:true};
+api.getState().islands[0].palimpsest=true;
 const code = api.specimenCode();
 assert.ok(code.startsWith("SG1."));
 const decoded = api.decodeSpecimen(code);
@@ -386,6 +420,7 @@ assert.deepEqual(Array.from(decoded.climates).sort(), ["braided","verdant"]);
 assert.deepEqual(Array.from(decoded.phenomena), ["seed-rain"]);
 assert.deepEqual(Array.from(decoded.streak), ["verdant",4,"seed-rain"]);
 assert.deepEqual(Array.from(decoded.ancestry[0]), [8,2,1,"life"]);
+assert.equal(decoded.succession[0],7,"SG1 specimen should preserve a full Palimpsest succession mask");
 assert.ok(!("log" in decoded), "specimen must not contain field-log text");
 assert.ok(!("chronicle" in decoded), "specimen must not contain chronicle text");
 assert.ok(!("lastCycleReport" in decoded), "specimen must not contain session-local cycle-report state");
