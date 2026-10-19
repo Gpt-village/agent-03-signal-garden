@@ -146,6 +146,21 @@ try{
   assert.equal(mobileHud.secondaryHidden,true,"mobile map should hide secondary HUD chips");
   assert.equal(mobileHud.essentialVisible,true,"mobile map should retain essential HUD chips");
   assert.equal(mobileHud.contained,true,"mobile HUD should stay horizontally within the canvas");
+  const mobileHudRows=await evaluate(`(()=>{
+    const ids=["seasonChip","focusChip","resChip","climateChip","phenomenonChip"];
+    const rects=ids.map(id=>document.getElementById(id).getBoundingClientRect());
+    const tops=[...new Set(rects.map(r=>Math.round(r.top)))];
+    return {
+      rowCount:tops.length,
+      firstRowSame:Math.round(rects[0].top)===Math.round(rects[1].top)&&Math.round(rects[1].top)===Math.round(rects[2].top),
+      secondRowSame:Math.round(rects[3].top)===Math.round(rects[4].top),
+      secondBelowFirst:rects[3].top>rects[0].top
+    };
+  })()`);
+  assert.equal(mobileHudRows.rowCount,2,"compact mobile HUD should occupy exactly two rows");
+  assert.equal(mobileHudRows.firstRowSame,true);
+  assert.equal(mobileHudRows.secondRowSame,true);
+  assert.equal(mobileHudRows.secondBelowFirst,true);
   assert.equal(mobileHud.display,"grid","mobile HUD should use the compact grid layout");
   assert.equal(mobileHud.rowCount,2,"essential mobile HUD chips should occupy exactly two rows");
   assert.ok(mobileHud.hudHeight<=70,"mobile HUD should stay within a 70px vertical budget");
@@ -449,7 +464,7 @@ try{
   assert.equal(exceptions.length,0,"uncaught browser exceptions: "+JSON.stringify(exceptions));
 
   console.log("Signal Garden canonical browser smoke passed.");
-  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,mobileHud,firstTabClass,controlsLabel,quickNavPosition,quickNavHrefs,researchTargetTop,researchFocused,historyInitiallyOpen,historyTargetTop,historyFocused,canvasRole,touchAction,shortcutMeta,initialGuide,guideLive,fieldLogLive,actionStatusRole,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,offscreenCanvasStable:offscreenCanvasA===offscreenCanvasB,offscreenSelectionDeferred:offscreenCanvasAfterSelection===offscreenCanvasB,resumeRenderedLatest:resumedCanvas!==offscreenCanvasAfterSelection,actionAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,focusBeforeUndo,undoInitiallyDisabled,undoLabel,lifeAfterUndo,focusAfterUndo,undoAnnouncement,lifeAfterRedo,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,undoAfterReloadDisabled,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,canvasArmedStatus,canvasCancelledStatus,url:selectedUrl}));
+  console.log(JSON.stringify({expectedVersion,expectedSchema,version,motionChip,contrastChip,panelShadow,activeOutline,title,mobileHud,mobileHudRows,firstTabClass,controlsLabel,quickNavPosition,quickNavHrefs,researchTargetTop,researchFocused,historyInitiallyOpen,historyTargetTop,historyFocused,canvasRole,touchAction,shortcutMeta,initialGuide,guideLive,fieldLogLive,actionStatusRole,researchSummary,researchCompass,observedResearchSummary,selectedAnnouncement,offscreenCanvasStable:offscreenCanvasA===offscreenCanvasB,offscreenSelectionDeferred:offscreenCanvasAfterSelection===offscreenCanvasB,resumeRenderedLatest:resumedCanvas!==offscreenCanvasAfterSelection,actionAnnouncement,nurturePressedInitially,connectPressed,pendingConnectStatus,cancelledConnectStatus,lifeBefore,lifeAfter,focusBeforeUndo,undoInitiallyDisabled,undoLabel,lifeAfterUndo,focusAfterUndo,undoAnnouncement,lifeAfterRedo,links,routeMemory,glyph,echoGlyphPressed,memoryBefore,memoryAfter,specimenLength,germinationInitiallyDisabled,germinationInitialStatus,echoInitiallyDisabled,glyphInitialStatus,echoReady,glyphDescription,echoDisabledAfterSelection,initialTextMap,linkedTextMap,migratedTextMap,generatedPreview,changedPreview,previewText,specimenStatus,reloadedLife,undoAfterReloadDisabled,exhaustedFocus,nurtureApplyDisabled,exhaustedModeStatus,exhaustedGuide,freeArmText,zeroFocusPending,blockedCompletionStatus,freeCancelText,afterFreeCancel,canvasArmedStatus,canvasCancelledStatus,url:selectedUrl}));
 }finally{
   if(ws)try{ws.close()}catch{}
   proc.kill("SIGTERM");
