@@ -724,7 +724,7 @@
     save();renderUI();
   }
   function migrateSignals(){
-    var transfers=[],cycleClimate=macroClimate(),sendTraits={},bondBirths=[];
+    var transfers=[],cycleClimate=macroClimate(),sendTraits={},bondEvents=[];
     state.islands.forEach(function(a){sendTraits[a.id]=exportTrait(a)});
     state.islands.forEach(function(a){
       if(!a.links.length)return;
@@ -755,7 +755,9 @@
       if(!state.edgeSignals[ek])state.edgeSignals[ek]={life:0,memory:0,strange:0};
       state.edgeSignals[ek][type]=Math.min(10000,(state.edgeSignals[ek][type]||0)+1);
       var newBond=bondForEdgeKey(ek);
-      if(!existingBond&&newBond)bondBirths.push({key:ek,bond:newBond});
+      if((!existingBond&&newBond)||(existingBond&&!newBond)||(existingBond&&newBond&&existingBond.kind!==newBond.kind)){
+        bondEvents.push({key:ek,before:existingBond,after:newBond});
+      }
       transfers.push({from:a.id,to:b.id,type:type,amount:receivedAmount,lineageBonus:lineageBonus,bondBonus:bondBonus,bondName:existingBond?existingBond.name:null,sourcePalimpsest:!!a.palimpsest});
       motes.push({from:a.id,to:b.id,type:type,start:performance.now(),duration:reducedMotion?1:1300+a.id*120});
     });
@@ -770,9 +772,16 @@
       state.log.unshift({c:state.cycle,msg:"Migration crossed the bridges: "+parts.join(", ")+" signal"+(transfers.length===1?"":"s")+"."});
       state.log=state.log.slice(0,20);
       if(state.islands.every(function(x){return x.arrivals>0}))d("cross-pollinated","Cross-Pollinated Archipelago","Every island has received a signal born somewhere else. The garden no longer has truly isolated histories.");
-      bondBirths.forEach(function(x){
-        addChronicle("bond",x.bond.name+" matured on route "+x.key+" from accumulated typed crossings.");
-        d("bond-"+x.bond.kind,x.bond.name,x.bond.text);
+      bondEvents.forEach(function(x){
+        if(!x.before&&x.after){
+          addChronicle("bond",x.after.name+" matured on route "+x.key+" from accumulated typed crossings.");
+          d("bond-"+x.after.kind,x.after.name,x.after.text);
+        }else if(x.before&&x.after){
+          addChronicle("bond",x.key+" transitioned from "+x.before.name+" to "+x.after.name+" as its crossing history changed.");
+          d("bond-"+x.after.kind,x.after.name,x.after.text);
+        }else if(x.before&&!x.after){
+          addChronicle("bond",x.key+" lost its "+x.before.name+" identity as its signal history became less coherent.");
+        }
       });
     }
     return transfers;
