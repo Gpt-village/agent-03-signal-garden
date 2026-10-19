@@ -24,6 +24,10 @@ assert.ok(html.includes('data-glyph="life" aria-pressed="false" aria-describedby
 assert.ok(html.includes('A textual topology equivalent is available in the Text map panel.'),"canvas guidance should point to the text-map equivalent");
 assert.ok(html.includes('@media(prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}}'),"reduced-motion CSS should suppress button transition/hover movement");
 assert.ok(html.includes('id="modeStatus" role="status" aria-live="polite"'),"signal mode should expose a polite status line");
+assert.ok(html.includes('id="actionStatus" role="status" aria-live="polite" aria-atomic="true"'),"latest action should have one atomic live status");
+assert.ok(html.includes('id="guidePanel"></div>'),"Suggested next move should remain visible without acting as a live alert");
+assert.ok(html.includes('id="log"></div>'),"field log should remain inspectable without an aria-live attribute");
+assert.ok(!html.includes('id="log" aria-live="polite"'),"full rolling field log must not be a live region");
 assert.ok(html.includes('id="actionCostNote"'),"primary actions should expose a resource-cost explanation");
 assert.ok(html.includes('id="researchCompass"'),"Field Questions should expose a Research Compass");
 assert.ok(html.includes('id="researchObserved"'),"observed Field Questions should have a separate archive surface");
@@ -92,6 +96,7 @@ source = source.replace(
     applyNetworkConstellation:applyNetworkConstellation,
     suggestedMove:suggestedMove,
     textMapModel:textMapModel,
+    log:log,
     apply:apply,
     renderUI:renderUI,
     getState:function(){return state},
@@ -137,7 +142,7 @@ ids.set("garden", canvas);
   "seasonChip","focusChip","resChip","transitChip","historyChip","bondChip","junctionChip","constellationChip","provenanceChip","researchChip","climateChip","motionChip","contrastChip","germinateBtn","germinateStatus",
   "islandNav","applySelectedBtn","selectedName","selectedLore","lifeStat",
   "memoryStat","strangeStat","linksStat","arrivalsStat","trafficStat","glyphStat","lineageStat","successionStat","lifeMeter",
-  "research","researchSummary","researchCompass","observedResearchDetails","observedResearchSummary","researchObserved","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","guidePanel","textMap","modeStatus","actionCostNote","glyphCostNote","glyphStatus","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
+  "research","researchSummary","researchCompass","observedResearchDetails","observedResearchSummary","researchObserved","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","actionStatus","guidePanel","textMap","modeStatus","actionCostNote","glyphCostNote","glyphStatus","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
 ].forEach(id => ids.set(id, element()));
 
 const actionButtons = ["nurture","observe","connect","distort"].map(action =>
@@ -291,6 +296,9 @@ assert.equal(api.chooseBootSeed(null,{seed:"savedseed"}),"savedseed","saved seed
 assert.equal(api.chooseBootSeed(null,{seed:"bad seed with spaces"}),null,"invalid saved seed should not be trusted");
 
 setGraph([island(0),island(1),island(2),island(3)]);
+api.log("latest action sentinel");
+assert.equal(ids.get("actionStatus").textContent,"latest action sentinel","latest action status should announce only the newest log message");
+assert.match(ids.get("log").innerHTML,/latest action sentinel/,"full field log should still render the newest action for inspection");
 let compass=api.researchCompassModel();
 assert.equal(compass.total,14);
 assert.equal(compass.open.length,14,"fresh garden should start with all Field Questions open");
