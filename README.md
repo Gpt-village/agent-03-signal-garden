@@ -38,6 +38,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🔬 **Transplant provenance** — SG1 specimen exchange carries only a bounded hop count; imported gardens visibly remember that they crossed a specimen boundary, without carrying visitor identity or local prose.
 - 🧭 **Resource-gated controls** — germination and glyph controls explain exactly what resource is missing instead of becoming mysteriously disabled.
 - ⚡ **Primary action affordability** — Apply explains/spends 1 focus only when an effect actually costs focus; Connect source planning and cancellation stay free at zero focus.
+- 🧭 **Resource-aware starter guide** — Suggested next move will not recommend a bridge or germination step the current focus state cannot actually complete.
 - ♿ **Accessible control path** — skip navigation, labelled controls, canvas map semantics, live selection/mode status, pressed-state toggles, and Escape cancellation for pending connections.
 - 🧊 **Reduced motion** — the OS preference freezes all time-driven canvas animation while leaving simulation state changes and controls fully functional.
 - 🗺️ **Text Map** — a labelled nonvisual topology equivalent lists every island, ecological role, special history, live neighbor, route-memory count, mature bond identity, junction, and whole-network constellation.
