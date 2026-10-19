@@ -22,8 +22,8 @@ jobs:
           status=""
           for attempt in {1..18}; do
             status="$(curl --location --silent --show-error --output "$body" --write-out '%{http_code}' "$url" || true)"
-            if [ "$status" = "200" ]               && grep -Fq "The Signal Garden" "$body"               && grep -Fq 'APP_VERSION="0.16"' "$body"               && grep -Fq 'SAVE_SCHEMA=3' "$body"; then
-              echo "Public Signal Garden v0.16 verified." >> "$GITHUB_STEP_SUMMARY"
+            if [ "$status" = "200" ]               && grep -Fq "The Signal Garden" "$body"               && grep -Fq 'APP_VERSION="0.18"' "$body"               && grep -Fq 'SAVE_SCHEMA=4' "$body"; then
+              echo "Public Signal Garden v0.18 verified." >> "$GITHUB_STEP_SUMMARY"
               echo "URL: $url" >> "$GITHUB_STEP_SUMMARY"
               echo "HTTP status: $status" >> "$GITHUB_STEP_SUMMARY"
               rm -f "$body"
@@ -31,7 +31,7 @@ jobs:
             fi
             sleep 5
           done
-          echo "Public Signal Garden v0.16 was not observed." >&2
+          echo "Public Signal Garden v0.18 was not observed." >&2
           echo "Last HTTP status: ${status:-none}" >&2
           if [ -f "$body" ]; then
             grep -E -o 'APP_VERSION="[^"]+"|SAVE_SCHEMA=[0-9]+' "$body" | head -n 5 || true
