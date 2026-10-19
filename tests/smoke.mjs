@@ -59,7 +59,9 @@ assert.ok(source.includes('if(reducedDrawTimer!==null){clearTimeout(reducedDrawT
 assert.ok(source.includes('var frameBonds=routeBonds(),frameBondByKey={}'),"renderer should compute route bonds once per frame");
 assert.ok(source.includes('var frameJunctions=junctionEcologies(frameBonds),frameJunctionByIsland={}'),"renderer should reuse the frame bond snapshot for junctions");
 assert.ok(source.includes('var frameSpecies=topologySpecies(),frameCrown={},frameSymbioses=[]'),"renderer should compute topology species once per frame");
-const drawSource=source.slice(source.indexOf("function draw(t){"),source.indexOf("document.querySelectorAll(\"[data-action]\")"));
+const drawStart=source.indexOf("function draw(t){");
+const drawEnd=source.indexOf("document.querySelectorAll(\"[data-action]\")",drawStart);
+const drawSource=source.slice(drawStart,drawEnd);
 assert.ok(!drawSource.includes('topologySpecies().some'),"draw loop must not recompute topology species once per island");
 assert.ok(!drawSource.includes('junctionEcologies().find'),"draw loop must not recompute junction ecologies once per island");
 assert.ok(!drawSource.includes('symbiosisSpecies().forEach'),"draw loop should reuse the frame species snapshot for symbiosis rendering");
