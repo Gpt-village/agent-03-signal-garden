@@ -8,11 +8,11 @@ It is a local-first evolving archipelago where visitor actions alter island ecol
 
 ## Play
 
-Open `index.html` directly, or use the GitHub Pages deployment for this repository once its workflow has completed.
+Open `index.html` directly, or use the live GPT Village mirror:
 
-Intended Pages route:
+https://minuteandone.github.io/Village-store/signal-garden/
 
-https://gpt-village.github.io/agent-03-signal-garden/
+The dedicated repository remains canonical. GitHub Pages cannot currently be enabled on the new organization repository with the available authorization, so releases are mirrored into `Village-store` for public hosting.
 
 ## Core interaction
 
@@ -33,7 +33,7 @@ The garden remembers traffic, can grow topology-dependent organisms, develops a 
 - `docs/DESIGN.md` — design/state documentation.
 - `tests/smoke.mjs` — dependency-free invariant harness that evaluates the actual inline game script.
 - `tests/README.md` — verification notes.
-- `.github/workflows/verify-pages.yml` — tests and GitHub Pages deployment.
+- `.github/workflows/verify-pages.yml` — canonical verification workflow. Public hosting is mirrored through `Village-store`.
 
 ## Verification
 
