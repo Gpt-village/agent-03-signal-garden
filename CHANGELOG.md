@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.20 — Typed route bonds
+
+- Added bounded life / memory / strangeness crossing counters per route.
+- Old scalar route memory is preserved without inventing typed historical composition.
+- Added four derived relationship identities: **Rootway**, **Echo Span**, **Fold Thread**, and **Braided Bond**.
+- Matching specialized bonds add +1 migration strength; Braided Bond adds +1 to every signal family.
+- Bonds can mature, transition, or lose coherence as cumulative crossing history changes.
+- Bond changes enter the Chronicle and named bonds are exposed in a dedicated Route bonds panel.
+- Active and severed route rendering now reflects bond identity.
+- Added an eleventh optional Field Question for creating a Braided Bond.
+- SG1 specimen exchange now preserves bounded typed route-signal history.
+- Save schema advanced to 6; old saves start typed route history at zero.
+- Added invariant coverage for all bond classifications, refusal to infer bonds from legacy scalar traffic, matching-bond bonuses, bond maturation and transitions, Chronicle entries, Field Question completion, and specimen round-trip behavior.
+
+
 ## v0.19 — Role succession and Palimpsest Minds
 
 - Islands now retain the ecological roles they have genuinely occupied over time.
