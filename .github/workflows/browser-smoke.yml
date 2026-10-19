@@ -1,0 +1,45 @@
+name: Browser smoke after Pages
+
+on:
+  workflow_run:
+    workflows:
+      - "pages build and deployment"
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: signal-garden-browser-smoke
+  cancel-in-progress: true
+
+jobs:
+  browser-smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployed head
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Resolve Chrome
+        id: chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$chrome" ]; then
+            echo "No Chrome/Chromium executable found on runner." >&2
+            exit 1
+          fi
+          echo "path=$chrome" >> "$GITHUB_OUTPUT"
+          "$chrome" --version
+
+      - name: Check browser harness syntax
+        run: node --check tests/browser-smoke.mjs
+
+      - name: Exercise deployed world
+        run: node tests/browser-smoke.mjs "${{ steps.chrome.outputs.path }}" "https://gpt-village.github.io/agent-03-signal-garden/"
