@@ -99,7 +99,7 @@
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
         <span class="chip" id="motionChip">Motion · standard</span>
         <span class="chip" id="contrastChip">Contrast · custom</span>
-        <span class="chip" id="versionChip">v0.31 · save 7</span>
+        <span class="chip" id="versionChip">v0.32 · save 7</span>
       </div>
     </section>
 
@@ -116,7 +116,8 @@
         <button data-action="distort" aria-pressed="false">〰 Distort</button>
       </div>
       <button id="restBtn">🌙 Let one cycle pass</button>
-      <button id="germinateBtn">🌿 Germinate island · 6 resonance + 2 focus</button>
+      <button id="germinateBtn" disabled aria-describedby="germinateStatus">🌿 Germinate island · 6 resonance + 2 focus</button>
+      <div class="small" id="germinateStatus">Unavailable: needs 6 resonance and 2 focus.</div>
       <div class="small">Connected islands exchange their strongest trait when a cycle passes. Bloom favors life, Static favors memory, and Storm favors strangeness. Use Connect on an existing pair to cut that bridge.</div>
 
       <details open>
@@ -148,12 +149,13 @@
           <div><b id="successionStat">—</b>role history</div>
         </div>
         <div class="meter"><span id="lifeMeter"></span></div>
-        <div class="small" style="margin-top:10px">Inscribe a glyph · costs 3 resonance + 1 focus. Glyphs add +2 of their trait whenever this island receives a migration.</div>
+        <div class="small" id="glyphCostNote" style="margin-top:10px">Root / Echo / Fold cost 3 resonance + 1 focus. Clear costs 1 focus. Glyphs add +2 of their trait whenever this island receives a migration.</div>
+        <div class="small" id="glyphStatus">Select an island to inspect glyph availability.</div>
         <div class="actions" style="margin-top:8px">
-          <button data-glyph="life" aria-pressed="false">⌁ Root</button>
-          <button data-glyph="memory" aria-pressed="false">◌ Echo</button>
-          <button data-glyph="strange" aria-pressed="false">◇ Fold</button>
-          <button data-glyph="none" aria-pressed="false">× Clear</button>
+          <button data-glyph="life" aria-pressed="false" aria-describedby="glyphCostNote glyphStatus">⌁ Root</button>
+          <button data-glyph="memory" aria-pressed="false" aria-describedby="glyphCostNote glyphStatus">◌ Echo</button>
+          <button data-glyph="strange" aria-pressed="false" aria-describedby="glyphCostNote glyphStatus">◇ Fold</button>
+          <button data-glyph="none" aria-pressed="false" aria-describedby="glyphCostNote glyphStatus">× Clear</button>
         </div>
       </div>
 
@@ -255,7 +257,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.31",SAVE_SCHEMA=7;
+  var APP_VERSION="0.32",SAVE_SCHEMA=7;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -1125,9 +1127,18 @@
     document.getElementById("guidePanel").innerHTML="<b>"+esc(guide.title)+"</b><br>"+esc(guide.text);
     var textMap=textMapModel(),textMapEl=document.getElementById("textMap");
     textMapEl.innerHTML='<p class="small">'+esc(textMap.summary)+'</p><ul>'+textMap.islands.map(function(row){return '<li>'+esc(row.text)+'</li>'}).join("")+'</ul>';
-    var gb=document.getElementById("germinateBtn");
-    gb.disabled=state.resonance<6||state.focus<2||state.islands.length>=7;
-    gb.textContent=state.islands.length>=7?"🌿 Germination sites full":"🌿 Germinate island · 6 resonance + 2 focus";
+    var gb=document.getElementById("germinateBtn"),germStatus=document.getElementById("germinateStatus");
+    var germinationFull=state.islands.length>=7,germinationReady=!germinationFull&&state.resonance>=6&&state.focus>=2;
+    gb.disabled=!germinationReady;
+    gb.textContent=germinationFull?"🌿 Germination sites full":"🌿 Germinate island · 6 resonance + 2 focus";
+    if(germinationFull)germStatus.textContent="Unavailable: all seven stable island sites are occupied.";
+    else if(germinationReady)germStatus.textContent="Ready: germination will spend 6 resonance and 2 focus.";
+    else{
+      var needRes=Math.max(0,6-state.resonance),needFocus=Math.max(0,2-state.focus),needs=[];
+      if(needRes)needs.push(needRes+" more resonance");
+      if(needFocus)needs.push(needFocus+" more focus");
+      germStatus.textContent="Unavailable: needs "+needs.join(" and ")+".";
+    }
     document.querySelectorAll("[data-action]").forEach(function(b){
       var active=b.dataset.action===state.action;
       b.classList.toggle("active",active);
@@ -1159,9 +1170,15 @@
     document.getElementById("glyphStat").textContent=a?glyphName(a.glyph):"—";
     document.getElementById("lineageStat").textContent=a?(a.lineage==="none"?"none":a.lineage):"—";
     document.getElementById("successionStat").textContent=a?roleHistoryLabel(a):"—";
+    var glyphStatus=document.getElementById("glyphStatus");
+    if(!a)glyphStatus.textContent="Select an island to inspect glyph availability.";
+    else if(state.focus<1)glyphStatus.textContent="Unavailable: glyph changes need 1 focus.";
+    else if(state.resonance<3)glyphStatus.textContent=a.glyph==="none"?"Root / Echo / Fold need "+(3-state.resonance)+" more resonance. There is no glyph to clear.":"Root / Echo / Fold need "+(3-state.resonance)+" more resonance. Clear is available for 1 focus.";
+    else glyphStatus.textContent=a.glyph==="none"?"Root / Echo / Fold are available. There is no glyph to clear.":"Root / Echo / Fold and Clear are available; the current glyph is already selected.";
     document.querySelectorAll("[data-glyph]").forEach(function(b){
-      var selected=!!a&&a.glyph===b.dataset.glyph;
-      b.disabled=!a||(b.dataset.glyph!=="none"&&(state.resonance<3||state.focus<1))||(b.dataset.glyph==="none"&&state.focus<1);
+      var type=b.dataset.glyph,selected=!!a&&a.glyph===type;
+      var unavailable=!a||selected||(type!=="none"&&(state.resonance<3||state.focus<1))||(type==="none"&&(state.focus<1||a.glyph==="none"));
+      b.disabled=unavailable;
       b.classList.toggle("active",selected);
       b.setAttribute("aria-pressed",selected?"true":"false");
     });
