@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.48 — Current-fragment semantics
+
+- Added `aria-current="location"` to the quick-nav link matching the current URL fragment.
+- Added a visual current-location state for the matching quick-nav link.
+- Current state is derived from native `location.hash` and updates on `hashchange`.
+- Browser Back/Forward therefore restores the correct semantic quick-nav state without custom routing.
+- No-hash pages leave all quick-nav items non-current.
+- Upgraded the invariant fake-browser harness to model window hashchange listeners and six quick-nav links.
+- Real Chrome verifies keyboard Actions, Research, small-phone Specimen, and browser Back current-location states.
+- No save-schema or simulation-rule changes.
+- Canonical invariant and browser verification passed on the exact v0.48 head.
+
+
 ## v0.47 — Visible fragment focus
 
 - Added explicit `:focus-visible` styling to all six quick-navigation fragment destinations.
