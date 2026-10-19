@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.17 — Causal cycle reports
+
+- Added a session-local Last Cycle Report after each autonomous cycle.
+- Reports exact migration transfers with source, destination, signal type, and strength.
+- Reports island role changes caused during the cycle.
+- Reports climate before/after and any phenomenon pulse that actually fired.
+- Report state is intentionally excluded from SG1 specimen exchange.
+- Added invariant coverage for structured cycle-report generation and specimen omission.
+
 ## v0.16 — Visible sky phenomena
 
 - Added a dedicated Sky phenomenon panel.
