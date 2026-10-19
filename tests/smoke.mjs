@@ -71,6 +71,7 @@ source = source.replace(
 );
 
 function element(extra = {}) {
+  const attrs={};
   return Object.assign({
     textContent: "",
     innerHTML: "",
@@ -79,6 +80,9 @@ function element(extra = {}) {
     dataset: {},
     classList: { toggle() {} },
     addEventListener() {},
+    setAttribute(name,value){attrs[name]=String(value)},
+    getAttribute(name){return Object.prototype.hasOwnProperty.call(attrs,name)?attrs[name]:null},
+    removeAttribute(name){delete attrs[name]},
     closest() { return null; }
   }, extra);
 }
