@@ -77,10 +77,11 @@
         <span class="chip" id="bondChip">Bonds 0</span>
         <span class="chip" id="junctionChip">Junctions 0</span>
         <span class="chip" id="constellationChip">Constellation · none</span>
-        <span class="chip" id="researchChip">Research 0/13</span>
+        <span class="chip" id="provenanceChip">Provenance · local</span>
+        <span class="chip" id="researchChip">Research 0/14</span>
         <span class="chip" id="climateChip">Climate · Braided Sky</span>
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
-        <span class="chip" id="versionChip">v0.22 · save 6</span>
+        <span class="chip" id="versionChip">v0.23 · save 7</span>
       </div>
     </section>
 
@@ -158,6 +159,11 @@
       </details>
 
       <details open>
+        <summary>Specimen provenance</summary>
+        <div class="discoveries" id="provenance"></div>
+      </details>
+
+      <details open>
         <summary>Network constellation</summary>
         <div class="discoveries" id="constellation"></div>
       </details>
@@ -206,7 +212,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.22",SAVE_SCHEMA=6;
+  var APP_VERSION="0.23",SAVE_SCHEMA=7;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -234,7 +240,7 @@
   }
   function fresh(){
     randState=hash(seed);
-    return {schema:SAVE_SCHEMA,seed:seed,cycle:1,focus:8,resonance:0,mode:"Quiet",selected:null,action:"nurture",discoveries:[],log:[],chronicle:[],edgeMemory:{},edgeSignals:{},climateSeen:{},lastClimate:null,streakClimate:null,climateStreak:0,activePhenomenon:null,phenomenaSeen:{},islands:[
+    return {schema:SAVE_SCHEMA,seed:seed,cycle:1,focus:8,resonance:0,mode:"Quiet",selected:null,action:"nurture",discoveries:[],log:[],chronicle:[],edgeMemory:{},edgeSignals:{},climateSeen:{},lastClimate:null,streakClimate:null,climateStreak:0,activePhenomenon:null,phenomenaSeen:{},transplantCount:0,islands:[
       makeIsland(0,.24,.31,58),makeIsland(1,.67,.27,48),makeIsland(2,.50,.62,66),makeIsland(3,.79,.69,42)
     ]};
   }
@@ -266,6 +272,8 @@
   if(!Number.isInteger(state.climateStreak)||state.climateStreak<0)state.climateStreak=0;
   if(typeof state.activePhenomenon!=="string")state.activePhenomenon=null;
   if(!state.phenomenaSeen||typeof state.phenomenaSeen!=="object")state.phenomenaSeen={};
+  if(!Number.isInteger(state.transplantCount)||state.transplantCount<0)state.transplantCount=0;
+  state.transplantCount=Math.min(99,state.transplantCount);
   var repairedPhenomena={};
   ["seed-rain","memory-dew","parallax-bloom","confluence-pulse"].forEach(function(k){if(state.phenomenaSeen[k])repairedPhenomena[k]=true});
   state.phenomenaSeen=repairedPhenomena;
