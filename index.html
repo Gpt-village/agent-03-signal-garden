@@ -99,7 +99,7 @@
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
         <span class="chip" id="motionChip">Motion · standard</span>
         <span class="chip" id="contrastChip">Contrast · custom</span>
-        <span class="chip" id="versionChip">v0.40 · save 7</span>
+        <span class="chip" id="versionChip">v0.41 · save 7</span>
       </div>
     </section>
 
@@ -119,6 +119,8 @@
       <button id="restBtn">🌙 Let one cycle pass</button>
       <button id="germinateBtn" disabled aria-describedby="germinateStatus">🌿 Germinate island · 6 resonance + 2 focus</button>
       <div class="small" id="germinateStatus">Unavailable: needs 6 resonance and 2 focus.</div>
+      <button id="undoBtn" disabled aria-describedby="undoStatus">↶ Undo last world action</button>
+      <div class="small" id="undoStatus">Nothing to undo in this session.</div>
       <div class="small">Connected islands exchange their strongest trait when a cycle passes. Bloom favors life, Static favors memory, and Storm favors strangeness. Use Connect on an existing pair to cut that bridge.</div>
 
       <details open>
@@ -265,7 +267,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.40",SAVE_SCHEMA=7;
+  var APP_VERSION="0.41",SAVE_SCHEMA=7;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -388,6 +390,7 @@
   function clampEarly(v){return Math.max(0,Math.min(100,Number(v)||0))}
   var motes=[];
   var lastCycleReport=null;
+  var undoSnapshot=null;
   var audioOn=false,audioCtx=null;
   var canvasVisible=true,framePending=false,reducedDrawTimer=null;
   var motionQuery=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):null;
@@ -435,6 +438,25 @@
     canvasObserver.observe(canvas);
   }
   function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+  function checkpointUndo(label){
+    undoSnapshot={
+      label:String(label||"last world action"),
+      state:JSON.stringify(state),
+      report:lastCycleReport?JSON.stringify(lastCycleReport):null
+    };
+  }
+  function undoLastAction(){
+    if(!undoSnapshot)return false;
+    var snap=undoSnapshot;undoSnapshot=null;
+    state=JSON.parse(snap.state);
+    seed=state.seed;randState=hash(seed);
+    lastCycleReport=snap.report?JSON.parse(snap.report):null;
+    motes=[];
+    if(window.history&&window.history.replaceState)window.history.replaceState(null,"",location.pathname+"?seed="+encodeURIComponent(seed));
+    save();renderUI();
+    log("Undid "+snap.label+".");
+    return true;
+  }
   function tone(freq,duration,type,delay){
     if(!audioOn)return;
     try{
