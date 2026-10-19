@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.33 — Primary action affordability
+
+- Added an explicit cost note for Nurture / Observe / Distort / Connect.
+- Nurture, Observe, and Distort require 1 focus and disable Apply when focus is exhausted.
+- Connect source arming is free.
+- Connect source cancellation is free.
+- Completing or rewiring a connection requires 1 focus.
+- Zero-focus Connect completion stays blocked while preserving the armed source.
+- Apply button text explains arm / cancel / spend / missing-focus states.
+- Mode status reports affordability and the special Connect planning semantics.
+- Keyboard/canvas action paths use the same underlying state machine.
+- No schema bump.
+- Invariant coverage proves zero-focus no-mutation, free Connect planning/cancellation, blocked completion, and focus preservation.
+- Deployed Chrome coverage exhausts focus through real UI actions and verifies the same states.
+- Browser smoke startup was hardened against slow Chrome DevTools initialization without relaxing gameplay assertions.
+
+
 ## v0.32 — Resource-gated action explanations
 
 - Germination now exposes a nearby status explaining exactly which resources are missing.
