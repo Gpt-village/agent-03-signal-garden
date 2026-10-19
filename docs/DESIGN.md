@@ -539,6 +539,45 @@ This keeps immediate action feedback while preventing historical log/guidance te
 
 No schema bump.
 
+## Adaptive canvas budget
+
+The canvas scheduler now adapts to visibility and motion preference.
+
+### Offscreen suspension
+
+When `IntersectionObserver` reports that the canvas is fully outside the viewport:
+
+- the current frame is allowed to finish;
+- no new animation frame is scheduled;
+- state/UI interactions continue normally;
+- when the canvas re-enters the viewport, one fresh frame is scheduled immediately from the **latest** world state.
+
+This saves continuous graph/render work while visitors are reading the long sidebar below the visual map.
+
+### Reduced-motion cadence
+
+When `prefers-reduced-motion: reduce` is active:
+
+- the animation clock remains frozen as before;
+- visible canvas refreshes use a 250 ms timer instead of continuous `requestAnimationFrame` chaining;
+- switching the system motion preference clears any stale low-frequency timer and reschedules immediately.
+
+Standard-motion visible canvases retain ordinary animation-frame rendering.
+
+### Scheduler state
+
+The renderer keeps three ephemeral controls only:
+
+- `canvasVisible`;
+- `framePending`;
+- `reducedDrawTimer`.
+
+None are persisted or included in specimens.
+
+No schema bump and no simulation behavior changes.
+
+Browser verification covers the actual lifecycle: scroll the canvas fully offscreen, prove delayed bitmaps remain unchanged, mutate selection while offscreen, confirm the bitmap still stays frozen, scroll back, and confirm the latest selection is rendered.
+
 ## Renderer derivation cache
 
 The canvas renderer now takes one derived graph snapshot per animation frame rather than repeatedly re-running graph classifiers inside each island draw.
