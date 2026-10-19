@@ -672,6 +672,23 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Two-row mobile HUD
+
+v0.45 bounds the already-compacted narrow-screen HUD to a predictable two-row footprint.
+
+At viewports up to 820 px:
+
+- the HUD becomes a six-column CSS grid;
+- Cycle / Focus / Resonance each span two columns, forming row one;
+- Climate / Phenomenon each span three columns, forming row two;
+- chip text is centered, single-line, and may ellipsize rather than forcing extra rows.
+
+The set of visible/hidden information does not change from v0.44. This release only constrains footprint.
+
+No save-schema or simulation-rule changes occur.
+
+Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
+
 ## Compact mobile HUD
 
 v0.44 reduces visual-map occlusion on narrow screens without removing information from the world.
