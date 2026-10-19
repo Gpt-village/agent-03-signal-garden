@@ -156,6 +156,10 @@ try{
   assert.match(researchSummary,/14 open/,"fresh deployed garden should expose the open research count");
   const researchCompass=await evaluate("document.getElementById('researchCompass').textContent");
   assert.match(researchCompass,/not part of the starting map/,"fresh Research Compass should point to New Land");
+  assert.match(researchCompass,/Experiment hint/,"fresh Research Compass should expose an experiment hint");
+  assert.match(researchCompass,/0\/6 resonance/,"fresh Research Compass should expose live New Land resource progress");
+  const openResearch=await evaluate("document.getElementById('research').textContent");
+  assert.match(openResearch,/Hint:/,"open Field Questions should expose state-aware hints");
   const observedResearchSummary=await evaluate("document.getElementById('observedResearchSummary').textContent");
   assert.match(observedResearchSummary,/Observed archive · 0/);
   const germinationInitiallyDisabled=await evaluate("document.getElementById('germinateBtn').disabled");
@@ -181,6 +185,9 @@ try{
   assert.ok(lifeAfter>lifeBefore,"Nurture should increase selected-island life");
   const actionAnnouncement=await evaluate("document.getElementById('actionStatus').textContent");
   assert.match(actionAnnouncement,/Nurtured/,"latest action status should announce concise Nurture feedback");
+  const nurturedResearchCompass=await evaluate("document.getElementById('researchCompass').textContent");
+  assert.match(nurturedResearchCompass,/1\/6 resonance/,"Research Compass hint should update after real gameplay changes resonance");
+  assert.notEqual(nurturedResearchCompass,researchCompass,"Research Compass text should change when relevant state changes");
 
   const nurturePressedInitially=await evaluate(`document.querySelector('[data-action="nurture"]').getAttribute('aria-pressed')`);
   assert.equal(nurturePressedInitially,"true","default nurture mode should expose pressed state");
