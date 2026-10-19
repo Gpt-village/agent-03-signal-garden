@@ -844,9 +844,9 @@
     if(!id)return "";
     if(id==="new-land"){
       if(state.islands.length>4)return "New land is already part of this garden.";
-      if(state.resonance<6)return "Build resonance through observation or other signals, while leaving room to recover focus.";
-      if(state.focus<2)return "The garden has enough resonance. Let a cycle pass until at least 2 focus is available for germination.";
-      return "Germination is affordable now. Use the Germinate island control when you want the map to expand.";
+      if(state.resonance<6)return "Current resources: "+state.resonance+"/6 resonance and "+state.focus+"/2 focus. Build resonance through observation or other signals, while leaving room to recover focus.";
+      if(state.focus<2)return "Current resources: "+state.resonance+"/6 resonance and "+state.focus+"/2 focus. The garden has enough resonance; let a cycle pass until at least 2 focus is available for germination.";
+      return "Current resources: "+state.resonance+"/6 resonance and "+state.focus+"/2 focus. Germination is affordable now whenever you want the map to expand.";
     }
     if(id==="ring"){
       var activeRing=state.islands.filter(function(a){return a.links.length>0});
