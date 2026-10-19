@@ -195,6 +195,22 @@ The current climate streak and active phenomenon are visible in the HUD. First p
 
 Bounded specimen exchange preserves only phenomenon identity/history and climate-streak counters. Chronicle prose remains local and is not transferred.
 
+## Last Cycle Report
+
+The garden exposes a session-local **Last Cycle Report** after each autonomous cycle.
+
+The report is structured from simulation state rather than copied from the rolling field log. It shows:
+
+- the cycle number and seasonal mode;
+- climate before and after the cycle;
+- any climate phenomenon that actually pulsed on that cycle;
+- every migration transfer (source island → destination island, signal type, strength);
+- island role changes caused by migration/evolution.
+
+The purpose is causal clarity: visitors should be able to answer “what just happened, and why?” without reverse-engineering several UI surfaces.
+
+The report is **not** included in SG1 specimen exchange. It is session-local explanatory state, not part of the shareable phenotype.
+
 ## Phenomenon visibility
 
 Active sustained-climate phenomena are not only state variables.
