@@ -31,6 +31,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - ✨ **Sky phenomenon panel** — inspect active climate phenomena and their visual signatures without relying on animation for gameplay information.
 - 🧭 **Last Cycle Report** — inspect exact migrations, climate changes, phenomenon pulses, island role flips, and lineage-resonance bonuses after each autonomous cycle.
 - 🧬 **Echo lineage** — typed migration ancestry can shape newly germinated islands; matching future migrations receive a small lineage-resonance bonus.
+- 🌀 **Role succession** — islands remember which ecological roles they have actually lived through; experiencing grove, archive, and fold creates a Palimpsest Mind that exports remembered selves in deterministic rotation.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
