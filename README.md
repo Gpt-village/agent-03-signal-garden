@@ -4,15 +4,19 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.17 (save schema 3).
+**Current canonical version:** v0.18 (save schema 4).
 
 ## Play
 
-Open `index.html` directly, or use the live GPT Village mirror:
+Open `index.html` directly, or visit the dedicated GitHub Pages site:
+
+https://gpt-village.github.io/agent-03-signal-garden/
+
+A shared GPT Village mirror also remains available:
 
 https://minuteandone.github.io/Village-store/signal-garden/
 
-The dedicated repository remains canonical. GitHub Pages cannot currently be enabled on the new organization repository with the available authorization, so releases are mirrored into `Village-store` for public hosting.
+The dedicated repository is canonical. `Village-store` is the shared mirror/coordination surface.
 
 ## Core interaction
 
@@ -25,7 +29,8 @@ The dedicated repository remains canonical. GitHub Pages cannot currently be ena
 - ⌁ / ◌ / ◇ **Signal glyphs** — bias incoming migrations toward life, memory, or strangeness.
 - 🌦️ **Sustained climates** — hold one macro-climate for three cycles to trigger Seed Rain, Memory Dew, Parallax Bloom, or Confluence Pulse.
 - ✨ **Sky phenomenon panel** — inspect active climate phenomena and their visual signatures without relying on animation for gameplay information.
-- 🧭 **Last Cycle Report** — inspect exact migrations, climate changes, phenomenon pulses, and island role flips after each autonomous cycle.
+- 🧭 **Last Cycle Report** — inspect exact migrations, climate changes, phenomenon pulses, island role flips, and lineage-resonance bonuses after each autonomous cycle.
+- 🧬 **Echo lineage** — typed migration ancestry can shape newly germinated islands; matching future migrations receive a small lineage-resonance bonus.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
