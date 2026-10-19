@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.43 — Mobile section navigation
+
+- Added a compact Map / Actions / Island / Research / History / Specimen jump bar.
+- The jump bar becomes sticky on narrow/mobile layouts.
+- Added stable fragment targets with scroll margin so sticky navigation does not cover headings.
+- Native fragment navigation/history behavior is preserved.
+- Quick-nav clicks reveal collapsed details targets before the native jump.
+- History remains collapsed by default but opens automatically when reached through the jump bar.
+- No save-schema or simulation-rule changes.
+- Invariant coverage checks links, targets, sticky CSS, scroll margins, and details reveal logic.
+- Real Chrome coverage verifies sticky mobile behavior, Research landing, and collapsed-to-open History navigation.
+- Canonical invariants, Pages deployment, and browser smoke are green for the exact v0.43 head.
+
+
 ## v0.42 — Input semantics
 
 - Added `aria-keyshortcuts` metadata for Nurture / Observe / Connect / Distort / Undo / Apply.
