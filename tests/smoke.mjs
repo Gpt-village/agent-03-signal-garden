@@ -310,8 +310,12 @@ setGraph([
   island(1, [0], 10, 80, 5)
 ]);
 api.getState().islands[1].glyph = "memory";
+api.getState().islands[1].lineage = "life";
 const memoryBeforeGlyphMigration = api.getState().islands[1].memory;
-api.migrateSignals();
+const lineageTransfers=api.migrateSignals();
+const lineageArrival=lineageTransfers.find(x=>x.to===1&&x.type==="life");
+assert.ok(lineageArrival,"life migration should reach the lineage test receiver");
+assert.equal(lineageArrival.lineageBonus,1,"matching echo lineage should add exactly one migration strength");
 assert.equal(api.getState().edgeMemory["0-1"], 2, "two linked islands should each record one crossing in a cycle");
 assert.equal(api.getState().islands[0].arrivals, 1);
 assert.equal(api.getState().islands[1].arrivals, 1);
