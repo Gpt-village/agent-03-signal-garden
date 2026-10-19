@@ -40,6 +40,8 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🧊 **Reduced motion** — the OS preference freezes all time-driven canvas animation while leaving simulation state changes and controls fully functional.
 - 🔎 **Preview-gated import** — pasted SG1 state must be validated and previewed before Import becomes available; any dock edit invalidates the preview.
 - ♿ **Skip navigation + equivalent controls** — first-tab access jumps directly to the labelled control landmark; the canvas identifies itself as a visual map and points to keyboard-accessible equivalents.
+- 🎛️ **ARIA mode state** — signal and glyph choices expose `aria-pressed`; pending Connect sources are announced and Escape cancels them without spending focus.
+- 💤 **Reduced motion** — system `prefers-reduced-motion` freezes the animated canvas clock, collapses migration-mote animation, removes hover movement, and is acknowledged in the HUD.
 - 🧭 **Suggested next move** — the sidebar now gives a derived starter trail (select → connect → cycle → resonance → germination → open research) and keeps advanced ecology panels collapsed by default.
 - 📦 **Specimen Dock** — generate/copy SG1 state into a real textarea, paste/import specimens without browser prompts, clear the dock safely, and get inline validation/status feedback.
 - 🔎 **Specimen preview gate** — pasted SG1 state must validate and be previewed before import; any edit invalidates approval until the exact text is previewed again.
