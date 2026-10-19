@@ -19,7 +19,9 @@ Each island tracks:
 - **strangeness** — instability, folds, and nonordinary behavior;
 - **links** — current bridges to other islands;
 - **arrivals** — foreign signals received through those bridges;
-- **glyph** — optional bounded Root / Echo / Fold inscription that biases incoming migrations.
+- **glyph** — optional bounded Root / Echo / Fold inscription that biases incoming migrations;
+- **imprints** — bounded counts of received life / memory / strangeness migrations;
+- **lineage** — optional inherited life / memory / strangeness echo carried by newborn land.
 
 Each island's currently strongest variable becomes its ecological role:
 
@@ -96,6 +98,28 @@ New islands:
 
 The first successful birth unlocks **New Land**. Filling all seven stable sites unlocks **Seven-Island Sky**.
 
+## Migration ancestry and echo lineages
+
+Every received migration increments a typed ancestry imprint on the destination island:
+
+- life arrival → life imprint;
+- memory arrival → memory imprint;
+- strange arrival → strangeness imprint.
+
+The archipelago sums those imprints when new land germinates. A newborn receives an **echo lineage** only when migration history is both substantial and meaningfully dominant:
+
+- at least 8 total recorded imprints across the current archipelago;
+- the leading signal has at least 6 imprints;
+- the lead is not tied.
+
+Inherited lineage gives the newborn a small birth bonus in that trait.
+
+Lineage remains meaningful after birth: an incoming migration that matches the island's inherited lineage receives **+1 lineage resonance**. The Last Cycle Report identifies that bonus explicitly.
+
+Old saves migrate safely by adding zeroed imprint counters and a `none` lineage. Bounded SG1 specimen exchange may carry only numeric imprint counts plus the lineage enum; local Chronicle and field-log prose remain excluded.
+
+The first successful inherited birth unlocks **Echo Lineage**. Field Questions include an optional ninth prompt asking whether migration history can shape land that did not yet exist.
+
 ## Route memory and topology species
 
 Migration history persists separately from the current network.
@@ -115,7 +139,7 @@ These species are derived from the live graph and route history rather than plac
 
 The garden persists one current local world in browser `localStorage`.
 
-As of **v0.13 / save schema 2**:
+As of **v0.18 / save schema 4**:
 
 - an explicit `?seed=` URL intentionally takes precedence;
 - otherwise a valid persisted garden's own seed is reused before any new random seed is generated;
@@ -140,9 +164,9 @@ A **specimen code** instead captures a deliberately limited evolved phenotype:
 
 It intentionally omits the field log, milestone chronicle text, arbitrary localStorage contents, and unrelated browser data.
 
-Current bounded specimen data also includes island glyph enums and the set of observed macro-climate IDs.
+Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, and lineage enums.
 
-Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate IDs, topology size, indices, and route-memory bounds before replacing local game state.
+Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
 ## Accessibility
 
@@ -265,7 +289,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **seven** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **nine** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -275,7 +299,9 @@ Current questions ask whether a visitor can:
 - create a remembered route scar by heavily using and then severing a bridge;
 - sustain grove-, archive-, and fold-minds at the same time;
 - pass through at least three different macro-climates;
-- sustain all three mixed-ecology bridge symbioses at once.
+- sustain all three mixed-ecology bridge symbioses at once;
+- sustain one macro-climate long enough to trigger a sky phenomenon;
+- accumulate enough typed migration history for a newborn island to inherit an echo lineage.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
