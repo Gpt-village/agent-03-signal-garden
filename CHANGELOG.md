@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.34 — Resource-aware starter guidance
+
+- Suggested next move now respects focus affordability.
+- Zero-focus unlinked gardens recommend recovering focus instead of claiming the first bridge is immediately completable.
+- Linked cycle-1 gardens still recommend the first migration cycle because that action also restores focus.
+- Evolved zero-focus gardens recommend focus recovery before spending actions.
+- Resonance-ready four-island gardens with only 1 focus recommend restoring germination focus instead of claiming germination is ready.
+- Updated starter text to explain Connect's free source-planning step and 1-focus completion cost.
+- No schema bump.
+- Added invariant cases for each affordability branch.
+- Deployed Chrome smoke verifies the guide switches to Recover focus after real UI actions exhaust focus.
+
+
 ## v0.33 — Primary action affordability
 
 - Added an explicit cost note for Nurture / Observe / Distort / Connect.
