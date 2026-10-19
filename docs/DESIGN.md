@@ -264,6 +264,34 @@ As of **v0.23 / save schema 7**:
 
 The **Copy garden seed** action shares only the procedural starting seed. It does not export the visitor's complete local history.
 
+## Specimen preview gate
+
+v0.26 adds an explicit safety step between pasted SG1 text and replacement of the local garden.
+
+Preview state is deliberately **ephemeral** and is never saved.
+
+The dock now follows this sequence:
+
+1. paste or generate an SG1 specimen;
+2. **Preview pasted** validates it with the same bounded decoder used by import;
+3. the preview displays seed, cycle, season, island count, live-route count, focus, resonance, and the resulting transplant-hop number;
+4. only the exact validated text enables **Import previewed**;
+5. any textarea edit immediately invalidates the preview and disables import;
+6. the visitor must preview that exact edited text again before it can replace the local garden.
+
+Generating the current specimen automatically previews it.
+
+Invalid preview attempts leave the current garden unchanged and expose decoder feedback inline.
+
+This adds no persisted fields and does not change SG1 payload structure or save schema.
+
+The deployed Chrome smoke explicitly exercises:
+- import disabled before preview;
+- a generated specimen producing a valid preview;
+- editing the text disabling import;
+- restoring the exact specimen and re-previewing;
+- successful import only after revalidation.
+
 ## Specimen Dock
 
 v0.25 makes specimen exchange a first-class interface instead of relying on browser prompt dialogs.
