@@ -349,10 +349,11 @@ assert.ok(remembered&&remembered.sourcePalimpsest,"Palimpsest migration should i
 assert.equal(remembered.type,"strange","cycle 2 / island 0 should rotate Palimpsest export to strange");
 assert.equal(api.getState().edgeMemory["0-1"], 4, "two migration pulses should accumulate four total directed crossings");
 
-assert.equal(api.getState().islands[0].arrivals, 1);
-assert.equal(api.getState().islands[1].arrivals, 1);
-assert.equal(api.getState().islands[0].imprints.memory,1,"receiving a memory migration should increment memory ancestry");
-assert.equal(api.getState().islands[1].imprints.life,1,"receiving a life migration should increment life ancestry");
+assert.equal(api.getState().islands[0].arrivals, 2,"two migration pulses should produce two arrivals on island 0");
+assert.equal(api.getState().islands[1].arrivals, 2,"two migration pulses should produce two arrivals on island 1");
+assert.equal(api.getState().islands[0].imprints.memory,2,"island 0 should receive memory ancestry on both pulses");
+assert.equal(api.getState().islands[1].imprints.life,1,"island 1 should retain the first life ancestry imprint");
+assert.equal(api.getState().islands[1].imprints.strange,1,"Palimpsest remembered-self export should add a strange ancestry imprint");
 assert.ok(api.getState().islands[1].memory >= memoryBeforeGlyphMigration + 2, "Echo glyph should add memory on incoming migration");
 
 setGraph([
