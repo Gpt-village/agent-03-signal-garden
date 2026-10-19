@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.27 — Skip navigation and accessible map semantics
+
+- Added a first-focus **Skip to controls** link.
+- Added a labelled, programmatically focusable controls landmark.
+- The canvas now identifies itself as a visual map and points to screen-reader guidance for equivalent keyboard controls.
+- Selected-island name/lore now uses one polite live status region.
+- Added visible focus styling for the skip link.
+- No schema bump: accessibility changes are interface-only.
+- Added source invariants for skip-link/landmark/canvas/live-region markup.
+- Extended deployed Chrome smoke to prove real Tab → Enter skip navigation, canvas semantics, and selected-island announcements.
+
+
 ## v0.26 — Specimen preview gate
 
 - Added an explicit **Preview pasted** step before specimen import.
