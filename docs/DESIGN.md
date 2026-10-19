@@ -689,6 +689,25 @@ No save-schema or simulation-rule changes occur.
 
 Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
 
+## High-contrast current location
+
+Custom quick-nav border/background colors may be remapped or flattened in forced-colors/high-contrast environments.
+
+v0.49 explicitly preserves the current-fragment indicator with a system-color outline:
+
+```css
+.quick-nav a[aria-current="location"] {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+```
+
+The normal-color current state remains unchanged.
+
+Because browser smoke already emulates forced colors, real Chrome verifies that after keyboard navigation marks Actions current, the quick-nav link still renders a solid outline at least 2 px wide even though focus itself has moved to the destination section.
+
+No save-schema or simulation-rule changes.
+
 ## Current-fragment semantics
 
 The quick navigation exposes the active fragment with `aria-current="location"`.
