@@ -99,7 +99,7 @@
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
         <span class="chip" id="motionChip">Motion · standard</span>
         <span class="chip" id="contrastChip">Contrast · custom</span>
-        <span class="chip" id="versionChip">v0.35 · save 7</span>
+        <span class="chip" id="versionChip">v0.36 · save 7</span>
       </div>
     </section>
 
@@ -123,7 +123,7 @@
 
       <details open>
         <summary>Suggested next move</summary>
-        <div class="discovery" id="guidePanel" aria-live="polite"></div>
+        <div class="discovery" id="guidePanel"></div>
       </details>
 
       <div>
@@ -228,9 +228,10 @@
         <div class="log" id="chronicle"></div>
       </details>
 
+      <div class="sr-only" id="actionStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <details>
         <summary>Field log</summary>
-        <div class="log" id="log" aria-live="polite"></div>
+        <div class="log" id="log"></div>
       </details>
 
       <details open class="specimen-dock">
@@ -264,7 +265,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.35",SAVE_SCHEMA=7;
+  var APP_VERSION="0.36",SAVE_SCHEMA=7;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -555,7 +556,10 @@
   }
   function log(msg){
     state.log.unshift({c:state.cycle,msg:msg});
-    state.log=state.log.slice(0,20);save();renderUI();
+    state.log=state.log.slice(0,20);
+    var actionStatus=document.getElementById("actionStatus");
+    if(actionStatus)actionStatus.textContent=msg;
+    save();renderUI();
   }
   function d(id,title,text){
     if(state.discoveries.some(function(x){return x.id===id}))return;
