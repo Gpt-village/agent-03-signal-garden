@@ -451,6 +451,22 @@ The deployed Chrome smoke uses real **Tab** and **Enter** input to verify the sk
 
 No save-schema bump is required.
 
+## Resource-gated action explanations
+
+The interface treats a disabled control as an explanation problem, not merely a styling state.
+
+As of v0.32:
+
+- **Germinate island** is disabled until the visitor has 6 resonance and 2 focus, or permanently when all seven stable sites are occupied.
+- A nearby status line explains the exact missing amount of resonance/focus, or reports that germination is ready.
+- Root / Echo / Fold glyphs state their 3 resonance + 1 focus cost.
+- Clear glyph states its 1 focus cost.
+- Glyph status distinguishes no-selection, no-focus, insufficient-resonance, available, and already-selected conditions.
+- Selected glyph controls are disabled to avoid spending resources on a no-op.
+- Resource status is connected to the relevant controls through descriptive semantics rather than relying only on color/visual disabled styling.
+
+This is an interface-only behavior layer; it does not alter save state or simulation balance.
+
 ## Accessibility
 
 The canvas is not the only control surface.
