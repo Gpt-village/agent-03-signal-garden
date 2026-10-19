@@ -110,7 +110,7 @@ try{
   assert.equal(contrastChip,"Contrast · forced","deployed HUD should acknowledge forced colors");
   const panelShadow=await evaluate("getComputedStyle(document.querySelector('.panel')).boxShadow");
   assert.equal(panelShadow,"none","forced-colors mode should remove decorative panel shadows");
-  const activeOutline=await evaluate("getComputedStyle(document.querySelector('[data-action="nurture"]')).outlineStyle");
+  const activeOutline=await evaluate(`getComputedStyle(document.querySelector('[data-action="nurture"]')).outlineStyle`);
   assert.equal(activeOutline,"solid","active signal state should retain an explicit outline in forced colors");
   await sleep(150);
   const reducedCanvasA=await evaluate("document.getElementById('garden').toDataURL()");
