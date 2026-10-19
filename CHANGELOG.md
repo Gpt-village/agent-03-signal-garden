@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.21 — Junction ecologies
+
+- Added derived ecologies where multiple mature route bonds meet at one island.
+- Added **Scribe Orchard**, **Prism Nursery**, **Dream Estuary**, **Confluence Knot**, and **Triune Loom**.
+- Junction ecologies apply small bounded trait pulses once per autonomous cycle.
+- Junction effects occur before climate recording, so relationship structure can causally alter macro-climate and later role succession.
+- Added a dedicated Junction ecologies panel, HUD count, summary output, canvas marker, and Last Cycle Report section.
+- Added a twelfth optional Field Question for forming a Triune Loom.
+- No save-schema bump: junctions are derived from active topology + typed bond history.
+- Added invariant coverage for all junction classifications, Triune Loom trait effects, research completion, and causal cycle-report inclusion.
+
+
 ## v0.20 — Typed route bonds
 
 - Added bounded life / memory / strangeness crossing counters per route.
