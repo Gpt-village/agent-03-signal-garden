@@ -1587,6 +1587,11 @@
   document.getElementById("restBtn").addEventListener("click",function(){nextCycle();log("One cycle passed. The garden evolved without direct instruction.")});
   document.getElementById("germinateBtn").addEventListener("click",spawnIsland);
   document.getElementById("undoBtn").addEventListener("click",undoLastAction);
+  document.getElementById("quickNav").addEventListener("click",function(e){
+    var link=e.target.closest('a[href^="#"]');if(!link)return;
+    var id=link.getAttribute("href").slice(1),target=document.getElementById(id);
+    if(target&&target.tagName==="DETAILS")target.open=true;
+  });
   canvas.addEventListener("click",function(e){apply(pickIsland(e.clientX,e.clientY))});
   document.addEventListener("keydown",function(e){
     if(e.key==="Escape"&&Number.isInteger(state.connectFrom)){
