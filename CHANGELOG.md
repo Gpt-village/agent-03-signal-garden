@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.19 — Role succession and Palimpsest Minds
+
+- Islands now retain the ecological roles they have genuinely occupied over time.
+- Added grove/archive/fold succession history per island.
+- An island that has lived through all three roles becomes a Palimpsest Mind.
+- Palimpsest Minds rotate outgoing migration type deterministically through remembered selves.
+- Last Cycle Report labels transfers exported by a Palimpsest Mind.
+- Added a tenth optional Field Question for achieving full role succession.
+- Added visible role-history state to the selected-island panel and navigator.
+- Added Palimpsest lore and canvas marker.
+- SG1 specimen exchange now stores a bounded 0–7 role-history bitmask per island.
+- Save schema advanced to 5.
+
 ## v0.18 — Migration ancestry and echo lineages
 
 - Added typed life / memory / strangeness ancestry imprints to islands.
