@@ -76,10 +76,11 @@
         <span class="chip" id="historyChip">Route memory 0</span>
         <span class="chip" id="bondChip">Bonds 0</span>
         <span class="chip" id="junctionChip">Junctions 0</span>
-        <span class="chip" id="researchChip">Research 0/12</span>
+        <span class="chip" id="constellationChip">Constellation · none</span>
+        <span class="chip" id="researchChip">Research 0/13</span>
         <span class="chip" id="climateChip">Climate · Braided Sky</span>
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
-        <span class="chip" id="versionChip">v0.21 · save 6</span>
+        <span class="chip" id="versionChip">v0.22 · save 6</span>
       </div>
     </section>
 
@@ -157,6 +158,11 @@
       </details>
 
       <details open>
+        <summary>Network constellation</summary>
+        <div class="discoveries" id="constellation"></div>
+      </details>
+
+      <details open>
         <summary>Junction ecologies</summary>
         <div class="discoveries" id="junctions"></div>
       </details>
@@ -200,7 +206,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.21",SAVE_SCHEMA=6;
+  var APP_VERSION="0.22",SAVE_SCHEMA=6;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
