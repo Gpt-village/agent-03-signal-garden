@@ -191,6 +191,8 @@ try{
   assert.equal(actionsFocusStyle.outlineStyle,"solid","keyboard fragment destination should render an explicit focus outline");
   assert.ok(actionsFocusStyle.outlineWidth>=2,"fragment destination focus outline should be at least 2px");
   assert.ok(actionsFocusStyle.outlineOffset>=4,"fragment destination focus outline should clear the section content");
+  const actionsCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
+  assert.deepEqual(actionsCurrent.filter(x=>x[1]),[["#actionsSection","location"]],"keyboard fragment jump should mark only Actions as current");
 
   await evaluate(`document.querySelector('#quickNav a[href="#researchSection"]').click()`);
   await waitFor("location.hash==='#researchSection'","Research section anchor navigation");
@@ -198,6 +200,8 @@ try{
   assert.ok(researchTargetTop>=0&&researchTargetTop<844,"Research jump target should land visibly in the mobile viewport");
   const researchFocused=await evaluate("document.activeElement && document.activeElement.id");
   assert.equal(researchFocused,"researchSection","native Research fragment navigation should move focus to its tabindex target");
+  const researchCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).filter(a=>a.hasAttribute('aria-current')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
+  assert.deepEqual(researchCurrent,[["#researchSection","location"]],"mouse/script fragment jump should update aria-current to Research");
   const historyInitiallyOpen=await evaluate("document.getElementById('historySection').open");
   assert.equal(historyInitiallyOpen,false,"History should begin collapsed");
   await evaluate(`document.querySelector('#quickNav a[href="#historySection"]').click()`);
@@ -237,6 +241,13 @@ try{
   assert.ok(narrowLanding.targetTop>=narrowLanding.navBottom+4,"320px Specimen jump target should clear the sticky navigation");
   assert.ok(narrowLanding.targetTop<narrowLanding.viewport,"320px Specimen jump target should remain visible");
   assert.equal(narrowLanding.focused,"specimenSection","small-phone native fragment navigation should focus the Specimen target");
+  const specimenCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).filter(a=>a.hasAttribute('aria-current')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
+  assert.deepEqual(specimenCurrent,[["#specimenSection","location"]],"small-phone Specimen jump should mark Specimen current");
+
+  await evaluate("history.back()");
+  await waitFor("location.hash==='#historySection'","native Back fragment navigation");
+  const backCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).filter(a=>a.hasAttribute('aria-current')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
+  assert.deepEqual(backCurrent,[["#historySection","location"]],"browser Back should restore aria-current through hashchange");
 
   await send("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:1,mobile:true,screenWidth:390,screenHeight:844});
   await sleep(100);
