@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.42 — Input semantics
+
+- Added `aria-keyshortcuts` metadata for Nurture / Observe / Connect / Distort / Undo / Apply.
+- Dynamic island navigator controls now advertise shortcuts 1–7.
+- Added explicit canvas `touch-action: pan-y pinch-zoom` so touch scrolling/zoom policy is not implicit.
+- Existing keyboard and simulation behavior is unchanged.
+- No save-schema bump.
+- Invariant coverage checks static shortcut metadata, dynamic navigator metadata, and touch policy.
+- Real Chrome coverage verifies deployed shortcut attributes and computed touch-action behavior on the mobile test viewport.
+- The deployed v0.42 feature head passed browser smoke; the corrected final invariant harness is green.
+
+
 ## v0.41 — Session-only Undo
 
 - Added one reversible in-session checkpoint for meaningful world mutations.
