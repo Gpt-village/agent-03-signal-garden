@@ -99,7 +99,7 @@
         <span class="chip" id="phenomenonChip">Phenomenon · dormant</span>
         <span class="chip" id="motionChip">Motion · standard</span>
         <span class="chip" id="contrastChip">Contrast · custom</span>
-        <span class="chip" id="versionChip">v0.32 · save 7</span>
+        <span class="chip" id="versionChip">v0.33 · save 7</span>
       </div>
     </section>
 
@@ -108,12 +108,13 @@
         <h2>Send a signal</h2>
         <p class="action-note">Choose one, then click an island. <span class="kbd">N</span> nurture · <span class="kbd">O</span> observe · <span class="kbd">C</span> connect/rewire · <span class="kbd">D</span> distort · <span class="kbd">Esc</span> cancels a pending connection.</p>
         <div class="small" id="modeStatus" role="status" aria-live="polite">Signal mode: nurture.</div>
+        <div class="small" id="actionCostNote">Nurture / Observe / Distort cost 1 focus. Connect source arming and cancellation are free; completing a link or cut costs 1 focus.</div>
       </div>
       <div class="actions">
-        <button data-action="nurture" aria-pressed="true">🌱 Nurture</button>
-        <button data-action="observe" aria-pressed="false">👁 Observe</button>
-        <button data-action="connect" aria-pressed="false">🕸 Connect</button>
-        <button data-action="distort" aria-pressed="false">〰 Distort</button>
+        <button data-action="nurture" aria-pressed="true" aria-describedby="actionCostNote modeStatus">🌱 Nurture</button>
+        <button data-action="observe" aria-pressed="false" aria-describedby="actionCostNote modeStatus">👁 Observe</button>
+        <button data-action="connect" aria-pressed="false" aria-describedby="actionCostNote modeStatus">🕸 Connect</button>
+        <button data-action="distort" aria-pressed="false" aria-describedby="actionCostNote modeStatus">〰 Distort</button>
       </div>
       <button id="restBtn">🌙 Let one cycle pass</button>
       <button id="germinateBtn" disabled aria-describedby="germinateStatus">🌿 Germinate island · 6 resonance + 2 focus</button>
@@ -129,7 +130,7 @@
         <h3>Island navigator</h3>
         <div class="small">Keyboard: <span class="kbd">1–7</span> selects an island; <span class="kbd">Enter</span> applies the current signal when focus is not on another control.</div>
         <div class="island-nav" id="islandNav" aria-label="Select an island" style="margin-top:8px"></div>
-        <button id="applySelectedBtn" style="width:100%;margin-top:8px">⚡ Apply current signal</button>
+        <button id="applySelectedBtn" aria-describedby="actionCostNote modeStatus" style="width:100%;margin-top:8px">⚡ Apply current signal</button>
       </div>
 
       <div class="island-card">
@@ -257,7 +258,7 @@
 (function(){
   "use strict";
   var canvas=document.getElementById("garden"),ctx=canvas.getContext("2d");
-  var APP_VERSION="0.32",SAVE_SCHEMA=7;
+  var APP_VERSION="0.33",SAVE_SCHEMA=7;
   var KEY="agent03-signal-garden-v1";
   var seedParam=new URLSearchParams(location.search).get("seed"),bootSaved=null,bootParseError=false;
   try{
@@ -1053,15 +1054,17 @@
   function apply(a){
     if(!a)return;
     state.selected=a.id;
-    if(state.focus<=0){log("No focus left. Let a cycle pass.");return}
     if(state.action==="nurture"){
+      if(state.focus<=0){log("Nurture needs 1 focus. Let a cycle pass.");save();renderUI();return}
       state.focus--;a.life=clamp(a.life+11);a.memory=clamp(a.memory+2);state.resonance++;cue("nurture");
       log("Nurtured "+a.name+"; new growth takes the shape of nearby signals.");
     }else if(state.action==="observe"){
+      if(state.focus<=0){log("Observe needs 1 focus. Let a cycle pass.");save();renderUI();return}
       state.focus--;a.memory=clamp(a.memory+10);a.strange=clamp(a.strange+2);state.resonance+=2;cue("observe");
       log("Observed "+a.name+" long enough for it to notice back.");
       if(a.memory>55)d("witness-"+a.id,"Reciprocal Witness",a.name+" now changes subtly when selected, as if selection itself became weather.");
     }else if(state.action==="distort"){
+      if(state.focus<=0){log("Distort needs 1 focus. Let a cycle pass.");save();renderUI();return}
       state.focus--;a.strange=clamp(a.strange+13);a.life=clamp(a.life-2);state.resonance+=1;cue("distort");
       log("Distorted the signal around "+a.name+"; geometry loosens without fully breaking.");
       if(a.strange>60)d("fold-"+a.id,"Local Fold",a.name+" begins drawing a second shoreline that never quite overlaps the first.");
@@ -1070,6 +1073,7 @@
       if(!first){state.connectFrom=a.id;log("Connection armed at "+a.name+". Choose a second island.");}
       else if(first.id===a.id){delete state.connectFrom;log("Connection cancelled.");}
       else{
+        if(state.focus<=0){log("Completing or rewiring a connection needs 1 focus. The source remains armed.");save();renderUI();return}
         state.focus--;
         var existing=first.links.indexOf(a.id);
         if(existing<0){
@@ -1148,6 +1152,13 @@
     if(state.action==="connect"&&Number.isInteger(state.connectFrom)){
       var sourceIsland=state.islands[state.connectFrom];
       modeText="Connect source: "+(sourceIsland?sourceIsland.name:"island "+state.connectFrom)+". Choose a destination, or press Escape to cancel.";
+      if(state.focus<1)modeText+=" Completing or rewiring needs 1 focus; source cancellation is still free.";
+    }else if(state.action==="connect"){
+      modeText+=" Choose a source for free; completing or rewiring costs 1 focus.";
+    }else if(state.focus<1){
+      modeText+=" Unavailable until you regain 1 focus by letting a cycle pass.";
+    }else{
+      modeText+=" Applying this signal costs 1 focus.";
     }
     document.getElementById("modeStatus").textContent=modeText;
     var nav=document.getElementById("islandNav");
@@ -1156,9 +1167,15 @@
       return '<button type="button" data-island-id="'+x.id+'" aria-pressed="'+(state.selected===x.id?'true':'false')+'">'+(i+1)+' · '+esc(x.name)+' · '+role+(x.lineage&&x.lineage!=="none"?' · echo '+x.lineage:'')+(x.palimpsest?' · palimpsest':'')+'</button>';
     }).join("");
     var a=state.islands.find(function(x){return x.id===state.selected});
-    var applyBtn=document.getElementById("applySelectedBtn");
-    applyBtn.disabled=!a;
-    applyBtn.textContent=a?"⚡ Apply "+state.action+" to "+a.name:"⚡ Select an island first";
+    var applyBtn=document.getElementById("applySelectedBtn"),connectSource=state.islands.find(function(x){return x.id===state.connectFrom});
+    var freeConnectStep=state.action==="connect"&&a&&(!connectSource||connectSource.id===a.id);
+    var applyAffordable=!!a&&(state.focus>0||freeConnectStep);
+    applyBtn.disabled=!applyAffordable;
+    if(!a)applyBtn.textContent="⚡ Select an island first";
+    else if(state.action==="connect"&&!connectSource)applyBtn.textContent="⚡ Arm connect at "+a.name+" · free";
+    else if(state.action==="connect"&&connectSource.id===a.id)applyBtn.textContent="⚡ Cancel connect source · free";
+    else if(state.focus<1)applyBtn.textContent="⚡ Apply "+state.action+" to "+a.name+" · needs 1 focus";
+    else applyBtn.textContent="⚡ Apply "+state.action+" to "+a.name+" · 1 focus";
     document.getElementById("selectedName").textContent=a?a.name:"No island selected";
     document.getElementById("selectedLore").textContent=a?lore(a):"Click an island to inspect it.";
     document.getElementById("lifeStat").textContent=a?Math.round(a.life):"—";
