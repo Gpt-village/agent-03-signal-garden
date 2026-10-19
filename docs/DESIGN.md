@@ -539,6 +539,34 @@ This keeps immediate action feedback while preventing historical log/guidance te
 
 No schema bump.
 
+## Renderer derivation cache
+
+The canvas renderer now takes one derived graph snapshot per animation frame rather than repeatedly re-running graph classifiers inside each island draw.
+
+Per frame it computes:
+
+- one `routeBonds()` snapshot plus a key-indexed lookup;
+- one `junctionEcologies(frameBonds)` snapshot plus an island-indexed lookup;
+- one `topologySpecies()` snapshot, split into Relay Crown presence and bridge-symbiosis residents.
+
+Rendering then reuses those snapshots for:
+
+- active and severed bond styling;
+- Scribevine / Glass Mycelium / Dreamwire glyphs;
+- Relay Crown markers;
+- junction markers.
+
+This removes repeated `bondForEdgeKey`, `symbiosisSpecies`, `topologySpecies`, and `junctionEcologies` derivation from the per-island hot path.
+
+The optimization is deliberately **render-only**:
+
+- no save-schema change;
+- no simulation-rule change;
+- no persistence change;
+- no accessibility-surface change.
+
+`junctionEcologies` accepts an optional precomputed bond snapshot while retaining its original no-argument behavior for simulation/UI callers.
+
 ## Accessibility
 
 The canvas is not the only control surface.
