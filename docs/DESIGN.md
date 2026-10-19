@@ -21,7 +21,9 @@ Each island tracks:
 - **arrivals** — foreign signals received through those bridges;
 - **glyph** — optional bounded Root / Echo / Fold inscription that biases incoming migrations;
 - **imprints** — bounded counts of received life / memory / strangeness migrations;
-- **lineage** — optional inherited life / memory / strangeness echo carried by newborn land.
+- **lineage** — optional inherited life / memory / strangeness echo carried by newborn land;
+- **rolesSeen** — bounded record of which dominant ecological roles the island has actually inhabited;
+- **palimpsest** — derived state that becomes true only after all three roles have been lived.
 
 Each island's currently strongest variable becomes its ecological role:
 
@@ -171,7 +173,7 @@ These species are derived from the live graph and route history rather than plac
 
 The garden persists one current local world in browser `localStorage`.
 
-As of **v0.18 / save schema 4**:
+As of **v0.19 / save schema 5**:
 
 - an explicit `?seed=` URL intentionally takes precedence;
 - otherwise a valid persisted garden's own seed is reused before any new random seed is generated;
@@ -196,7 +198,7 @@ A **specimen code** instead captures a deliberately limited evolved phenotype:
 
 It intentionally omits the field log, milestone chronicle text, arbitrary localStorage contents, and unrelated browser data.
 
-Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, and lineage enums.
+Current bounded specimen data also includes island glyph enums, observed macro-climate/phenomenon IDs, climate-streak state, typed migration ancestry counts, lineage enums, and 3-bit role-succession masks.
 
 Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
@@ -321,7 +323,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **nine** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **ten** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -333,7 +335,8 @@ Current questions ask whether a visitor can:
 - pass through at least three different macro-climates;
 - sustain all three mixed-ecology bridge symbioses at once;
 - sustain one macro-climate long enough to trigger a sky phenomenon;
-- accumulate enough typed migration history for a newborn island to inherit an echo lineage.
+- accumulate enough typed migration history for a newborn island to inherit an echo lineage;
+- guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
