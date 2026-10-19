@@ -689,6 +689,22 @@ No save-schema or simulation-rule changes occur.
 
 Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
 
+## Minimum mobile target sizes
+
+v0.50 adds an explicit minimum target contract for the mobile interaction surfaces that repeat throughout the world:
+
+- buttons;
+- quick-navigation links;
+- disclosure `summary` controls.
+
+Each receives at least **24 × 24 CSS px** via shared CSS rather than relying on incidental line-height or padding.
+
+The real-browser audit switches to **320 px** width, enumerates every visible control in those three families, measures the rendered bounding box, and fails if any visible target is narrower or shorter than 24 px.
+
+The audit intentionally checks the whole visible control set instead of a hand-picked sample.
+
+No save-schema or simulation-rule changes.
+
 ## High-contrast current location
 
 Custom quick-nav border/background colors may be remapped or flattened in forced-colors/high-contrast environments.
