@@ -402,6 +402,16 @@ assert.ok(api.routeBonds().some(x=>x.kind==="rootway"),"new typed crossings shou
 assert.ok(api.getState().chronicle.some(x=>x.kind==="bond"),"first route-bond maturation should enter the Chronicle");
 
 setGraph([
+  island(0,[1],10,5,80),
+  island(1,[0],10,80,5),
+  island(2),island(3)
+],{"0-1":7},{"0-1":{life:4,memory:2,strange:1}});
+assert.equal(api.bondForEdgeKey("0-1").kind,"rootway");
+api.migrateSignals();
+assert.equal(api.bondForEdgeKey("0-1").kind,"braided","mixed later traffic should evolve Rootway into Braided Bond");
+assert.ok(api.getState().chronicle.some(x=>x.kind==="bond"&&x.msg.includes("transitioned from Rootway to Braided Bond")),"bond identity transition should enter the Chronicle");
+
+setGraph([
   island(0, [1], 80, 10, 5),
   island(1, [0], 10, 80, 5),
   island(2, [], 50, 20, 10),
