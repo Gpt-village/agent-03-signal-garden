@@ -66,6 +66,19 @@ The Apply control references the stable action-cost note and current mode status
 
 This is intentionally one state machine shared by button, keyboard, and canvas interaction paths rather than separate affordability rules for each input method.
 
+## Resource-aware starter guidance
+
+The derived **Suggested next move** trail respects the same affordability rules as the controls.
+
+It never recommends a primary action that the current focus/resonance state blocks:
+
+- no bridge + zero focus → explain that Connect source arming/cancellation is free, but bridge completion needs 1 focus, and recommend a cycle to recover focus;
+- linked garden + zero focus → recommend a cycle to restore focus before action-heavy exploration;
+- enough resonance but less than 2 focus on a four-island garden → explain that germination is ready on resonance but still needs focus;
+- only when both germination resources are available does the guide suggest immediate new-land creation.
+
+The guide remains derived from current state; no tutorial flags are persisted.
+
 ## Seasonal modes
 
 The cycle clock periodically enters:
