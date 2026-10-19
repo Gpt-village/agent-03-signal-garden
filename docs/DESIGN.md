@@ -672,6 +672,20 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Pointer-path and hit-test budget
+
+v0.40 removes work that was happening on the canvas interaction path without contributing to world behavior.
+
+- Removed the unused persistent mouse-position object.
+- Removed the canvas `mousemove` listener that only updated that dead state.
+- Canvas click handling now passes client coordinates directly into one hit-test function.
+- The hit-test function performs exactly one `getBoundingClientRect()` read per click path.
+- Island hit testing compares squared distance against squared reach, avoiding an unnecessary square root.
+
+These are implementation optimizations only. Nurture / Observe / Connect / Distort semantics, focus costs, canvas selection, and save state are unchanged.
+
+Invariant coverage guards against reintroducing dead mouse tracking, repeated geometry reads, or `Math.hypot` in the hit path. Real Chrome coverage performs actual canvas clicks and proves Connect source arming/cancellation still work without spending focus.
+
 ## Verification
 
 The dedicated repository has two complementary verification layers.
