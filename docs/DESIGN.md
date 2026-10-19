@@ -100,6 +100,27 @@ New islands:
 
 The first successful birth unlocks **New Land**. Filling all seven stable sites unlocks **Seven-Island Sky**.
 
+## Network constellations
+
+The garden now derives one optional **whole-network constellation** from the shape of the active linked islands.
+
+A constellation exists only when every active island belongs to one connected component. Disconnected mini-shapes cannot impersonate a whole-network state.
+
+Current constellations:
+
+- **Star Crown** — at least four active islands; exactly one hub connects to every other active island, and all other active islands are leaves. Each cycle, the hub gains +1 in its current dominant trait.
+- **Halo Circuit** — every active island has degree two and the active graph is one cycle. Each active island gains +1 memory per cycle.
+- **Living Arbor** — at least four active islands; the graph is connected and acyclic but not the special Star Crown case. Each leaf gains +1 life.
+- **Mesh Choir** — at least four active islands; the connected graph has at least two redundant edges beyond a tree. The garden gains +1 resonance.
+
+Constellation effects occur after junction pulses and before macro-climate recording, allowing whole-network shape to causally alter climate and later role history.
+
+Constellations are derived, not persisted. Rewiring the graph immediately changes or removes the current constellation.
+
+The current constellation is visible in the HUD, sidebar, copyable garden summary, and Last Cycle Report.
+
+Field Questions include a thirteenth optional prompt: create a **Mesh Choir**.
+
 ## Junction ecologies
 
 Mature route bonds can interact when they meet at one island.
@@ -382,7 +403,7 @@ Chronicle text is local history and is intentionally excluded from specimen exch
 
 ## Field Questions
 
-The garden includes **twelve** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
+The garden includes **thirteen** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
 
 Current questions ask whether a visitor can:
 
@@ -397,7 +418,8 @@ Current questions ask whether a visitor can:
 - accumulate enough typed migration history for a newborn island to inherit an echo lineage;
 - guide one island through grove-, archive-, and fold-mind roles until it becomes a Palimpsest Mind;
 - develop one route into a Braided Bond by building substantial history in all three signal families;
-- converge Rootway, Echo Span, and Fold Thread on one island to form a Triune Loom.
+- converge Rootway, Echo Span, and Fold Thread on one island to form a Triune Loom;
+- shape the connected active graph into a dense Mesh Choir.
 
 The HUD reports how many have been observed. The panel labels incomplete prompts as open questions rather than failures.
 
