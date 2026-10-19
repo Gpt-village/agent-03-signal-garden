@@ -68,7 +68,7 @@ assert.ok(html.includes('data-action="connect" aria-pressed="false" aria-keyshor
 assert.ok(html.includes('data-action="distort" aria-pressed="false" aria-keyshortcuts="D"'),"Distort should expose its D shortcut semantically");
 assert.ok(html.includes('id="undoBtn" disabled aria-keyshortcuts="U"'),"Undo should expose its U shortcut semantically");
 assert.ok(html.includes('id="applySelectedBtn" aria-keyshortcuts="Enter"'),"Apply should expose its Enter shortcut semantically");
-assert.ok(source.includes('data-island-id="'+x.id+'" aria-keyshortcuts="'+(i+1)+'"'),"dynamic island navigator buttons should expose 1–7 shortcuts");
+assert.ok(source.includes("aria-keyshortcuts=\"'+(i+1)+'\""),"dynamic island navigator buttons should expose 1–7 shortcuts");
 assert.ok(source.includes('checkpointUndo("same-seed reset")'),"same-seed reset should be recoverable in-session");
 assert.ok(source.includes('checkpointUndo("new random garden")'),"new-random-garden replacement should be recoverable in-session");
 assert.ok(!source.includes("undoSnapshot:"),"undo checkpoint must not be serialized as part of world state");
