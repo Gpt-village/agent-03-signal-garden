@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.16 — Visible sky phenomena
+
+- Added a dedicated Sky phenomenon panel.
+- Added an eighth optional Field Question for triggering a sustained-climate phenomenon.
+- Added distinct canvas signatures for Seed Rain, Memory Dew, Parallax Bloom, and Confluence Pulse.
+- Reduced-motion preference freezes or simplifies phenomenon animation.
+- Extended invariant coverage so triggering Seed Rain completes the phenomenon research question.
+
 ## v0.15 — Sustained climate phenomena
 
 - Added climate streak tracking.
