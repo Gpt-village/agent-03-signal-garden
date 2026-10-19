@@ -562,6 +562,7 @@
   }
   function importSpecimenCode(code){
     var p=decodeSpecimen(code);
+    checkpointUndo("specimen import");
     seed=p.seed;randState=hash(seed);
     var next=fresh();
     next.transplantCount=Math.min(99,(Number.isInteger(p.provenance)?p.provenance:0)+1);
@@ -1043,6 +1044,7 @@
     if(a.glyph===type){log(a.name+" already carries the "+glyphName(type)+" glyph.");return}
     var cost=type==="none"?0:3,focusCost=1;
     if(state.resonance<cost||state.focus<focusCost){log("That inscription needs "+cost+" resonance and "+focusCost+" focus.");return}
+    checkpointUndo((type==="none"?"Clear glyph on ":"Inscribe "+glyphName(type)+" on ")+a.name);
     state.resonance-=cost;state.focus-=focusCost;a.glyph=type;
     addChronicle("glyph",type==="none"?"Cleared the glyph from "+a.name+".":"Inscribed the "+glyphName(type)+" glyph on "+a.name+".");cue("glyph");
     log(type==="none"?"Cleared "+a.name+"'s glyph.":a.name+" now carries the "+glyphName(type)+" glyph.");
@@ -1053,6 +1055,7 @@
     if(state.resonance<6||state.focus<2){log("Germination needs 6 resonance and 2 focus.");return}
     var slot=spawnSlots[state.islands.length-4];
     if(!slot){log("No stable germination site remains in this archipelago.");return}
+    checkpointUndo("germination");
     state.resonance-=6;state.focus-=2;
     var id=state.islands.length;
     var oldRand=randState;
@@ -1174,6 +1177,7 @@
     });
   }
   function nextCycle(){
+    checkpointUndo("cycle "+(state.cycle+1));
     var beforeRoles={};
     state.islands.forEach(function(a){beforeRoles[a.id]=dominantTrait(a)});
     var beforeClimate=macroClimate();
@@ -1220,15 +1224,18 @@
     state.selected=a.id;
     if(state.action==="nurture"){
       if(state.focus<=0){log("Nurture needs 1 focus. Let a cycle pass.");save();renderUI();return}
+      checkpointUndo("Nurture on "+a.name);
       state.focus--;a.life=clamp(a.life+11);a.memory=clamp(a.memory+2);state.resonance++;cue("nurture");
       log("Nurtured "+a.name+"; new growth takes the shape of nearby signals.");
     }else if(state.action==="observe"){
       if(state.focus<=0){log("Observe needs 1 focus. Let a cycle pass.");save();renderUI();return}
+      checkpointUndo("Observe on "+a.name);
       state.focus--;a.memory=clamp(a.memory+10);a.strange=clamp(a.strange+2);state.resonance+=2;cue("observe");
       log("Observed "+a.name+" long enough for it to notice back.");
       if(a.memory>55)d("witness-"+a.id,"Reciprocal Witness",a.name+" now changes subtly when selected, as if selection itself became weather.");
     }else if(state.action==="distort"){
       if(state.focus<=0){log("Distort needs 1 focus. Let a cycle pass.");save();renderUI();return}
+      checkpointUndo("Distort on "+a.name);
       state.focus--;a.strange=clamp(a.strange+13);a.life=clamp(a.life-2);state.resonance+=1;cue("distort");
       log("Distorted the signal around "+a.name+"; geometry loosens without fully breaking.");
       if(a.strange>60)d("fold-"+a.id,"Local Fold",a.name+" begins drawing a second shoreline that never quite overlaps the first.");
@@ -1238,8 +1245,9 @@
       else if(first.id===a.id){delete state.connectFrom;log("Connection cancelled.");}
       else{
         if(state.focus<=0){log("Completing or rewiring a connection needs 1 focus. The source remains armed.");save();renderUI();return}
-        state.focus--;
         var existing=first.links.indexOf(a.id);
+        checkpointUndo((existing<0?"Connect ":"Cut ")+first.name+" ↔ "+a.name);
+        state.focus--;
         if(existing<0){
           first.links.push(a.id);a.links.push(first.id);
           first.memory=clamp(first.memory+5);a.memory=clamp(a.memory+5);state.resonance+=2;cue("connect");
@@ -1674,12 +1682,14 @@
   });
   document.getElementById("resetBtn").addEventListener("click",function(){
     if(confirm("Reset this garden to the beginning of the same seed? This clears its local history.")){
-      localStorage.removeItem(KEY);state=fresh();save();renderUI();log("Reset to the beginning of seed "+state.seed+".");
+      checkpointUndo("same-seed reset");
+      localStorage.removeItem(KEY);state=fresh();lastCycleReport=null;motes=[];save();renderUI();log("Reset to the beginning of seed "+state.seed+".");
     }
   });
   document.getElementById("newGardenBtn").addEventListener("click",function(){
     if(!confirm("Generate a completely new random garden? This replaces the current local garden."))return;
-    seed=Math.random().toString(36).slice(2,10);randState=hash(seed);state=fresh();motes=[];
+    checkpointUndo("new random garden");
+    seed=Math.random().toString(36).slice(2,10);randState=hash(seed);state=fresh();motes=[];lastCycleReport=null;
     if(window.history&&window.history.replaceState)window.history.replaceState(null,"",location.pathname+"?seed="+encodeURIComponent(seed));
     save();renderUI();log("Generated a new random garden with seed "+seed+".");
   });
