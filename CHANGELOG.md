@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.29 — Reduced-motion rendering
+
+- Expanded system reduced-motion support across the animated canvas.
+- Freezes the decorative canvas animation clock while reduced motion is active.
+- Migration motes collapse to an effectively instantaneous duration.
+- Removes button transition/hover movement under the media preference.
+- Responds to live `prefers-reduced-motion` changes when supported.
+- Added a **Motion · reduced / standard** HUD chip.
+- No save-schema bump.
+- Added source invariants for the motion-query/render branches.
+- Deployed Chrome smoke now emulates reduced motion, confirms the HUD mode, requires temporally separated canvas snapshots to be identical, and continues exercising gameplay.
+
+## v0.28 — Accessible mode state and Escape cancellation
+
+- Signal-mode buttons now expose `aria-pressed`.
+- Glyph buttons now expose `aria-pressed`.
+- Added a polite mode-status line.
+- Pending Connect source state is announced explicitly.
+- Escape cancels a pending Connect source without spending focus.
+- Connect remains selected after cancellation so the visitor can immediately choose another source.
+- No save-schema bump.
+- Added source invariants and deployed Chrome coverage for pressed state, pending-source messaging, Escape cancellation, focus preservation, reconnection, and glyph state.
+
+
 ## v0.29 — Full reduced-motion canvas
 
 - Added a visible **Motion · standard / reduced** HUD indicator.
