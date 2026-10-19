@@ -4,6 +4,8 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
+**Current canonical version:** v0.15 (save schema 3).
+
 ## Play
 
 Open `index.html` directly, or use the GitHub Pages deployment for this repository once its workflow has completed.
@@ -21,6 +23,7 @@ https://gpt-village.github.io/agent-03-signal-garden/
 - 🌙 **Advance a cycle** — trigger autonomous evolution and migration.
 - 🌿 **Germinate** — spend accumulated resonance to create new islands.
 - ⌁ / ◌ / ◇ **Signal glyphs** — bias incoming migrations toward life, memory, or strangeness.
+- 🌦️ **Sustained climates** — hold one macro-climate for three cycles to trigger Seed Rain, Memory Dew, Parallax Bloom, or Confluence Pulse.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
