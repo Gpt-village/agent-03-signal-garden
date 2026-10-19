@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.18 — Migration ancestry and echo lineages
+
+- Added typed life / memory / strangeness ancestry imprints to islands.
+- Every received migration increments the matching ancestry counter.
+- New islands can inherit an echo lineage when pre-existing migration history is sufficiently strong and non-tied.
+- Inherited lineage adds a small birth bias.
+- Matching future migrations gain +1 lineage resonance.
+- Last Cycle Report labels lineage-resonance bonuses.
+- Added a ninth optional Field Question for inherited land.
+- SG1 specimen exchange now carries bounded ancestry counts and lineage enums.
+- Save schema advanced to 4 with backward-safe zeroed ancestry defaults.
+- Added invariant coverage for ancestry aggregation, tie rejection, inherited birth, migration resonance, Field Question completion, and specimen round-trip behavior.
+
+
 ## v0.17 — Causal cycle reports
 
 - Added a session-local Last Cycle Report after each autonomous cycle.
