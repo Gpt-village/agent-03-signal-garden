@@ -195,6 +195,36 @@ try{
   const historyFocused=await evaluate("document.activeElement && document.activeElement.id");
   assert.equal(historyFocused,"historySection","native History fragment navigation should move focus to its tabindex target");
 
+  await send("Emulation.setDeviceMetricsOverride",{width:320,height:568,deviceScaleFactor:1,mobile:true,screenWidth:320,screenHeight:568});
+  await sleep(100);
+  const narrowPhone=await evaluate(`(()=>{
+    const nav=document.getElementById('quickNav').getBoundingClientRect();
+    const target=document.getElementById('specimenSection');
+    return {
+      overflow:document.documentElement.scrollWidth<=document.documentElement.clientWidth+1,
+      navPosition:getComputedStyle(document.getElementById('quickNav')).position,
+      navHeight:nav.height,
+      scrollMargin:parseFloat(getComputedStyle(target).scrollMarginTop)
+    };
+  })()`);
+  assert.equal(narrowPhone.overflow,true,"320px viewport should not overflow horizontally");
+  assert.equal(narrowPhone.navPosition,"sticky","320px viewport should preserve sticky section navigation");
+  assert.ok(narrowPhone.scrollMargin>=narrowPhone.navHeight+8,"mobile fragment clearance should exceed the rendered sticky-nav height");
+
+  await evaluate(`document.querySelector('#quickNav a[href="#specimenSection"]').click()`);
+  await waitFor("location.hash==='#specimenSection'","Specimen section small-phone anchor navigation");
+  const narrowLanding=await evaluate(`(()=>{
+    const nav=document.getElementById('quickNav').getBoundingClientRect();
+    const target=document.getElementById('specimenSection').getBoundingClientRect();
+    return {targetTop:target.top,navBottom:nav.bottom,viewport:innerHeight,focused:document.activeElement&&document.activeElement.id};
+  })()`);
+  assert.ok(narrowLanding.targetTop>=narrowLanding.navBottom+4,"320px Specimen jump target should clear the sticky navigation");
+  assert.ok(narrowLanding.targetTop<narrowLanding.viewport,"320px Specimen jump target should remain visible");
+  assert.equal(narrowLanding.focused,"specimenSection","small-phone native fragment navigation should focus the Specimen target");
+
+  await send("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:1,mobile:true,screenWidth:390,screenHeight:844});
+  await sleep(100);
+
   const canvasRole=await evaluate("document.getElementById('garden').getAttribute('role')");
   assert.equal(canvasRole,"img","canvas should identify itself as a visual map rather than the only gameplay control");
   const canvasDescription=await evaluate("document.getElementById('canvasHelp').textContent");
