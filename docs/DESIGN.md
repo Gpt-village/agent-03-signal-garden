@@ -423,17 +423,56 @@ The canvas is not the only control surface.
 
 A sidebar island navigator exposes every current island as a native focusable button. Visitors may select islands through those controls or keys **1–7**, choose a signal through native buttons / N-O-C-D shortcuts, and use **Apply current signal** to perform the same action as a canvas click.
 
-Connect remains a two-step interaction: apply Connect to one selected island, select another, then apply again.
+Connect remains a two-step interaction: apply Connect to one selected island, select another, then apply again. **Escape** cancels a pending connection source.
 
-The field log uses an ARIA live region, and the experience honors reduced-motion preference for migration motes.
+The page exposes a first-focus **Skip to controls** link whose target is a labelled, programmatically focusable controls landmark. The canvas identifies itself as a visual map and points to screen-reader guidance explaining that equivalent gameplay controls exist in the sidebar.
+
+Signal-mode buttons expose `aria-pressed` state, glyph controls expose their selected state, and a polite live mode-status region announces the current signal mode or pending connection source. Selected-island name/lore is exposed through one polite live status region rather than forcing screen-reader users to infer changes from the canvas.
+
+### Reduced motion
+
+The browser's `prefers-reduced-motion: reduce` preference is observed directly.
+
+Under reduced motion:
+
+- button transition/hover movement is suppressed;
+- the canvas animation clock is frozen for star twinkle, storm scan lines, island pulse/wobble, strange-island drift, selection/connect rings, and time-driven phenomenon visuals;
+- migration motes already collapse to effectively immediate feedback;
+- simulation changes caused by visitor actions and cycle advancement still occur normally;
+- the HUD explicitly reports **Motion · reduced**.
+
+No required gameplay information depends on animation.
+
+Optional synthesized audio remains opt-in and independent of motion preference; it never carries required information.
 
 ## Verification
 
-An offline Node harness lives under `storage/personal/agent-03/signal-garden/tests/`.
+The dedicated repository has two complementary verification layers.
 
-It reads the actual inline script from the playable page, evaluates it against a minimal fake browser, and checks graph classification, route memory, migration accounting, bounded specimen round-tripping, omission of field-log text, and malformed specimen rejection.
+### Invariant harness
 
-The harness is committed but should **not** be described as CI-passing until an actual runner completes; GitHub Actions remained queued during this session.
+`tests/smoke.mjs` reads the actual inline game script from `index.html`, evaluates it against a minimal fake browser, and asserts simulation, persistence, sharing, topology, accessibility, and UI-contract invariants.
+
+The canonical **Verify Signal Garden** workflow runs that harness and syntax-checks both the inline world script and browser-smoke harness.
+
+### Deployed browser smoke
+
+`tests/browser-smoke.mjs` runs in headless Chrome against the dedicated GitHub Pages artifact after deployment.
+
+It is version/schema aware and currently exercises, among other things:
+
+- 390px mobile layout without horizontal overflow;
+- real Tab → Enter skip navigation;
+- controls landmark and canvas map semantics;
+- selection/live-region announcements;
+- signal-mode pressed state and Escape cancellation;
+- nurture, connect, migration, glyph, keyboard, reload-persistence, and specimen-dock flows;
+- SG1 preview gating and transplant provenance;
+- emulated `prefers-reduced-motion: reduce`;
+- a pixel-stability assertion proving the reduced-motion canvas remains visually static over time without interaction;
+- absence of uncaught browser exceptions.
+
+The shared `Village-store` mirror has its own version-aware public-route check and browser smoke so a canonical success is not silently confused with a stale mirror.
 
 ## Archipelago climate
 
@@ -561,29 +600,33 @@ The HUD reports how many have been observed. The panel labels incomplete prompts
 
 ## Public surfaces
 
-- Source: `site/signal-garden/index.html`
-- Stable forwarding route: `signal-garden/index.html`
-- Development thread: https://github.com/Minuteandone/Village-store/issues/24
-- Intended public route: https://minuteandone.github.io/Village-store/signal-garden/
+Canonical repository:
 
-Deployment success is not assumed until independently observed; GitHub Actions was still queued during the October 19 build session.
+https://github.com/Gpt-village/agent-03-signal-garden
+
+Dedicated public world:
+
+https://gpt-village.github.io/agent-03-signal-garden/
+
+Shared GPT Village mirror:
+
+https://minuteandone.github.io/Village-store/signal-garden/
+
+Shared development / coordination thread:
+
+https://github.com/Minuteandone/Village-store/issues/24
+
+The dedicated repository is canonical. `Minuteandone/Village-store` remains the shared Village index/mirror surface. Releases are developed and verified canonically first, then the exact verified world and test harnesses are mirrored into `Village-store`.
+
+Both canonical and shared routes now have version-aware deployed-artifact checks; browser verification is not inferred merely from source commits.
 
 ## Dedicated repository
 
-Requested repository:
+`Gpt-village/agent-03-signal-garden` was successfully created on October 19, 2026 after the repository-creator authorization was corrected.
 
-`Gpt-village/agent-03-signal-garden`
+The earlier HTTP 403 creation attempt remains historical infrastructure context, not the current repository status.
 
-The creation workflow references `VILLAGE_REPO_CREATOR_TOKEN` only through GitHub Actions secret injection. The secret value was not printed, committed, copied into Issues, or otherwise exposed.
-
-On 2026-10-19 the workflow completed:
-
-- secret-presence check: **success**;
-- organization repository creation: **failure**;
-- GitHub API result: **HTTP 403 — Resource not accessible by personal access token**;
-- run: https://github.com/Minuteandone/Village-store/actions/runs/39282409494
-
-This is an authorization blocker, not a missing-secret or transient syntax failure. The shared `Minuteandone/Village-store` tree remains the canonical source until repository-creation authorization changes.
+Repository-administration credentials remain runtime-only secrets and are never printed, committed, or copied into project prose.
 
 ## Optional sound and playtest summary
 
@@ -606,12 +649,10 @@ These are source/discovery links only. Their mechanics and authorship are not fo
 
 These are possibilities, not promises:
 
-- an optional sound layer that never carries required information;
-- stronger browser-level visual/accessibility testing when execution infrastructure is available;
-- climate-specific rare phenomena beyond the current feedback rules;
-- a compact read-only “garden summary” suitable for human playtest reports;
+- modularizing the growing single-file prototype without changing the local-first deployment model;
+- stronger semantic summaries of route/junction/constellation state for nonvisual exploration;
 - voluntary cross-world artifacts if another agent explicitly chooses to contribute one;
-- modularizing the growing single-file prototype once the dedicated repository exists.
+- further usability work driven by real visitor or agent feedback rather than feature-count growth.
 
 ## Design rule
 
