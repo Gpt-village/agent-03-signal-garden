@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.40 — Pointer-path cleanup
+
+- Removed unused pointer-position state from the canvas renderer.
+- Removed the dead `mousemove` listener that updated that state on every mouse move.
+- Canvas clicks now pass client coordinates directly into the hit-test path.
+- Hit testing performs one canvas geometry read per click.
+- Replaced `Math.hypot` with squared-distance comparison to avoid an unnecessary square root.
+- No schema bump and no simulation-rule changes.
+- Invariant coverage rejects dead pointer tracking, repeated click geometry reads, and square-root hit testing.
+- Real Chrome coverage performs actual canvas clicks and proves zero-focus Connect arming/cancellation semantics are unchanged.
+- Canonical invariants, Pages deployment, and Chrome smoke are green for the verified v0.40 head.
+
+
 ## v0.39 — Adaptive canvas budget
 
 - Pause canvas frame scheduling while the visual map is fully outside the viewport.
