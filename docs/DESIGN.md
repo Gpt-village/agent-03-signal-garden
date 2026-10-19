@@ -689,6 +689,27 @@ No save-schema or simulation-rule changes occur.
 
 Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
 
+## Visible fragment focus
+
+The six quick-navigation destinations are focusable fragment targets. Keyboard activation already moved focus natively, but generic section/details targets did not have an explicit focus style.
+
+v0.47 adds a dedicated `:focus-visible` outline to:
+
+- Map;
+- Actions;
+- Island;
+- Research;
+- History;
+- Specimen.
+
+The rule uses the same cyan focus color as interactive controls but a larger 4 px outline offset so the destination section itself is visually distinct from buttons/links within it.
+
+Real Chrome coverage focuses the Actions quick-nav link, activates it with **Enter**, waits for native fragment focus transfer, and verifies the destination renders a solid ≥2 px outline with ≥4 px offset.
+
+Mouse/touch fragment jumps do not receive this keyboard-only focus treatment.
+
+No save-schema or simulation-rule changes.
+
 ## Narrow-phone fragment navigation
 
 At viewports up to 820 px, section targets use expanded fragment clearance so sticky navigation does not cover the destination.
