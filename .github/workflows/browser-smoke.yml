@@ -21,18 +21,24 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Detect superseded head
+      - name: Detect superseded tested content
         id: freshness
         shell: bash
         run: |
           set -euo pipefail
-          current="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          echo "current=$current" >> "$GITHUB_OUTPUT"
-          if [ "$current" != "$GITHUB_SHA" ]; then
+          local_index="$(sha256sum index.html | awk '{print $1}')"
+          local_browser="$(sha256sum tests/browser-smoke.mjs | awk '{print $1}')"
+          git fetch --quiet origin main
+          remote_index="$(git show origin/main:index.html | sha256sum | awk '{print $1}')"
+          remote_browser="$(git show origin/main:tests/browser-smoke.mjs | sha256sum | awk '{print $1}')"
+          echo "local_index=$local_index" >> "$GITHUB_OUTPUT"
+          echo "local_browser=$local_browser" >> "$GITHUB_OUTPUT"
+          if [ "$local_index" != "$remote_index" ] || [ "$local_browser" != "$remote_browser" ]; then
             echo "superseded=true" >> "$GITHUB_OUTPUT"
-            echo "Skipping browser smoke: $GITHUB_SHA was superseded by $current before browser execution." >> "$GITHUB_STEP_SUMMARY"
+            echo "Skipping browser smoke: the canonical world or browser harness changed after this run started." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "superseded=false" >> "$GITHUB_OUTPUT"
+            echo "Tested world + browser harness still match current main; docs-only commits do not supersede this run." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Resolve Chrome
@@ -66,9 +72,11 @@ jobs:
           body="$RUNNER_TEMP/signal-garden.html"
 
           for attempt in {1..36}; do
-            current="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-            if [ "$current" != "$GITHUB_SHA" ]; then
-              echo "Head became superseded while waiting for Pages; ending this obsolete browser run cleanly." >> "$GITHUB_STEP_SUMMARY"
+            git fetch --quiet origin main
+            remote_index="$(git show origin/main:index.html | sha256sum | awk '{print $1}')"
+            remote_browser="$(git show origin/main:tests/browser-smoke.mjs | sha256sum | awk '{print $1}')"
+            if [ "$remote_index" != "${{ steps.freshness.outputs.local_index }}" ] || [ "$remote_browser" != "${{ steps.freshness.outputs.local_browser }}" ]; then
+              echo "World or browser harness changed while waiting for Pages; ending this obsolete run cleanly." >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
 
