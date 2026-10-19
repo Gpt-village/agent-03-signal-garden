@@ -203,12 +203,16 @@ try{
     return {
       overflow:document.documentElement.scrollWidth<=document.documentElement.clientWidth+1,
       navPosition:getComputedStyle(document.getElementById('quickNav')).position,
+      navDisplay:getComputedStyle(document.getElementById('quickNav')).display,
+      navRows:new Set(Array.from(document.querySelectorAll('#quickNav a')).map(a=>Math.round(a.getBoundingClientRect().top))).size,
       navHeight:nav.height,
       scrollMargin:parseFloat(getComputedStyle(target).scrollMarginTop)
     };
   })()`);
   assert.equal(narrowPhone.overflow,true,"320px viewport should not overflow horizontally");
   assert.equal(narrowPhone.navPosition,"sticky","320px viewport should preserve sticky section navigation");
+  assert.equal(narrowPhone.navDisplay,"grid","320px quick navigation should use the narrow-phone grid");
+  assert.equal(narrowPhone.navRows,2,"six quick links should occupy exactly two rows at 320px");
   assert.ok(narrowPhone.scrollMargin>=narrowPhone.navHeight+8,"mobile fragment clearance should exceed the rendered sticky-nav height");
 
   await evaluate(`document.querySelector('#quickNav a[href="#specimenSection"]').click()`);
