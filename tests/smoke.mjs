@@ -200,6 +200,7 @@ api.advanceClimatePhenomenon();
 api.advanceClimatePhenomenon();
 assert.equal(api.getState().activePhenomenon,"seed-rain","three sustained Verdant cycles should activate Seed Rain");
 assert.equal(api.getState().phenomenaSeen["seed-rain"],true,"Seed Rain should enter bounded phenomenon history");
+assert.equal(api.researchPrompts().find(x=>x.id==="phenomenon").done,true,"triggering a climate phenomenon should complete the optional phenomenon research question");
 api.getState().islands.forEach((x,i)=>assert.ok(x.life>=lifeBeforeSeedRain[i]+2,"Seed Rain should add bounded life to every island"));
 assert.ok(api.getState().chronicle.some(x=>x.kind==="phenomenon"),"first phenomenon pulse should enter the chronicle");
 
