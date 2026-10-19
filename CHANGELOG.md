@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.36 — Concise live feedback
+
+- Added one atomic visually-hidden latest-action status for concise action announcements.
+- The full rolling Field log remains visible/inspectable but is no longer an aria-live region.
+- Suggested next move remains visible guidance but is no longer an aria-live region.
+- Mode, selection, and specimen statuses remain live because they correspond directly to visitor intent.
+- No schema bump.
+- Invariant coverage verifies only the latest log message is copied into the atomic action status.
+- Deployed Chrome coverage verifies the noisy surfaces are non-live and that a real Nurture action announces concise feedback.
+
+
 ## v0.37 — State-aware Research Hints
 
 - Research Compass now includes a live **Experiment hint** for the first open Field Question.
