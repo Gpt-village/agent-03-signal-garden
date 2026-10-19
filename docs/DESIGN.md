@@ -264,6 +264,28 @@ As of **v0.23 / save schema 7**:
 
 The **Copy garden seed** action shares only the procedural starting seed. It does not export the visitor's complete local history.
 
+## Specimen Dock
+
+v0.25 makes specimen exchange a first-class interface instead of relying on browser prompt dialogs.
+
+The dock contains:
+
+- a pasteable SG1 textarea;
+- **Generate + copy** — writes the current bounded specimen into the dock and attempts clipboard copy;
+- **Import pasted** — validates and imports the textarea value;
+- **Clear dock** — clears only the text field, not the current garden;
+- inline `aria-live` status for generation, clipboard fallback, validation errors, and successful import.
+
+Clipboard failure is non-destructive: the generated code remains in the textarea for manual copy.
+
+Import no longer uses `prompt()` or `alert()`. Invalid codes leave the current garden unchanged and expose the validation error inline.
+
+The specimen privacy boundary is unchanged: SG1 carries bounded game state and transplant-hop provenance, but excludes field-log prose, Chronicle prose, visitor identity, and unrelated browser data.
+
+No save-schema bump is required because the dock itself is interface state, not simulation state.
+
+The deployed Chrome smoke now generates a specimen, imports that same specimen through the dock, and requires the visible provenance marker to advance to transplant hop 1.
+
 ## First-visit trail
 
 v0.24 adds a derived **Suggested next move** panel to make the existing simulation easier to enter without adding a separate tutorial save state.
