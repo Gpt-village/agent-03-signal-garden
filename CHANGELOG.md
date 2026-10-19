@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.31 — Forced-colors / high-contrast support
+
+- Added a visible **Contrast · custom / forced** HUD indicator.
+- Observe `forced-colors: active` through `matchMedia`, including live preference changes.
+- Remove decorative shadows/backdrop blur in forced-colors mode.
+- Preserve active/selected signal, island, and glyph states with explicit system **Highlight** outlines.
+- Use system colors for disabled controls, meters, canvas border, and links.
+- No schema bump: this is interface/accessibility state only.
+- Added source guards for the forced-colors contract.
+- Extended deployed Chrome smoke to emulate forced colors and reduced motion together, verify the HUD state, confirm shadows are removed, and confirm active controls retain an explicit outline.
+
+
 ## v0.30 — Text Map topology equivalent
 
 - Added a labelled **Text map** region as a nonvisual equivalent of the canvas topology.
