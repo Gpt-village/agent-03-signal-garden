@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.22 — Network constellations
+
+- Added derived whole-network states based on the connected active graph.
+- Added **Star Crown**, **Halo Circuit**, **Living Arbor**, and **Mesh Choir**.
+- Disconnected active components never qualify as a whole-network constellation.
+- Star Crown amplifies its hub's current dominant trait.
+- Halo Circuit adds memory to every active island.
+- Living Arbor adds life to each leaf.
+- Mesh Choir adds one garden resonance.
+- Constellation effects occur before climate recording, making graph shape causally relevant to macro-climate.
+- Added HUD/sidebar/summary/Last Cycle Report constellation surfaces.
+- Added a thirteenth optional Field Question for creating Mesh Choir.
+- No schema bump: constellation state is derived from topology.
+- Added invariant coverage for all four classifications, disconnected rejection, bounded effects, research completion, and causal report inclusion.
+
+
 ## v0.21 — Junction ecologies
 
 - Added derived ecologies where multiple mature route bonds meet at one island.
