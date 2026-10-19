@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.50 — Minimum mobile target sizes
+
+- Added a shared 24 × 24 CSS-pixel minimum for buttons, quick-nav links, and disclosure summaries.
+- Uses border-box sizing so the minimum applies to the actual rendered target box.
+- No save-schema or simulation-rule changes.
+- Invariant coverage requires the explicit shared target-size rule.
+- Real Chrome at 320 px enumerates every visible control in those target families and verifies none render below 24 × 24.
+- Canonical invariants, Pages deployment, and browser smoke passed on the exact v0.50 head.
+
+
 ## v0.49 — High-contrast current location
 
 - Added an explicit system `Highlight` outline for the quick-nav link carrying `aria-current="location"` under forced-colors mode.
