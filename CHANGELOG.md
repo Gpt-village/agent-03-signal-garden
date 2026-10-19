@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.44 — Compact mobile HUD
+
+- Constrained the map HUD between explicit left/right canvas margins.
+- Narrow layouts keep only Cycle / Focus / Resonance / Climate / Phenomenon visible over the map.
+- Transit, route memory, bonds, junctions, constellation, provenance, research, motion, contrast, and version chips become mobile-only hidden secondary HUD items.
+- Hidden mobile HUD values remain available in sidebar/textual world surfaces.
+- Desktop retains the complete HUD.
+- No save-schema or simulation-rule changes.
+- Invariant coverage checks mobile/essential chip classification and HUD containment rules.
+- Real Chrome coverage at 390 px proves secondary chips are hidden, essential chips stay visible, and the HUD remains inside the canvas.
+- Canonical invariants, Pages deployment, and browser exercise are green for the exact v0.44 artifact.
+
+
 ## v0.43 — Mobile section navigation
 
 - Added a compact Map / Actions / Island / Research / History / Specimen jump bar.
