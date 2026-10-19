@@ -195,6 +195,23 @@ The current climate streak and active phenomenon are visible in the HUD. First p
 
 Bounded specimen exchange preserves only phenomenon identity/history and climate-streak counters. Chronicle prose remains local and is not transferred.
 
+## Phenomenon visibility
+
+Active sustained-climate phenomena are not only state variables.
+
+The sidebar exposes a **Sky phenomenon** panel with the active phenomenon, its description, current climate streak, and a bounded list of phenomenon types observed in the current specimen history.
+
+The canvas also gives each active phenomenon a distinct nonessential visual signature:
+
+- **Seed Rain** — falling signal-seed strokes;
+- **Memory Dew** — faint circular memory droplets;
+- **Parallax Bloom** — displaced ecological outlines around islands;
+- **Confluence Pulse** — a garden-wide expanding synchronization ring.
+
+These visuals do not carry required gameplay information. Reduced-motion mode freezes or simplifies their motion.
+
+Field Questions now include an eighth optional prompt: sustain one macro-climate long enough to trigger any archipelago-wide phenomenon.
+
 ## Mixed-ecology bridge symbiosis
 
 A live bridge with at least four accumulated crossings can host a symbiosis when its endpoints have different dominant ecological roles:
