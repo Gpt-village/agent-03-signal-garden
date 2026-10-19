@@ -479,6 +479,27 @@ No required gameplay information depends on animation.
 
 Optional synthesized audio remains opt-in and independent of motion preference; it never carries required information.
 
+### Text Map
+
+The sidebar includes a labelled **Text map** region as a nonvisual topology equivalent to the canvas.
+
+It is derived from current simulation state and does not create new persisted data.
+
+The map provides:
+
+- one whole-network summary naming the current constellation and active junction ecologies;
+- one readable entry per island;
+- each island's current grove/archive/fold role;
+- echo-lineage / Palimpsest / junction context when present;
+- an explicit **isolated** state when no live route exists;
+- every live neighbor by name;
+- the route's current mature bond identity, or **young bridge** when it has not matured;
+- route-memory count for that relationship.
+
+The region is intentionally **not** an ARIA live region. It updates whenever the garden renders, but screen-reader users can browse it on demand without receiving a large unsolicited announcement after every action.
+
+Canvas guidance explicitly points visitors to the Text Map as the textual topology equivalent.
+
 ## Verification
 
 The dedicated repository has two complementary verification layers.
