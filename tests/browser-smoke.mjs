@@ -180,6 +180,18 @@ try{
   assert.equal(quickNavPosition,"sticky","390px layout should keep section navigation sticky");
   const quickNavHrefs=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).map(a=>a.getAttribute('href'))`);
   assert.deepEqual(quickNavHrefs,["#worldSection","#actionsSection","#islandSection","#researchSection","#historySection","#specimenSection"],"quick navigation should expose the six intended destinations");
+
+  await evaluate(`document.querySelector('#quickNav a[href="#actionsSection"]').focus()`);
+  await key("Enter","Enter",13);
+  await waitFor("location.hash==='#actionsSection' && document.activeElement && document.activeElement.id==='actionsSection'","keyboard quick-nav destination focus");
+  const actionsFocusStyle=await evaluate(`(()=>{
+    const e=document.getElementById('actionsSection'),cs=getComputedStyle(e);
+    return {outlineStyle:cs.outlineStyle,outlineWidth:parseFloat(cs.outlineWidth),outlineOffset:parseFloat(cs.outlineOffset)};
+  })()`);
+  assert.equal(actionsFocusStyle.outlineStyle,"solid","keyboard fragment destination should render an explicit focus outline");
+  assert.ok(actionsFocusStyle.outlineWidth>=2,"fragment destination focus outline should be at least 2px");
+  assert.ok(actionsFocusStyle.outlineOffset>=4,"fragment destination focus outline should clear the section content");
+
   await evaluate(`document.querySelector('#quickNav a[href="#researchSection"]').click()`);
   await waitFor("location.hash==='#researchSection'","Research section anchor navigation");
   const researchTargetTop=Number(await evaluate("document.getElementById('researchSection').getBoundingClientRect().top"));
