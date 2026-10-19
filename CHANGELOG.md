@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.49 — High-contrast current location
+
+- Added an explicit system `Highlight` outline for the quick-nav link carrying `aria-current="location"` under forced-colors mode.
+- Preserves current-section visibility when custom border/background colors are remapped.
+- Normal-color current-location styling remains unchanged.
+- No save-schema or simulation-rule changes.
+- Invariant coverage requires the forced-colors current-location rule.
+- Real Chrome with forced colors emulated verifies the current Actions link retains a solid ≥2 px outline after focus moves to the destination.
+- Canonical invariants, Pages, and browser smoke passed on the exact v0.49 head.
+
+
 ## v0.48 — Current-fragment semantics
 
 - Added `aria-current="location"` to the quick-nav link matching the current URL fragment.
