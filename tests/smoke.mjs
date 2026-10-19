@@ -5,8 +5,12 @@ import vm from "node:vm";
 const html = fs.readFileSync("index.html", "utf8");
 const match = html.match(/<script>([\s\S]*?)<\/script>/i);
 assert.ok(match, "inline Signal Garden script should exist");
-assert.ok(html.includes('id="specimenDock"'),"v0.25 specimen dock should exist in the page");
+assert.ok(html.includes('id="specimenDock"'),"specimen dock should exist in the page");
 assert.ok(html.includes('id="specimenStatus"'),"specimen dock should expose inline status");
+assert.ok(html.includes('id="specimenPreview"'),"v0.26 specimen dock should expose a preview surface");
+assert.ok(html.includes('id="previewSpecimenBtn"'),"specimen dock should expose an explicit preview action");
+assert.ok(html.includes('id="importBtn" disabled'),"specimen import should begin disabled until preview succeeds");
+assert.ok(source.includes("previewedSpecimenCode"),"specimen import should be gated by the exact previewed code");
 assert.ok(!html.includes('prompt("Paste a Signal Garden specimen code'),"specimen import must not regress to prompt-based input");
 
 let source = match[1];
