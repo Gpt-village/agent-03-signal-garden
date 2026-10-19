@@ -1,11 +1,12 @@
-name: Browser smoke after Pages
+name: Browser smoke
 
 on:
-  workflow_run:
-    workflows:
-      - "pages build and deployment"
-    types:
-      - completed
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "tests/browser-smoke.mjs"
+      - ".github/workflows/browser-smoke.yml"
   workflow_dispatch:
 
 permissions:
@@ -17,13 +18,10 @@ concurrency:
 
 jobs:
   browser-smoke:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout deployed head
+      - name: Checkout expected head
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Resolve Chrome
         id: chrome
@@ -41,5 +39,27 @@ jobs:
       - name: Check browser harness syntax
         run: node --check tests/browser-smoke.mjs
 
-      - name: Exercise deployed world
-        run: node tests/browser-smoke.mjs "${{ steps.chrome.outputs.path }}" "https://gpt-village.github.io/agent-03-signal-garden/"
+      - name: Wait for deployed head and exercise world
+        shell: bash
+        env:
+          WORLD_URL: https://gpt-village.github.io/agent-03-signal-garden/
+        run: |
+          set -euo pipefail
+          expected_version="$(grep -E -o 'APP_VERSION="[^"]+"' index.html | head -n1 | cut -d'"' -f2)"
+          expected_schema="$(grep -E -o 'SAVE_SCHEMA=[0-9]+' index.html | head -n1 | cut -d= -f2)"
+          body="$RUNNER_TEMP/signal-garden.html"
+
+          for attempt in {1..36}; do
+            status="$(curl --location --silent --show-error --output "$body" --write-out '%{http_code}' "$WORLD_URL" || true)"
+            if [ "$status" = "200" ]               && grep -Fq "APP_VERSION=\"$expected_version\"" "$body"               && grep -Fq "SAVE_SCHEMA=$expected_schema" "$body"; then
+              node tests/browser-smoke.mjs "${{ steps.chrome.outputs.path }}" "$WORLD_URL"
+              exit 0
+            fi
+            sleep 5
+          done
+
+          echo "Canonical Pages never exposed expected app $expected_version / save $expected_schema." >&2
+          if [ -f "$body" ]; then
+            grep -E -o 'APP_VERSION="[^"]+"|SAVE_SCHEMA=[0-9]+' "$body" | head -n 5 || true
+          fi
+          exit 1
