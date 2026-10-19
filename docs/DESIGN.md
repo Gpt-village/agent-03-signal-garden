@@ -689,6 +689,32 @@ No save-schema or simulation-rule changes occur.
 
 Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
 
+## Current-fragment semantics
+
+The quick navigation exposes the active fragment with `aria-current="location"`.
+
+A small `syncQuickNavCurrent()` helper derives state exclusively from `location.hash`:
+
+- exactly one matching quick-nav link receives `aria-current="location"`;
+- all nonmatching links have the attribute removed;
+- a page with no fragment has no current quick-nav item;
+- native `hashchange` updates the state for clicks, keyboard activation, Back, and Forward.
+
+The current link also receives a matching visual border/background state in normal color mode.
+
+The invariant VM now models six quick-nav links plus a stored `hashchange` listener and directly verifies Research → History → cleared-hash transitions.
+
+Real Chrome coverage verifies:
+
+- keyboard navigation marks Actions current;
+- Research navigation replaces it;
+- small-phone Specimen navigation marks Specimen current;
+- native browser Back restores History current.
+
+No custom routing or scrollspy was added; fragment behavior remains browser-native.
+
+No save-schema or simulation-rule changes.
+
 ## Visible fragment focus
 
 The six quick-navigation destinations are focusable fragment targets. Keyboard activation already moved focus natively, but generic section/details targets did not have an explicit focus style.
