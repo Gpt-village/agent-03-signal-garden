@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.41 — Session-only Undo
+
+- Added one reversible in-session checkpoint for meaningful world mutations.
+- Undo covers signals, completed bridge changes, glyph changes, cycle advance, germination, specimen import, same-seed reset, and new-random-garden replacement.
+- Free selection, signal-mode changes, previews, sound toggles, and free Connect source planning/cancellation do not consume the checkpoint.
+- Undo restores world state, seed URL, and Last Cycle Report, and clears transient migration motes.
+- Undo history is not serialized to localStorage and is never exported in SG1 specimens.
+- Reloading preserves the world but clears Undo availability.
+- Added Undo button/status plus global U shortcut outside native controls.
+- No save-schema bump.
+- Invariant coverage verifies representative mutations, single-use behavior, free Connect semantics, import restoration, and destructive-action checkpoint guards.
+- Real Chrome coverage proves exact pre-Nurture life/focus restoration and session-only checkpoint clearing on reload.
+- Canonical invariants, Pages deployment, and browser smoke are green for the verified v0.41 head.
+
+
 ## v0.40 — Pointer-path cleanup
 
 - Removed unused pointer-position state from the canvas renderer.
