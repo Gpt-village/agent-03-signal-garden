@@ -716,6 +716,24 @@ The ordinary field log keeps short-lived operational events. The **Chronicle** k
 
 Chronicle text is local history and is intentionally excluded from specimen exchange.
 
+## Research Compass
+
+By v0.35 the garden has fourteen optional Field Questions, so presenting every observed and open prompt with equal weight became noisy.
+
+The research panel now derives three views from the same question list:
+
+- **Open questions** — visible by default.
+- **Observed archive** — completed questions move into a nested collapsed archive.
+- **Research Compass** — points to the first still-open question in the existing research sequence.
+
+The compass is intentionally transparent. It does not claim to predict difficulty or optimal play; it simply provides a deterministic next research direction.
+
+When every current question is observed, the compass reports research completion instead of inventing another objective.
+
+The starter guide's post-onboarding **Open research** state uses the same compass model, so the guide and research panel cannot disagree about which question is next.
+
+No question-completion state is added; all views remain derived from existing world state.
+
 ## Field Questions
 
 The garden includes **fourteen** optional research prompts. They are not win conditions and do not prescribe a single preferred ecology.
