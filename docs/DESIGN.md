@@ -672,6 +672,31 @@ The control semantics (`aria-pressed`, focus styles, live status, Text Map) do n
 
 Deployed Chrome smoke emulates forced colors together with reduced motion and asserts the HUD acknowledgment, panel shadow removal, and active-control outline.
 
+## Mobile section navigation
+
+v0.43 reduces long-sidebar navigation cost without hiding content.
+
+The controls sidebar begins with six native fragment links:
+
+- Map;
+- Actions;
+- Island;
+- Research;
+- History;
+- Specimen.
+
+Each destination is a real existing section with a stable ID and `tabindex="-1"` so fragment navigation has an explicit focus/scroll target.
+
+On viewports up to 820 px wide, the jump bar becomes sticky at the top of the viewport. Targets use `scroll-margin-top: 76px` so the sticky bar does not cover the destination heading.
+
+The navigation preserves native anchor behavior and URL hashes. A small click listener only reveals the destination first when it is a collapsed `<details>` panel; it does not replace native scrolling/history behavior.
+
+The History panel therefore begins collapsed as before, but a History jump opens it before the native fragment jump.
+
+No world state or schema changes occur.
+
+Invariant coverage checks all six links/targets, mobile sticky CSS, scroll-margin protection, and details reveal logic. Real Chrome coverage at 390 px verifies sticky positioning, exact link destinations, a visible Research landing, and collapsed-to-open History navigation on the deployed page.
+
 ## Input semantics and touch policy
 
 v0.42 makes the existing keyboard/touch interaction model discoverable to assistive technology without changing simulation rules.
