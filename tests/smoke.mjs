@@ -75,6 +75,7 @@ source = source.replace(
     inscribeGlyph:inscribeGlyph,
     gardenSummary:gardenSummary,
     researchPrompts:researchPrompts,
+    researchHint:researchHint,
     researchCompassModel:researchCompassModel,
     specimenCode:specimenCode,
     decodeSpecimen:decodeSpecimen,
@@ -304,17 +305,24 @@ assert.equal(compass.total,14);
 assert.equal(compass.open.length,14,"fresh garden should start with all Field Questions open");
 assert.equal(compass.observed.length,0);
 assert.equal(compass.next.id,"new-land","fresh Research Compass should point to the first research-sequence question");
+assert.match(compass.nextHint,/resonance|Germination/i,"fresh New Land hint should explain the resource direction");
+assert.equal(api.researchHint("new-land"),compass.nextHint,"direct hint helper and Compass should agree");
 api.renderUI();
 assert.match(ids.get("researchSummary").textContent,/14 open/);
 assert.match(ids.get("researchCompass").innerHTML,/Research compass/);
+assert.match(ids.get("researchCompass").innerHTML,/Experiment hint/);
 assert.match(ids.get("research").innerHTML,/not part of the starting map/);
+assert.match(ids.get("research").innerHTML,/Hint:/);
 assert.match(ids.get("researchObserved").innerHTML,/Nothing archived yet/);
 
+const firstResearchHint=compass.nextHint;
 api.getState().islands.push(island(4));
 compass=api.researchCompassModel();
 assert.equal(compass.observed.length,1,"germinated-land state should archive the New Land question");
 assert.equal(compass.observed[0].id,"new-land");
 assert.equal(compass.next.id,"ring","compass should advance to the next still-open research question");
+assert.notEqual(compass.nextHint,firstResearchHint,"Research hint should change when the Compass advances");
+assert.match(compass.nextHint,/link|circuit|endpoint|ring/i,"Ring hint should describe the topology experiment");
 api.renderUI();
 assert.match(ids.get("observedResearchSummary").textContent,/Observed archive · 1/);
 assert.ok(!ids.get("research").innerHTML.includes("not part of the starting map"),"observed New Land question should leave the open list");
@@ -368,6 +376,8 @@ api.getState().islands[1].imprints={life:3,memory:0,strange:1};
   assert.equal(im.total,8);
 }
 assert.equal(api.ancestralSignal(),"life","strong migration ancestry should resolve to its dominant signal");
+api.getState().resonance=7;api.getState().focus=3;
+assert.match(api.researchHint("lineage"),/life ancestry is ready/i,"lineage hint should recognize a dominant ready ancestry");
 
 api.getState().islands[0].imprints={life:4,memory:4,strange:0};
 api.getState().islands[1].imprints={life:0,memory:0,strange:0};
@@ -548,6 +558,8 @@ setGraph([
   island(3, [], 90, 10, 5)
 ]);
 assert.equal(api.macroClimate().id, "verdant", "life-heavy archipelago should produce Verdant Air");
+api.getState().climateStreak=2;
+assert.match(api.researchHint("phenomenon"),/2\/3/,"phenomenon hint should expose current sustained-climate progress");
 api.recordClimate();
 assert.equal(api.getState().climateSeen.verdant, true);
 assert.ok(api.getState().chronicle.some(x => x.kind === "climate"), "first recorded climate should enter the chronicle");
@@ -798,6 +810,7 @@ assert.deepEqual(Array.from(decoded.routeSignals[0]),[0,1,4,2,1],"SG1 specimen s
 assert.equal(decoded.provenance,2,"SG1 specimen should preserve only the bounded transplant-hop count");
 api.importSpecimenCode(code);
 assert.equal(api.getState().transplantCount,3,"import should advance specimen provenance by one hop");
+assert.match(api.researchHint("transplant"),/transplant hop 3|transplanted/i,"transplant hint should react to imported provenance");
 const legacyPayload=JSON.parse(JSON.stringify(decoded));
 delete legacyPayload.provenance;
 const legacyCode="SG1."+Buffer.from(JSON.stringify(legacyPayload),"binary").toString("base64").replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
