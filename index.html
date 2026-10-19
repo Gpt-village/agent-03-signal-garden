@@ -635,10 +635,12 @@
       var amount=3;
       if((state.mode==="Bloom"&&type==="life")||(state.mode==="Static"&&type==="memory")||(state.mode==="Storm"&&type==="strange"))amount=5;
       if(cycleClimate.trait===type)amount+=1;
+      var lineageBonus=b.lineage===type?1:0;
+      var receivedAmount=amount+lineageBonus;
       var beforeTrait=dominantTrait(b);
-      if(type==="life")b.life=clamp(b.life+amount);
-      if(type==="memory")b.memory=clamp(b.memory+amount);
-      if(type==="strange"){b.strange=clamp(b.strange+amount);b.life=clamp(b.life-1)}
+      if(type==="life")b.life=clamp(b.life+receivedAmount);
+      if(type==="memory")b.memory=clamp(b.memory+receivedAmount);
+      if(type==="strange"){b.strange=clamp(b.strange+receivedAmount);b.life=clamp(b.life-1)}
       if(b.glyph==="life")b.life=clamp(b.life+2);
       if(b.glyph==="memory")b.memory=clamp(b.memory+2);
       if(b.glyph==="strange")b.strange=clamp(b.strange+2);
@@ -648,7 +650,7 @@
       if(!b.imprints)b.imprints={life:0,memory:0,strange:0};
       b.imprints[type]=Math.min(10000,(b.imprints[type]||0)+1);
       var ek=edgeKey(a.id,b.id);state.edgeMemory[ek]=(state.edgeMemory[ek]||0)+1;
-      transfers.push({from:a.id,to:b.id,type:type,amount:amount});
+      transfers.push({from:a.id,to:b.id,type:type,amount:receivedAmount,lineageBonus:lineageBonus});
       motes.push({from:a.id,to:b.id,type:type,start:performance.now(),duration:reducedMotion?1:1300+a.id*120});
     });
     if(transfers.length){
@@ -816,7 +818,7 @@
     else{
       var transferText=lastCycleReport.transfers.length?lastCycleReport.transfers.map(function(x){
         var from=state.islands[x.from],to=state.islands[x.to];
-        return (from?from.name:"island "+x.from)+" → "+(to?to.name:"island "+x.to)+": "+x.type+" +"+x.amount;
+        return (from?from.name:"island "+x.from)+" → "+(to?to.name:"island "+x.to)+": "+x.type+" +"+x.amount+(x.lineageBonus?" (echo lineage +1)":"");
       }).join("<br>"):"No migrations crossed live routes.";
       var roleText=lastCycleReport.roleChanges.length?lastCycleReport.roleChanges.map(function(x){return esc(x.name)+": "+x.from+" → "+x.to}).join("<br>"):"No island changed dominant role.";
       var climateText=lastCycleReport.climateBefore===lastCycleReport.climateAfter?lastCycleReport.climateAfter:lastCycleReport.climateBefore+" → "+lastCycleReport.climateAfter;
