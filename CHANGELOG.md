@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.39 — Adaptive canvas budget
+
+- Pause canvas frame scheduling while the visual map is fully outside the viewport.
+- Resume immediately with the latest world state when the canvas re-enters view.
+- Under reduced-motion, refresh a visible canvas on a 250 ms cadence instead of continuously repainting a frozen animation clock.
+- Clear stale reduced-motion timers when the system motion preference changes.
+- Standard-motion visible rendering remains animation-frame driven.
+- No schema bump and no simulation-rule changes.
+- Invariant coverage guards the IntersectionObserver branch, offscreen early return, reduced-motion timer, adaptive startup path, and scheduler handoff.
+- Fixed two latent invariant-harness bugs exposed by the new scheduler: the draw-body source slice previously targeted an earlier UI loop, and the test API injector previously matched an internal motion callback instead of the IIFE startup tail.
+- Deployed Chrome coverage proves the bitmap stops changing offscreen, ignores offscreen selection changes visually, and renders the latest state after returning onscreen.
+- Canonical invariants, Pages deployment, and real Chrome smoke are green.
+
+
 ## v0.38 — Renderer derivation cache
 
 - Compute route bonds once per canvas frame and reuse a key-indexed lookup for active/severed route rendering.
