@@ -24,6 +24,8 @@ assert.ok(html.includes('data-glyph="life" aria-pressed="false" aria-describedby
 assert.ok(html.includes('A textual topology equivalent is available in the Text map panel.'),"canvas guidance should point to the text-map equivalent");
 assert.ok(html.includes('@media(prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}}'),"reduced-motion CSS should suppress button transition/hover movement");
 assert.ok(html.includes('id="modeStatus" role="status" aria-live="polite"'),"signal mode should expose a polite status line");
+assert.ok(html.includes('id="actionCostNote"'),"primary actions should expose a resource-cost explanation");
+assert.ok(html.includes('aria-describedby="actionCostNote modeStatus"'),"primary action controls should reference cost/status guidance");
 assert.ok(html.includes('data-action="nurture" aria-pressed="true"'),"default nurture mode should expose pressed state");
 assert.ok(html.includes('data-action="connect" aria-pressed="false"'),"inactive signal modes should expose unpressed state");
 assert.ok(html.includes('data-glyph="life" aria-pressed="false"'),"glyph controls should expose toggle state");
@@ -46,6 +48,8 @@ assert.ok(source.includes('var contrastQuery=window.matchMedia?window.matchMedia
 assert.ok(source.includes('document.getElementById("contrastChip").textContent=forcedColors?"Contrast · forced":"Contrast · custom"'),"HUD should expose whether forced colors are active");
 assert.ok(source.includes('var germinationFull=state.islands.length>=7,germinationReady=!germinationFull&&state.resonance>=6&&state.focus>=2'),"germination availability should be derived before enabling the control");
 assert.ok(source.includes('var unavailable=!a||selected||(type!=="none"&&(state.resonance<3||state.focus<1))||(type==="none"&&(state.focus<1||a.glyph==="none"))'),"glyph availability should disable unaffordable and no-op choices");
+assert.ok(source.includes('var freeConnectStep=state.action==="connect"&&a&&(!connectSource||connectSource.id===a.id)'),"Apply availability should preserve free Connect planning/cancellation at zero focus");
+assert.ok(source.includes('Completing or rewiring a connection needs 1 focus. The source remains armed.'),"blocked Connect completion should explain why it cannot proceed");
 const tail = "  renderUI();requestAnimationFrame(draw);";
 assert.ok(source.includes(tail), "expected game startup tail");
 source = source.replace(
@@ -85,6 +89,7 @@ source = source.replace(
     applyNetworkConstellation:applyNetworkConstellation,
     suggestedMove:suggestedMove,
     textMapModel:textMapModel,
+    apply:apply,
     renderUI:renderUI,
     getState:function(){return state},
     setState:function(next){state=next;motes=[]}
@@ -129,7 +134,7 @@ ids.set("garden", canvas);
   "seasonChip","focusChip","resChip","transitChip","historyChip","bondChip","junctionChip","constellationChip","provenanceChip","researchChip","climateChip","motionChip","contrastChip","germinateBtn","germinateStatus",
   "islandNav","applySelectedBtn","selectedName","selectedLore","lifeStat",
   "memoryStat","strangeStat","linksStat","arrivalsStat","trafficStat","glyphStat","lineageStat","successionStat","lifeMeter",
-  "research","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","guidePanel","textMap","glyphCostNote","glyphStatus","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
+  "research","bonds","provenance","constellation","junctions","species","discoveries","chronicle","log","guidePanel","textMap","modeStatus","actionCostNote","glyphCostNote","glyphStatus","restBtn","soundBtn","summaryBtn","exportBtn","specimenBtn","importBtn","resetBtn"
 ].forEach(id => ids.set(id, element()));
 
 const actionButtons = ["nurture","observe","connect","distort"].map(action =>
@@ -219,6 +224,41 @@ api.renderUI();
 assert.equal(glyphButtons[0].disabled,true);
 assert.equal(glyphButtons[3].disabled,true,"Clear should be disabled when the selected island has no glyph");
 assert.match(ids.get("glyphStatus").textContent,/3 more resonance/);
+
+setGraph([island(0),island(1),island(2),island(3)]);
+api.getState().selected=0;
+api.getState().focus=0;
+api.getState().action="nurture";
+const lifeBeforeNoFocus=api.getState().islands[0].life;
+api.renderUI();
+assert.equal(ids.get("applySelectedBtn").disabled,true,"zero-focus nurture should disable Apply");
+assert.match(ids.get("modeStatus").textContent,/Unavailable until you regain 1 focus/);
+api.apply(api.getState().islands[0]);
+assert.equal(api.getState().islands[0].life,lifeBeforeNoFocus,"zero-focus nurture must not mutate life");
+
+api.getState().action="connect";
+api.renderUI();
+assert.equal(ids.get("applySelectedBtn").disabled,false,"Connect source arming should remain available at zero focus");
+assert.match(ids.get("applySelectedBtn").textContent,/Arm connect.*free/);
+api.apply(api.getState().islands[0]);
+assert.equal(api.getState().connectFrom,0,"zero-focus Connect should arm a source for free");
+assert.equal(api.getState().focus,0);
+
+api.getState().selected=1;
+api.renderUI();
+assert.equal(ids.get("applySelectedBtn").disabled,true,"zero-focus Connect completion should be disabled");
+assert.match(ids.get("modeStatus").textContent,/Completing or rewiring needs 1 focus/);
+api.apply(api.getState().islands[1]);
+assert.equal(api.getState().islands[0].links.length,0,"blocked Connect completion must not mutate topology");
+assert.equal(api.getState().connectFrom,0,"blocked Connect completion should preserve the armed source");
+
+api.getState().selected=0;
+api.renderUI();
+assert.equal(ids.get("applySelectedBtn").disabled,false,"armed Connect source should remain freely cancellable");
+assert.match(ids.get("applySelectedBtn").textContent,/Cancel connect source.*free/);
+api.apply(api.getState().islands[0]);
+assert.equal(api.getState().connectFrom,undefined,"zero-focus Connect cancellation should clear the source");
+assert.equal(api.getState().focus,0,"free Connect planning/cancellation must not spend focus");
 
 api.getState().resonance=3;api.getState().focus=2;
 api.renderUI();
