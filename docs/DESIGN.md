@@ -402,6 +402,40 @@ Current bounded specimen data also includes island glyph enums, observed macro-c
 
 Imports use an `SG1` version prefix and validate island count, trait bounds, resources, glyph values, climate/phenomenon IDs, ancestry counters/lineages, topology size, indices, and route-memory bounds before replacing local game state.
 
+## Accessible mode state and cancellation
+
+v0.28 aligns visible selection state with the accessibility tree.
+
+- Nurture / Observe / Connect / Distort buttons expose `aria-pressed`.
+- Root / Echo / Fold / Clear glyph controls expose `aria-pressed` for the selected island.
+- A polite **mode status** announces the active signal mode.
+- When Connect has a source island armed, the status identifies that source and explains that Escape cancels it.
+- **Escape** cancels a pending Connect source without spending focus or leaving Connect mode.
+
+The deployed Chrome smoke verifies pressed-state transitions, pending-source messaging, Escape cancellation, no focus cost, successful re-connection afterward, and glyph pressed state.
+
+No save-schema bump is required.
+
+## Reduced-motion rendering
+
+v0.29 expands reduced-motion support beyond CSS transitions.
+
+The world observes `prefers-reduced-motion: reduce` through `matchMedia` and responds to live preference changes when the browser supports media-query change events.
+
+While reduced motion is active:
+
+- the canvas animation clock is frozen at a stable timestamp;
+- stars, island wobble/pulses, storm bands, and climate phenomena stop drifting;
+- migration motes collapse to an effectively instantaneous duration;
+- button transitions and hover transforms are removed;
+- the HUD explicitly reports **Motion · reduced**.
+
+Simulation time and game mechanics still advance normally; only decorative/transition motion is reduced.
+
+Canonical Chrome smoke emulates the reduced-motion media feature, checks the HUD state, compares two canvas snapshots separated in time and requires them to be identical, then continues the full gameplay/accessibility/specimen smoke under that preference.
+
+No save-schema bump is required.
+
 ## Skip navigation and map semantics
 
 v0.27 tightens the document-level keyboard and screen-reader path without changing simulation state.
