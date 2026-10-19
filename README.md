@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.20 (save schema 6).
+**Current canonical version:** v0.21 (save schema 6).
 
 ## Play
 
@@ -33,6 +33,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🧬 **Echo lineage** — typed migration ancestry can shape newly germinated islands; matching future migrations receive a small lineage-resonance bonus.
 - 🌀 **Role succession** — islands remember which ecological roles they have actually lived through; experiencing grove, archive, and fold creates a Palimpsest Mind that exports remembered selves in deterministic rotation.
 - 🌉 **Typed route bonds** — relationships remember which signal families repeatedly crossed them and can mature into Rootways, Echo Spans, Fold Threads, or Braided Bonds.
+- 🌱 **Junction ecologies** — combinations of mature bond types meeting at one island create derived local ecologies such as Scribe Orchard, Prism Nursery, Dream Estuary, Confluence Knot, and Triune Loom.
 
 The garden remembers traffic, can grow topology-dependent organisms, develops a whole-archipelago climate, records major milestones in a Chronicle, and supports bounded specimen exchange.
 
