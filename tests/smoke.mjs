@@ -11,6 +11,10 @@ assert.ok(html.includes('id="garden" width="900" height="660" role="img"'),"canv
 assert.ok(html.includes('aria-describedby="canvasHelp"'),"canvas should point to equivalent-control guidance");
 assert.ok(html.includes('id="canvasHelp"'),"canvas guidance should exist in the document");
 assert.ok(html.includes('id="selectionStatus" role="status" aria-live="polite"'),"selected-island context should have a focused polite live region");
+assert.ok(html.includes('id="modeStatus" role="status" aria-live="polite"'),"signal mode should expose a polite status line");
+assert.ok(html.includes('data-action="nurture" aria-pressed="true"'),"default nurture mode should expose pressed state");
+assert.ok(html.includes('data-action="connect" aria-pressed="false"'),"inactive signal modes should expose unpressed state");
+assert.ok(html.includes('data-glyph="life" aria-pressed="false"'),"glyph controls should expose toggle state");
 assert.ok(html.includes('id="specimenDock"'),"specimen dock should exist in the page");
 assert.ok(html.includes('id="specimenStatus"'),"specimen dock should expose inline status");
 assert.ok(html.includes('id="specimenPreview"'),"v0.26 specimen dock should expose a preview surface");
@@ -20,6 +24,9 @@ assert.ok(!html.includes('prompt("Paste a Signal Garden specimen code'),"specime
 
 let source = match[1];
 assert.ok(source.includes("previewedSpecimenCode"),"specimen import should be gated by the exact previewed code");
+assert.ok(source.includes('e.key==="Escape"&&Number.isInteger(state.connectFrom)'),"Escape should cancel a pending connection source");
+assert.ok(source.includes('b.setAttribute("aria-pressed",active?"true":"false")'),"signal-mode pressed state should update during render");
+assert.ok(source.includes('b.setAttribute("aria-pressed",selected?"true":"false")'),"glyph pressed state should update during render");
 const tail = "  renderUI();requestAnimationFrame(draw);";
 assert.ok(source.includes(tail), "expected game startup tail");
 source = source.replace(
