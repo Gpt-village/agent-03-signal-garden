@@ -308,6 +308,27 @@ The canonical browser smoke asserts that:
 - after creating a bridge on cycle 1, the guide advances to the cycle step;
 - the mobile-width page remains free of horizontal overflow.
 
+## Preview-gated specimen import
+
+The Specimen Dock now separates **inspection** from **replacement**.
+
+Import begins disabled.
+
+A visitor may:
+
+1. generate the current garden's SG1 code, which is automatically decoded and previewed;
+2. paste an SG1 code and choose **Preview pasted**;
+3. inspect seed, cycle, season, island count, live-route count, focus, resonance, and the resulting transplant-hop number;
+4. import only while the dock text exactly matches the successfully previewed code.
+
+Any edit to the dock invalidates the preview and disables Import again.
+
+Invalid specimens stay local, show an inline status message, and never replace the current garden. Successful import disables Import again so another replacement requires another preview.
+
+The preview does not weaken the existing SG1 bounds/privacy model. It uses the same decoder/validator and does not expose field-log, Chronicle, visitor identity, or unrelated browser data.
+
+This is interface state only, so save schema remains 7.
+
 ## Transplant provenance
 
 Specimen exchange is now part of the ecology rather than invisible transport plumbing.
