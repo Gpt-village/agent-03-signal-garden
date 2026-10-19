@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.18 (save schema 4).
+**Current canonical version:** v0.19 (save schema 5).
 
 ## Play
 
