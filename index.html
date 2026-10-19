@@ -779,7 +779,7 @@
       });
     }
     if(state.activePhenomenon==="confluence-pulse"){
-      var p=reducedMotion?.55:(tt%2400)/2400;
+      var p=reducedMotion ? 0.55 : (tt%2400)/2400;
       ctx.strokeStyle="rgba(215,247,220,"+(0.35*(1-p))+")";ctx.lineWidth=2;
       ctx.beginPath();ctx.arc(w*.5,h*.47,30+p*Math.min(w,h)*.7,0,Math.PI*2);ctx.stroke();
     }
