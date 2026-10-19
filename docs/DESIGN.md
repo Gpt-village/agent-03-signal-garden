@@ -689,6 +689,25 @@ No save-schema or simulation-rule changes occur.
 
 Invariant coverage checks the six-column grid contract and intended column spans. Real Chrome coverage at 390 px verifies exactly two unique chip-row positions and confirms the second row is below the first.
 
+## Narrow-phone fragment navigation
+
+At viewports up to 820 px, section targets use expanded fragment clearance so sticky navigation does not cover the destination.
+
+At **360 px and narrower**, the six quick-navigation links switch from wrapped flex layout to a deterministic **3 × 2 CSS grid**. This avoids an unpredictable third row and makes the sticky navigation height stable enough to reason about.
+
+The six jump targets remain native fragment destinations with `tabindex="-1"`, so browser history and native focus transfer are preserved.
+
+Real Chrome coverage at **320 × 568** verifies:
+
+- no horizontal overflow;
+- quick navigation remains sticky;
+- the six links occupy exactly two rows;
+- configured fragment clearance exceeds the rendered sticky-nav height;
+- the Specimen destination lands below the actual sticky nav;
+- the focused destination remains visible in the viewport.
+
+No save-schema or simulation-rule changes.
+
 ## Compact mobile HUD
 
 v0.44 reduces visual-map occlusion on narrow screens without removing information from the world.
