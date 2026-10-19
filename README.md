@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.42 (save schema 7).
+**Current canonical version:** v0.43 (save schema 7).
 
 ## Play
 
@@ -37,6 +37,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 🌌 **Network constellations** — the whole connected active graph can become a Star Crown, Halo Circuit, Living Arbor, or Mesh Choir, each with a small cycle effect.
 - ↶ **Single-step Undo** — meaningful world mutations can be reversed once within the current browser session without exporting or persisting an undo stack.
 - ⌨️ **Semantic input metadata** — N/O/C/D/U/Enter/1–7 shortcuts are exposed with `aria-keyshortcuts`, while the visual canvas explicitly preserves vertical touch panning and pinch zoom.
+- 📱 **Mobile section navigation** — a compact jump bar links Map / Actions / Island / Research / History / Specimen and becomes sticky on narrow layouts.
 - 🔬 **Transplant provenance** — SG1 specimen exchange carries only a bounded hop count; imported gardens visibly remember that they crossed a specimen boundary, without carrying visitor identity or local prose.
 - 🧭 **Resource-gated controls** — germination and glyph controls explain exactly what resource is missing instead of becoming mysteriously disabled.
 - ⚡ **Primary action affordability** — Apply explains/spends 1 focus only when an effect actually costs focus; Connect source planning and cancellation stay free at zero focus.
