@@ -193,6 +193,12 @@ try{
   assert.ok(actionsFocusStyle.outlineOffset>=4,"fragment destination focus outline should clear the section content");
   const actionsCurrent=await evaluate(`Array.from(document.querySelectorAll('#quickNav a')).map(a=>[a.getAttribute('href'),a.getAttribute('aria-current')])`);
   assert.deepEqual(actionsCurrent.filter(x=>x[1]),[["#actionsSection","location"]],"keyboard fragment jump should mark only Actions as current");
+  const actionsCurrentContrast=await evaluate(`(()=>{
+    const e=document.querySelector('#quickNav a[href="#actionsSection"]'),cs=getComputedStyle(e);
+    return {outlineStyle:cs.outlineStyle,outlineWidth:parseFloat(cs.outlineWidth)};
+  })()`);
+  assert.equal(actionsCurrentContrast.outlineStyle,"solid","forced-colors current-location link should retain an explicit outline");
+  assert.ok(actionsCurrentContrast.outlineWidth>=2,"forced-colors current-location outline should be at least 2px");
 
   await evaluate(`document.querySelector('#quickNav a[href="#researchSection"]').click()`);
   await waitFor("location.hash==='#researchSection' && document.activeElement && document.activeElement.id==='researchSection' && document.querySelector('#quickNav a[href=\"#researchSection\"]').getAttribute('aria-current')==='location'","Research section anchor navigation and current state");
