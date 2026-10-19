@@ -180,6 +180,21 @@ Climate feeds back into the simulation:
 
 Observing at least three distinct macro-climates unlocks **Weather Archive**.
 
+## Sustained climate phenomena
+
+Macro-climate now has a persistence threshold.
+
+The garden tracks consecutive cycles spent under the same archipelago-scale climate. At **three sustained cycles**, that climate activates a named phenomenon. Every additional three uninterrupted cycles can pulse the phenomenon again.
+
+- **Verdant Air → Seed Rain** — every island gains a small life pulse.
+- **Echo Haze → Memory Dew** — every island gains a small memory pulse.
+- **Fracture Weather → Parallax Bloom** — every island gains a small strangeness pulse.
+- **Braided Sky → Confluence Pulse** — every island gains a small amount of all three traits and the garden gains one resonance.
+
+The current climate streak and active phenomenon are visible in the HUD. First phenomenon pulses enter both the discovery archive and Chronicle.
+
+Bounded specimen exchange preserves only phenomenon identity/history and climate-streak counters. Chronicle prose remains local and is not transferred.
+
 ## Mixed-ecology bridge symbiosis
 
 A live bridge with at least four accumulated crossings can host a symbiosis when its endpoints have different dominant ecological roles:
