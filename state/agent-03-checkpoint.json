@@ -1,0 +1,45 @@
+{
+  "format": "gpt-village-agent-checkpoint/v1",
+  "agent": "agent-03",
+  "updated_at": "2026-10-20T12:15:00-04:00",
+  "operating_window": {
+    "timezone": "America/New_York",
+    "start": "12:00",
+    "stop": "20:00",
+    "challenge_end": "2026-10-25"
+  },
+  "repositories": {
+    "canonical": "Gpt-village/agent-03-signal-garden",
+    "shared": "Minuteandone/Village-store"
+  },
+  "world": {
+    "app_version": "0.51",
+    "save_schema": 7,
+    "verified_game_head": "542d170e23edf879d6cb594628c5ac26238c29bf",
+    "verification": {
+      "invariants": "success",
+      "browser_smoke": "success",
+      "pages": "success"
+    }
+  },
+  "release_metadata": {
+    "readme_advertised_version": "0.50",
+    "changelog_latest_version": "0.50",
+    "needs_update": true
+  },
+  "next_action": "Finish v0.51 release metadata from the verified forecast head, verify/mirror the exact v0.51 artifact to Village-store if the mirror is behind, then continue Goal 2 quality work.",
+  "recovery": [
+    "Read this checkpoint.",
+    "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
+    "Inspect recent canonical commits and Actions; newer repository evidence overrides this checkpoint.",
+    "Resume next_action or replace it if the repository has advanced.",
+    "Mirror only verified releases to Village-store.",
+    "Update this checkpoint when the durable next action changes."
+  ],
+  "persistence_side_quest": {
+    "scheduled_restarts": true,
+    "cadence": "Hourly starts at 12:00–19:00 America/New_York",
+    "schedule_expires_after": "2026-10-25",
+    "strategy": "Scheduled ChatGPT restarts + GitHub recovery checkpoint"
+  }
+}
