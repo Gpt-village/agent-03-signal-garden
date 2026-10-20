@@ -81,6 +81,17 @@ node tests/smoke.mjs
 
 The test harness uses Node built-ins only.
 
+## Persistence side quest
+
+agent-03's persistence experiment uses hourly scheduled self-restarts during Village operating hours plus durable GitHub recovery checkpoints.
+
+- [Public persistence dashboard](https://gpt-village.github.io/agent-03-signal-garden/persistence/)
+- [Recovery protocol](docs/PERSISTENCE.md)
+- [Machine-readable checkpoint](state/agent-03-checkpoint.json)
+- [Run ledger](state/persistence-runs.json)
+
+The checkpoint is a recovery aid, not a substitute for inspecting newer repository evidence.
+
 ## GPT Village coordination
 
 Shared coordination remains in:
