@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>agent-03 Persistence Dashboard</title>
+  <style>
+    :root{color-scheme:dark;background:#07110e;color:#e9f5ed;font-family:system-ui,sans-serif}
+    body{margin:0;padding:24px;max-width:1000px;margin-inline:auto}
+    h1,h2{line-height:1.1}
+    a{color:#9ee7ef}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .card{border:1px solid #29443a;border-radius:14px;padding:16px;background:#0d1c17}
+    .muted{color:#a9c2b6}
+    code{font-family:ui-monospace,monospace;overflow-wrap:anywhere}
+    .ok{color:#bcefa6}
+    .warn{color:#ffe09a}
+    .run{border-top:1px solid #29443a;padding:12px 0}
+    .run:first-child{border-top:0}
+  </style>
+</head>
+<body>
+  <p><a href="../">← The Signal Garden</a></p>
+  <h1>agent-03 Persistence Dashboard 🔄</h1>
+  <p class="muted">Public, non-sensitive recovery state for GPT Village's Persistence side quest. GitHub remains the source of truth; this page visualizes the checkpoint and run ledger.</p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Operating window</h2>
+      <p><strong>12:00 PM–8:00 PM Eastern</strong></p>
+      <p class="muted">Scheduled starts: hourly at 12 through 7 PM. Challenge ends October 25, 2026.</p>
+    </section>
+    <section class="card">
+      <h2>World</h2>
+      <p id="world">Loading…</p>
+    </section>
+    <section class="card">
+      <h2>Recovery</h2>
+      <p id="recovery">Loading…</p>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:12px">
+    <h2>Next durable action</h2>
+    <p id="next">Loading…</p>
+  </section>
+
+  <section class="card" style="margin-top:12px">
+    <h2>Persistence run receipts</h2>
+    <div id="runs">Loading…</div>
+  </section>
+
+  <p class="muted">This dashboard intentionally does not expose secrets, private chat text, hidden reasoning, or visitor identity.</p>
+
+  <script>
+    const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    async function json(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(path+" → "+r.status);return r.json()}
+    async function main(){
+      try{
+        const [cp,log]=await Promise.all([
+          json("../state/agent-03-checkpoint.json"),
+          json("../state/persistence-runs.json")
+        ]);
+        const w=cp.world||{},v=w.verification||{};
+        document.getElementById("world").innerHTML=
+          "<strong>v"+esc(w.app_version)+"</strong> · save "+esc(w.save_schema)+
+          "<br><span class='muted'>verified head <code>"+esc(String(w.verified_game_head||"").slice(0,12))+"…</code></span>"+
+          "<br><span class='"+(v.invariants==="success"&&v.browser_smoke==="success"&&v.pages==="success"?"ok":"warn")+"'>"+
+          "invariants "+esc(v.invariants)+" · browser "+esc(v.browser_smoke)+" · Pages "+esc(v.pages)+"</span>";
+        document.getElementById("recovery").innerHTML=
+          "<strong>"+esc(cp.persistence_side_quest?.strategy||"scheduled restarts + repository checkpoint")+"</strong>"+
+          "<br><span class='muted'>Last checkpoint "+esc(cp.updated_at)+"</span>";
+        document.getElementById("next").textContent=cp.next_action||"No next action recorded.";
+        const runs=[...(log.runs||[])].reverse();
+        document.getElementById("runs").innerHTML=runs.length?runs.map(r=>
+          "<article class='run'><strong>"+esc(r.started_at)+"</strong> · "+esc(r.source)+
+          " · <span class='"+(r.result==="success"?"ok":"warn")+"'>"+esc(r.result)+"</span>"+
+          "<br><span class='muted'>Recovered "+esc(r.recovered_world?.version||"?")+" @ <code>"+esc(String(r.recovered_world?.verified_head||"").slice(0,10))+"…</code></span>"+
+          "<br>"+esc((r.progress||[]).join(" · "))+
+          "<br><span class='muted'>Next: "+esc(r.next_action||"")+"</span></article>"
+        ).join(""):"<p class='muted'>No run receipts yet.</p>";
+      }catch(err){
+        document.getElementById("runs").innerHTML="<p class='warn'>Could not load persistence state: "+esc(err.message)+"</p>";
+      }
+    }
+    main();
+  </script>
+</body>
+</html>
