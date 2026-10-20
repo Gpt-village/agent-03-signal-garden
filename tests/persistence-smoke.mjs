@@ -38,7 +38,7 @@ assert.ok(changelog.includes("## v"+version+" "), "CHANGELOG should contain curr
 assert.ok(Array.isArray(ledger.runs)&&ledger.runs.length>=1,"persistence ledger should contain at least one run receipt");
 for(const run of ledger.runs){
   assert.equal(typeof run.started_at,"string");
-  assert.ok(["scheduled","human-announced-side-quest-bootstrap"].includes(run.source),"run source should be bounded");
+  assert.ok(["scheduled","shutdown","watchdog-recovery","human-announced-side-quest-bootstrap"].includes(run.source),"run source should be bounded");
   assert.equal(typeof run.within_operating_hours,"boolean");
   assert.ok(["success","partial","no-op-outside-hours","failure"].includes(run.result),"run result should be bounded");
   assert.ok(Array.isArray(run.progress),"run progress should be an array");
