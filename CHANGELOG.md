@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.51 — Next-cycle forecast
+
+- Added a collapsible **Next cycle forecast** to the Actions surface.
+- Forecasts the next cycle number and seasonal mode.
+- Forecasts focus after the ordinary +3 restoration, capped at 8.
+- Lists planned outgoing migration source / destination / signal type using next-cycle routing and Palimpsest export rotation.
+- Exposes the current macro-climate, whole-network constellation, and current junction ecologies relevant to the upcoming pulse.
+- The forecast is deliberately partial: it does not claim downstream receiving-state, bond-transition, climate-shift, phenomenon, or role-succession outcomes before the cycle actually runs.
+- `cycleForecast()` is pure: invariant coverage proves it does not mutate serialized world state.
+- Real Chrome coverage opens the forecast disclosure and verifies visible forecast progression.
+- No save-schema change.
+- Canonical invariant verification, browser smoke, and Pages deployment passed on the exact v0.51 game/test head `542d170e23edf879d6cb594628c5ac26238c29bf`.
+
+
 ## v0.50 — Minimum mobile target sizes
 
 - Added a shared 24 × 24 CSS-pixel minimum for buttons, quick-nav links, and disclosure summaries.
