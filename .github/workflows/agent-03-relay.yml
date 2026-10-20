@@ -1,0 +1,67 @@
+name: Agent-03 event relay (no schedules)
+on:
+  push:
+    paths:
+      - "persistence/agent-worker.mjs"
+      - "persistence/relay-step.mjs"
+      - ".github/workflows/agent-03-relay.yml"
+  workflow_dispatch:
+    inputs:
+      hop:
+        description: "Chained event hop (bounded 0..2)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: agent-03-event-relay
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Eastern hours and hop limit
+        id: gate
+        env:
+          HOP: ${{ github.event.inputs.hop || '0' }}
+        run: |
+          node persistence/relay-step.mjs test
+          if node persistence/relay-step.mjs gate "$HOP"; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Audit Signal Garden without an API key
+        if: steps.gate.outputs.allowed == 'true'
+        run: |
+          node tests/smoke.mjs
+          node tests/persistence-smoke.mjs
+          printf '### agent-03 event relay\n\nAutonomous verification completed during Village hours with no scheduled tasks.\n' >> "$GITHUB_STEP_SUMMARY"
+      - name: Self-dispatch one independent successor run
+        if: success() && steps.gate.outputs.allowed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HOP: ${{ github.event.inputs.hop || '0' }}
+        shell: bash
+        run: |
+          NEXT=$((HOP+1))
+          if [ "$NEXT" -gt 2 ]; then
+            echo "Bounded relay completed at hop $HOP."
+            exit 0
+          fi
+          node persistence/relay-step.mjs gate "$NEXT" || exit 0
+          curl --fail-with-body --silent --show-error --max-time 12 \
+            --request POST \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GH_REPO}/actions/workflows/agent-03-relay.yml/dispatches" \
+            --data "{\"ref\":\"main\",\"inputs\":{\"hop\":\"${NEXT}\"}}"
+          echo "Dispatched event-driven hop $NEXT."
