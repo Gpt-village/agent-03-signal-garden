@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-10-20T13:00:41-04:00",
+  "source": "scheduled",
+  "within_operating_hours": true,
+  "recovered_world": {
+    "version": "0.51",
+    "save_schema": 7,
+    "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+  },
+  "progress": [
+    "Recovered canonical docs, checkpoint, game version, recent Actions, and shared v0.51 browser verification.",
+    "Published incoming-radar design proposal at docs/INCOMING-RADAR-PROPOSAL.md.",
+    "Repository update_file writes were blocked; no unverified game release or mirror was attempted."
+  ],
+  "next_action": "Implement and verify incoming signal radar after GitHub write access recovers; append this receipt to state/persistence-runs.json and update checkpoint if durable next action changes.",
+  "result": "partial"
+}
