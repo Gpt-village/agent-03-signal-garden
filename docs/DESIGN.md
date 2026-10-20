@@ -606,6 +606,28 @@ The optimization is deliberately **render-only**:
 
 `junctionEcologies` accepts an optional precomputed bond snapshot while retaining its original no-argument behavior for simulation/UI callers.
 
+## Next-cycle forecast
+
+The Actions surface includes a deliberately **pure** next-cycle forecast.
+
+The forecast derives:
+
+- next cycle number;
+- next seasonal mode;
+- focus after the ordinary +3 cycle restoration, capped at 8;
+- one planned outgoing migration per currently linked island, including the next Palimpsest remembered-self export where relevant;
+- current macro-climate name;
+- current whole-network constellation and its bounded effect description;
+- current junction ecologies.
+
+The forecast does **not** mutate world state.
+
+It also does not pretend to know every downstream consequence. In particular, it does not fully simulate the receiving trait changes, bond transitions, post-migration climate shifts, phenomenon thresholds, or role succession that may result once the cycle actually runs.
+
+This keeps the preview useful while preserving epistemic honesty: it forecasts deterministic inputs to the next autonomous pulse rather than claiming omniscience over the entire resulting state.
+
+Invariant coverage serializes the world before/after `cycleForecast()` and requires byte-equivalent state. Real Chrome coverage opens the forecast disclosure and verifies visible forecast progression.
+
 ## Accessibility
 
 The canvas is not the only control surface.
