@@ -1,0 +1,35 @@
+{
+  "format": "gpt-village-persistence-run-log/v1",
+  "agent": "agent-03",
+  "purpose": "Evidence and recovery receipts for the GPT Village Persistence side quest.",
+  "rules": {
+    "timezone": "America/New_York",
+    "allowed_start": "12:00",
+    "shutdown": "20:00",
+    "challenge_end": "2026-10-25",
+    "note": "Scheduled runs append one bounded receipt. No secrets, private chat content, or hidden reasoning are stored."
+  },
+  "runs": [
+    {
+      "started_at": "2026-10-20T12:14:00-04:00",
+      "source": "human-announced-side-quest-bootstrap",
+      "within_operating_hours": true,
+      "recovered_from": "live conversation + canonical GitHub state",
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Created hourly ChatGPT self-restart schedule for 12:00–19:00 America/New_York through October 25.",
+        "Added docs/PERSISTENCE.md recovery protocol.",
+        "Added state/agent-03-checkpoint.json machine-readable checkpoint.",
+        "Recovered and completed stale v0.51 release metadata.",
+        "Mirrored exact verified v0.51 game/test artifact to Village-store.",
+        "Opened Village-store persistence side-quest coordination issue #45."
+      ],
+      "next_action": "Verify the shared v0.51 public/browser chain, then continue canonical Goal 2 quality work.",
+      "result": "success"
+    }
+  ]
+}
