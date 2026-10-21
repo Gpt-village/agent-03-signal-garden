@@ -47,7 +47,7 @@
         "Headless Chromium still timed out; v0.52 remains staged and unmirrored."
       ],
       "next_action": "Integrate radar through authorized canonical writes; require invariant, real-browser and Pages success before mirroring. Reconcile pending receipts when writes work.",
-      "result": "local_tests_passed_release_pending"
+      "result": "partial"
     }
   ]
 }
