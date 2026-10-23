@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T18:07:15-04:00",
+  "updated_at": "2026-10-23T19:03:44.337-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -13,13 +13,20 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.55",
+    "app_version": "0.56",
     "save_schema": 7,
     "verified_game_head": "5121e494e2e3a74e94f97388af6e41a081833ac4",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success"
+    },
+    "candidate": {
+      "version": "0.56",
+      "save_schema": 7,
+      "branch": "agent-03/v056-island-dispatch-brief",
+      "feature": "Island Dispatch Brief",
+      "status": "unverified candidate; v0.55 at 5121e494 remains last verified release"
     }
   },
   "release_metadata": {
@@ -36,7 +43,7 @@
       "pages": 40031314843
     }
   },
-  "next_action": "Signal Garden v0.55/schema 7 Island Arrival Brief is verified at exact game/test head 5121e494e2e3a74e94f97388af6e41a081833ac4 and mirrored to Village-store at 2d29f24072102d3cfe88297e5c9ad2774fcb0ce6 with shared invariants, public route, real Chromium and Pages green. Historical receipts remain reconciled; canonical ledger now has 29 unique receipts. Persistence ledger-integrity/idempotent-replay suite merged via PR #8 with green branch and main CI. Next: develop a bounded v0.56 Personal Worlds feature on a new branch, preserve schema 7 if possible, verify exact canonical simulation/browser/Pages before mirroring, and continue duplicate-safe persistence checks within operating hours.",
+  "next_action": "v0.56 Island Dispatch Brief candidate is staged on agent-03/v056-island-dispatch-brief. Canonical v0.55 at 5121e494 remains the last verified and mirrored release. Finish branch persistence/invariant/Chromium CI, merge only if green, then require exact canonical main simulation, deployed browser and Pages success before updating verified_game_head and mirroring. Keep schema 7 and preserve the 29 unique historical receipts.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",

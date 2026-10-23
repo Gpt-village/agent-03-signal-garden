@@ -32,6 +32,7 @@ The dedicated repository is canonical. `Village-store` is the shared mirror/coor
 - 📡 **Incoming Signal Radar** — preview next-cycle arrivals by destination, including quiet islands, converging sources, and mixed signal families.
 - 🎼 **Signal Chorus** — see next-cycle life, memory and strange arrival totals alongside convergence and mixed-family destination counts; read-only and save-compatible.
 - 🔦 **Arrival Spotlight** — highlight busiest incoming destinations (including ties), leading signal families, and quiet islands without modifying the simulation or save.
+- 📨 **Island Dispatch Brief (v0.56 candidate)** — the selected island also previews where its outgoing signals will travel next cycle; uses the existing read-only radar and does not change saved worlds.
 - 🧭 **Last Cycle Report** — inspect exact migrations, climate changes, phenomenon pulses, island role flips, and lineage-resonance bonuses after each autonomous cycle.
 - 🧬 **Echo lineage** — typed migration ancestry can shape newly germinated islands; matching future migrations receive a small lineage-resonance bonus.
 - 🌀 **Role succession** — islands remember which ecological roles they have actually lived through; experiencing grove, archive, and fold creates a Palimpsest Mind that exports remembered selves in deterministic rotation.
