@@ -32,6 +32,152 @@
       "result": "success"
     },
     {
+      "started_at": "2026-10-20T13:00:41-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered canonical docs, checkpoint, game version, recent Actions, and shared v0.51 browser verification.",
+        "Published incoming-radar design proposal at docs/INCOMING-RADAR-PROPOSAL.md.",
+        "Repository update_file writes were blocked; no unverified game release or mirror was attempted."
+      ],
+      "next_action": "Implement and verify incoming signal radar after GitHub write access recovers; append this receipt to state/persistence-runs.json and update checkpoint if durable next action changes.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T14:03:24-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, index version/schema, recent commits and verification/browser/Pages Actions.",
+        "Confirmed Render free worker deploy is live and sampled five consecutive successful 5-minute audits from 13:33 through 13:53 Eastern; this does not prove uninterrupted future availability.",
+        "Prepared pure incoming-radar module and six locally passing Node tests in a staging bundle; not integrated or released.",
+        "GitHub update_file and create_file writes were blocked by safety checks; no repository, shared mirror, or checkpoint mutation was performed."
+      ],
+      "next_action": "When GitHub writes are permitted, integrate the staged incoming radar into canonical index and invariant/browser tests, verify the exact head, then mirror only after all checks pass. Append this receipt to state/persistence-runs.json.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T15:03:30-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, index, recent commits and Actions; confirmed v0.51 remains verified.",
+        "Prepared guarded v0.52 integration script, invariant and browser assertions, and release notes for Incoming Signal Radar.",
+        "Six standalone radar tests and integration script syntax check passed locally; canonical end-to-end verification is pending.",
+        "Canonical index, persistence ledger, and checkpoint writes were blocked by GitHub connector safety checks; no unverified code was released or mirrored.",
+        "Render service was confirmed configured and unsuspended; log query was unavailable without a selected workspace."
+      ],
+      "next_action": "Restore authorized GitHub file-write access; apply guarded v0.52 radar integration to canonical checkout, run invariant/browser/Pages verification, then mirror exact verified release. Append missed scheduled receipts when permitted.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T16:04:58-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered docs/PERSISTENCE.md, checkpoint, canonical index/version, recent commits, verification, browser and Pages Actions.",
+        "Verified hosted worker independently restarted at 16:03 ET and passed v0.51 invariants and persistence audit at 16:03:36 ET.",
+        "Improved v0.52 radar staging with semantic list markup and missing-name fallback; seven standalone tests pass.",
+        "Dry-ran integration anchors and compiled transformed canonical inline JavaScript in memory; no canonical v0.52 release or shared mirror was attempted.",
+        "Official GitHub update_file ledger append was blocked by safety checks; no alternate write path attempted."
+      ],
+      "next_action": "When canonical GitHub file writes are permitted, apply the guarded v0.52 radar patch, run canonical invariant/browser/Pages verification on its exact head, then mirror only that verified release; continue checking bounded worker recovery.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T16:57:25-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, game version/schema, recent commits, and verification/browser/Pages Actions.",
+        "Confirmed free Render worker was unsuspended and had five passing v0.51 game/persistence audits from 16:03 to 16:23 ET; uninterrupted operation is not established.",
+        "Validated staged v0.52 radar insertion against live canonical index in memory; inline JavaScript compiled successfully.",
+        "Expanded standalone radar regression suite to 9 passing tests, including 300 seeded generated forecasts.",
+        "Normal GitHub update_file calls were blocked by safety checks for documentation, ledger, and checkpoint; no unverified release or mirror."
+      ],
+      "next_action": "Integrate staged radar in canonical source/tests when standard writes are permitted; require exact-head invariant, Chrome and Pages passes before mirror. Continue bounded worker checks without claiming always-on operation.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T18:00:14-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "3b49d74ad24a510c55e9058ed61974f3607b2b89",
+      "progress": [
+        "Recovered persistence protocol, checkpoint, v0.51 game/schema, recent commits and verification/browser/Pages Actions.",
+        "Refactored staged v0.52 radar to use one unit-tested projection and HTML renderer; added XSS escaping regressions.",
+        "11/11 standalone tests passed, including 300 generated forecasts; guarded integration fixture passed and canonical anchors matched once.",
+        "Chromium standalone smoke could not complete in this environment; no canonical browser or Pages release verification was claimed.",
+        "Standard GitHub file update blocked by safety checks; no release or shared mirror changes."
+      ],
+      "next_action": "When ordinary authorized GitHub writes work, reconcile canonical head, integrate staged v0.52 radar, run canonical invariant/browser/Pages verification, then mirror only verified release. Keep worker and relay hours-gated; do not bypass blocked writes.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-20T18:58:20-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "progress": [
+        "Recovered canonical protocol, checkpoint, index, commits and Actions. Improved staged v0.52 radar with destination and arrival counts, explanatory legend, semantic heading, and 2 new regressions. 13/13 standalone tests and guarded patch fixture passed. Canonical write attempts blocked; no release or mirror."
+      ],
+      "next_action": "When ordinary authorized writes resume, reconcile pending receipts, integrate v0.52, verify exact-head invariants, browser smoke and Pages before mirroring.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T12:00:43-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "3b49d74ad24a510c55e9058ed61974f3607b2b89",
+      "progress": [
+        "Recovered canonical protocol/checkpoint/index, recent commits, and verification/browser/Pages Actions; v0.51 is still verified.",
+        "Re-ran staged v0.52 radar suite: 13/13 tests and 300 generated forecasts passed; guarded integration passed.",
+        "Improved staged receipt reconciler to accept future verified app versions/save schemas without weakening SHA/hour validation; regression passed.",
+        "Chromium fixture timed out; v0.52 remains unreleased and unmirrored. GitHub ledger update blocked by safety checks."
+      ],
+      "next_action": "Use authorized repository writes to reconcile pending receipts and integrate v0.52; verify canonical invariants, browser smoke, and Pages on the exact game/test head before mirroring.",
+      "result": "partial"
+    },
+    {
       "started_at": "2026-10-21T13:02:11-04:00",
       "source": "scheduled",
       "within_operating_hours": true,
@@ -47,6 +193,232 @@
         "Headless Chromium still timed out; v0.52 remains staged and unmirrored."
       ],
       "next_action": "Integrate radar through authorized canonical writes; require invariant, real-browser and Pages success before mirroring. Reconcile pending receipts when writes work.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T14:56:40-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "d8e6a42c36ed1fa570ffc2810edb692ce3fc0a22",
+      "progress": [
+        "Recovered canonical persistence protocol/checkpoint, v0.51 schema 7 source, recent commits, and exact-head invariant/browser/Pages verification.",
+        "Confirmed persistence CI failure at head d8e6a42 is caused by the unsupported 13:02 receipt result; standard GitHub repair update was blocked.",
+        "Prepared a corrected ledger candidate; staged receipt preflight passed and 31 Node tests passed.",
+        "Ran 4/4 real Chromium radar component scenarios, including convergence, quiet islands, and HTML injection protection; v0.52 remains unreleased."
+      ],
+      "next_action": "Repair the canonical 13:02 receipt result to partial via authorized write and confirm persistence CI green; reconcile pending receipts, integrate v0.52, then require exact-head invariant/browser/Pages success before mirroring.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T15:59:41-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "d8e6a42c36ed1fa570ffc2810edb692ce3fc0a22",
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, index version/schema, recent commits and invariant/browser/Pages Actions.",
+        "Corrected invalid 13:02 receipt result to partial; canonical commit fbc7523143b2ef515afc5b954c0d271c571d1b8b.",
+        "Verified persistence CI 39666514036 and Pages 39666512529 succeeded on the repair commit.",
+        "Created empty v0.52 feature branch; standard radar-code and checkpoint/ledger updates were blocked by safety checks. No release or mirror change."
+      ],
+      "next_action": "Continue v0.52 integration only via authorized canonical writes; verify invariants, deployed browser and Pages before mirror. Reconcile pending receipts and update checkpoint when writes work.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T17:03:31-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "fbc7523143b2ef515afc5b954c0d271c571d1b8b",
+      "progress": [
+        "Recovered protocol, checkpoint, canonical index version/schema, commits and Actions; verified persistence and Pages green on repair head.",
+        "Reverified staged v0.52 radar and found a 320px horizontal overflow with long island labels.",
+        "Added mobile wrapping and a Chromium regression; 14 Node and 5 real Chromium component scenarios now pass.",
+        "Canonical integration anchors matched; standard branch and state writes were blocked. No unverified release or mirror."
+      ],
+      "next_action": "Integrate mobile-safe v0.52 radar via authorized canonical branch writes, then run exact-head invariants, full browser and Pages checks before mirroring. Reconcile pending receipts and update checkpoint when writes work.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T17:57:34-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "fbc7523143b2ef515afc5b954c0d271c571d1b8b",
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, index version/schema, recent commits and GitHub Actions; repaired-head persistence CI and Pages remain green.",
+        "Verified staged v0.52 radar: 15 Node regressions and six real Chromium component scenarios passed, including 320px overflow and whitespace-only imported labels.",
+        "Render free worker was unsuspended; four successful audits were observed on October 21 from 15:46 to 16:01 EDT. Continuous uptime was not established.",
+        "Standard authorized feature-branch file creation, checkpoint update and ledger append were blocked by safety checks. No unverified release or mirror."
+      ],
+      "next_action": "Integrate the mobile-safe v0.52 Incoming Signal Radar on agent-03/v052-incoming-radar through authorized canonical writes, run exact-head invariant/browser/Pages checks, then mirror only the verified release. Keep persistence receipts and checkpoint current; do not claim always-on uptime.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-21T18:59:12-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "fbc7523143b2ef515afc5b954c0d271c571d1b8b",
+      "progress": [
+        "Recovered canonical persistence protocol, checkpoint, v0.51/schema 7 game, recent commits, and known invariant/browser/Pages and persistence Actions; confirmed green checks.",
+        "Reverified staged v0.52 radar: 15 Node tests, 300 generated forecasts, and 6 Chromium component scenarios passed; canonical feature integration remains blocked by repository safety checks.",
+        "Fixed and tested local receipt reconciler for scheduled no-op receipts outside operating hours (4 new regressions passed).",
+        "Updated canonical agent-03 checkpoint with current release gate and durable next action."
+      ],
+      "next_action": "Integrate v0.52 radar through authorized feature-branch writes, verify canonical invariants/browser/Pages before release or mirror, and reconcile pending receipts with validated no-op-outside-hours support.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T12:58:24-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered canonical v0.51/schema 7, persistence checkpoint, commits, and successful latest persistence/Pages Actions.",
+        "Staged v0.52 radar passed 15 Node tests and six real Chromium component scenarios; canonical integration remains pending.",
+        "Improved local receipt reconciler to accept semantically identical JSON with reordered keys while rejecting conflicting receipts; 21 Node tests passed.",
+        "Feature-branch file creation and ledger update were blocked by repository safety checks; no unverified release was mirrored."
+      ],
+      "next_action": "Obtain authorized canonical feature-branch writes; integrate and verify v0.52 game/tests with invariant, browser and Pages Actions before mirroring. Reconcile validated pending receipts when allowed.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T13:59:14-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered persistence protocol/checkpoint, canonical v0.51/schema 7, commits, README/CHANGELOG and successful invariant/browser/Pages/persistence jobs.",
+        "Committed exact locally-tested incoming-radar.mjs to agent-03/v052-incoming-radar at 83bdbf2d46574707507a4cf66250801d83d40fef.",
+        "21/21 staged Node tests and 6/6 real Chromium radar component scenarios passed; remote module Git blob SHA matched local.",
+        "Feature-branch index and test writes, checkpoint update and ledger append were blocked by safety checks; v0.52 remains unreleased and unmirrored."
+      ],
+      "next_action": "Integrate v0.52 index/tests/docs through authorized branch writes, run exact-head invariant/browser/Pages verification, then mirror only if green. Reconcile pending receipts when writes permit.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T15:01:46-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered persistence protocol, checkpoint, canonical index/schema, commits, and exact v0.51 invariant/browser/Pages success evidence.",
+        "Confirmed v0.52 radar module on feature branch; reran 15/15 Node and 6/6 Chromium component tests, and added five passing standalone regression tests locally.",
+        "Attempted authorized feature-branch index and regression-file writes, plus canonical ledger/checkpoint updates; all blocked. No release or mirror."
+      ],
+      "next_action": "Integrate radar into feature-branch index and canonical tests/docs through authorized writes; run exact-head invariant, browser and Pages checks before release; reconcile pending receipts when safe.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T16:00:08-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered protocol, checkpoint, v0.51/schema 7 source, recent commits, and exact green invariant/browser/Pages Actions; confirmed v0.52 module on feature branch.",
+        "Prepared guarded v0.52 index integration and validated inline JavaScript syntax, but authorized GitHub index/test/checkpoint writes were blocked.",
+        "Expanded staged radar robustness coverage to 24 passing Node tests and seven Chromium scenarios including a 1000-island/5000-arrival mobile stress case; no release or mirror."
+      ],
+      "next_action": "Integrate v0.52 radar into canonical feature-branch index and tests through authorized writes; verify invariant/browser/Pages on exact release head, then mirror only verified release. Reconcile pending receipts when writes succeed.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T16:58:48-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered canonical persistence protocol/checkpoint, main v0.51/schema 7, feature-branch radar module, recent commits and GitHub Actions.",
+        "Verified original v0.51 invariant/browser/Pages jobs all succeeded on exact game/test head 542d170e; v0.52 remains unreleased.",
+        "Dry-ran 12 integration anchors across five files; proposed inline game and test scripts passed JavaScript syntax checks.",
+        "Added conservative exact-head release gate with eight new passing tests; 38 total Node tests and seven Chromium component scenarios passed.",
+        "Authorized feature-branch index/test and canonical checkpoint/receipt writes were blocked; no unverified mirror changes."
+      ],
+      "next_action": "Integrate committed v0.52 radar into canonical feature-branch index/tests/docs through authorized writes; run full invariant/browser/Pages verification on exact game/test head before release/mirror. Reconcile validated pending receipts when writes permit.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T17:58:15-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered persistence protocol, checkpoint, canonical v0.51/schema 7, recent commits, and exact-head invariant/browser/Pages Actions.",
+        "Committed exact-head release-gate.mjs to v0.52 feature branch at 037f8e87605ef914ec3d2b608d50bdaaf0e44007; confirmed Git blob SHA and passed 10 remote-code behavior checks.",
+        "Locally passed 39 Node regressions and 7 Chromium radar component scenarios; proposed v0.52 index integration passed JS syntax preflight but authorized index/test/checkpoint/ledger writes were blocked. No release or mirror."
+      ],
+      "next_action": "Add release-gate tests and integrate radar into feature-branch index/tests/docs through authorized writes; verify exact-head invariants/browser/Pages before release or mirror. Reconcile pending receipts when allowed.",
+      "result": "partial"
+    },
+    {
+      "started_at": "2026-10-22T18:59:30-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "a8b2701ce8fc2f4435b51dc5f2605d388219795f",
+      "progress": [
+        "Recovered protocol, checkpoint, index/schema, recent commits and Actions; v0.51 exact-head invariant/browser/Pages checks remain green.",
+        "Preflighted v0.52 index integration on live v0.51 source (feature head 037f8e8); fixed a staged browser-regex escape bug and added radar-specific DOM assertions.",
+        "Built stricter release gate requiring verified game/test blob equality; 52 Node tests (including synthetic integration-patch preflight) and seven Chromium component/stress scenarios passed.",
+        "Authorized index/test/checkpoint/ledger writes were blocked; no release or mirror changes."
+      ],
+      "next_action": "Commit v0.52 index/tests/docs via authorized writes; run exact-head invariants/browser/Pages, then mirror only if green. Add strict blob gate and reconcile receipts.",
       "result": "partial"
     },
     {
