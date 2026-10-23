@@ -106,6 +106,9 @@ try{
   const initialForecast=await evaluate("document.getElementById('cycleForecast').textContent");
   assert.match(initialForecast,/Cycle 2 · Quiet/,"fresh garden should forecast cycle 2 Quiet");
   assert.match(initialForecast,/Focus would recover to 8\/8/);
+  assert.match(initialForecast,/Incoming signal radar/,"fresh browser should show destination-first radar");
+  assert.match(initialForecast,/No incoming signals planned/,"fresh browser should show quiet islands");
+  assert.match(initialForecast,/0 of 4 islands expect 0 arrivals next cycle/,"fresh browser radar should summarize empty arrivals");
 
 
   const reducedPreference=await evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches");
@@ -420,6 +423,14 @@ try{
   const linkedForecast=await evaluate("document.getElementById('cycleForecast').innerText");
   assert.match(linkedForecast,/Planned exports/);
   assert.match(linkedForecast,/→/,"opened linked-garden forecast should name at least one planned migration route");
+  assert.match(linkedForecast,/Incoming signal radar/,"linked garden should show incoming radar");
+  assert.match(linkedForecast,/→ (life|memory|strange)/,"linked radar should show typed arrivals");
+  assert.match(linkedForecast,/[0-9]+ of [0-9]+ islands expect [0-9]+ arrivals? next cycle/,"linked radar should summarize expected arrivals");
+  const radarDom=await evaluate("(() => { const el=document.querySelector('#cycleForecast section[aria-label]'); return el ? {label:el.getAttribute('aria-label'), rows:el.querySelectorAll('li').length, text:el.innerText} : null; })()");
+  assert.ok(radarDom,"radar must exist as its own accessible region");
+  assert.equal(radarDom.label,"Incoming signal radar");
+  assert.equal(radarDom.rows,4,"radar should list all four islands, including quiet destinations");
+  assert.match(radarDom.text,/2 of 4 islands expect 2 arrivals next cycle/,"radar should summarize the two directed migrations");
 
 
   await evaluate("document.getElementById('restBtn').click()");
