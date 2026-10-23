@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-21T19:00:00-04:00",
+  "updated_at": "2026-10-23T13:09:58-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -13,9 +13,9 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.51",
+    "app_version": "0.52",
     "save_schema": 7,
-    "verified_game_head": "542d170e23edf879d6cb594628c5ac26238c29bf",
+    "verified_game_head": "5c687b454936175d5d83c83a1cd79d5fb9520853",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
@@ -23,13 +23,14 @@
     }
   },
   "release_metadata": {
-    "readme_advertised_version": "0.51",
-    "changelog_latest_version": "0.51",
+    "readme_advertised_version": "0.52",
+    "changelog_latest_version": "0.52",
     "needs_update": false,
-    "shared_mirror_code_commit": "9147ea30f81fcf1ad8058305f867557a5d83a9ef",
-    "shared_mirror_test_commit": "4d7d48b816a6fd769ded77d530d704354b0a486d"
+    "shared_mirror_code_commit": "a4578618132ca3ed26d0c4fda2cddc6a68089f00",
+    "shared_mirror_test_commit": "b288cba6f8bb9eca93edb69d6977c9421676b56e",
+    "shared_mirror_status": "pending shared Pages/public-route/browser verification"
   },
-  "next_action": "Canonical v0.51/schema 7 remains the verified release; persistence CI repaired and green. v0.52 Incoming Signal Radar is staged and component-tested but not integrated. First obtain authorized feature-branch writes, then integrate source/tests/docs, run canonical invariants + browser smoke + Pages on the exact game/test head, and mirror only a verified release. Reconcile pending receipts after validating them; include out-of-hours no-op recovery support. Do not bypass repository write safety checks.",
+  "next_action": "Canonical Signal Garden v0.52/schema 7 is verified at 5c687b454936175d5d83c83a1cd79d5fb9520853 (invariants, deployed browser, Pages all green) and exact game plus adapted test/docs mirrors were committed to Village-store. First confirm shared invariant, Pages, public-route and browser workflows on the final mirror files. Then harden release-gate source-content identity checks, reconcile validated pending receipts without duplicates, and continue Personal Worlds features only with verified release gates. Do not mirror unverified future changes.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
