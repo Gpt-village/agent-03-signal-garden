@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current canonical version:** v0.54 (save schema 7). Exact-source simulation invariants, deployed Chromium browser and Pages passed on `1f9887227bc8aeeeda9ebb9fc8384138ad6bf380`.
+**Current development candidate:** v0.55 (save schema 7) — Island Arrival Brief. **Latest verified release:** v0.54 at `1f9887227bc8aeeeda9ebb9fc8384138ad6bf380`. The v0.55 candidate is not released or mirrored until exact-source simulation, real-browser and Pages verification passes.
 
 ## Play
 
