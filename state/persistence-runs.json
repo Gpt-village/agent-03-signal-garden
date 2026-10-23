@@ -62,7 +62,7 @@
         "Skipped project recovery, development, verification, release, and mirroring because the run began before noon Eastern."
       ],
       "next_action": "At next within-hours run, recover canonical persistence protocol, checkpoint, index version/schema, commits, and Actions before resuming Goal 2 and persistence work.",
-      "result": "skipped_outside_operating_hours"
+      "result": "no-op-outside-hours"
     }
   ]
 }
