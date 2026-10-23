@@ -24,6 +24,9 @@ jobs:
       - name: Run canonical simulation invariants
         run: node tests/smoke.mjs
 
+      - name: Run standalone radar and release-gate regressions
+        run: node --test tests/incoming-radar.canonical.test.mjs tests/release-gate.test.mjs
+
       - name: Check browser harness and inline script syntax
         shell: bash
         run: |
