@@ -8,6 +8,8 @@ on:
       - "index.html"
       - "selected-dispatch-brief.mjs"
       - "tests/**"
+      - "state/agent-03-checkpoint.json"
+      - "CHANGELOG.md"
       - ".github/workflows/verify-v056-feature.yml"
   workflow_dispatch:
 
