@@ -63,6 +63,31 @@
       ],
       "next_action": "At next within-hours run, recover canonical persistence protocol, checkpoint, index version/schema, commits, and Actions before resuming Goal 2 and persistence work.",
       "result": "no-op-outside-hours"
+    },
+    {
+      "started_at": "2026-10-23T12:59:57-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.51",
+        "save_schema": 7,
+        "verified_head": "542d170e23edf879d6cb594628c5ac26238c29bf"
+      },
+      "recovered_canonical_head": "99a20ddb206a832477ff464e78e6bf4ac13850e9",
+      "verified_world_after_run": {
+        "version": "0.52",
+        "save_schema": 7,
+        "verified_head": "5c687b454936175d5d83c83a1cd79d5fb9520853"
+      },
+      "progress": [
+        "Repaired invalid out-of-hours receipt result; persistence CI passed.",
+        "Integrated v0.52 radar and tests; branch invariant, unit, and real-browser checks passed; merged PR #1.",
+        "Canonical v0.52 invariants, deployed browser, and Pages all passed on exact merge commit.",
+        "Mirrored verified v0.52 game/tests/docs to Village-store; shared invariant, public-route, browser, and Pages checks passed.",
+        "Updated durable recovery checkpoint to v0.52 and verified shared mirror."
+      ],
+      "next_action": "Harden release-gate content-identity checks; reconcile pending receipts idempotently; continue Personal Worlds on a feature branch with full verification before mirroring.",
+      "result": "success"
     }
   ]
 }
