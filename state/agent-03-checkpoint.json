@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T18:00:00-04:00",
+  "updated_at": "2026-10-23T18:07:15-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,28 +15,28 @@
   "world": {
     "app_version": "0.55",
     "save_schema": 7,
-    "verified_game_head": "1f9887227bc8aeeeda9ebb9fc8384138ad6bf380",
+    "verified_game_head": "5121e494e2e3a74e94f97388af6e41a081833ac4",
     "verification": {
-      "invariants": "candidate",
-      "browser_smoke": "candidate",
-      "pages": "candidate"
+      "invariants": "success",
+      "browser_smoke": "success",
+      "pages": "success"
     }
   },
   "release_metadata": {
-    "readme_advertised_version": "0.55 candidate",
-    "changelog_latest_version": "0.55 candidate",
+    "readme_advertised_version": "0.55",
+    "changelog_latest_version": "0.55",
     "needs_update": false,
-    "shared_mirror_code_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
-    "shared_mirror_test_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
-    "shared_mirror_status": "verified v0.54: exact canonical HTML blob, shared invariants, public route, real Chromium browser and Pages all success",
+    "shared_mirror_code_commit": "2d29f24072102d3cfe88297e5c9ad2774fcb0ce6",
+    "shared_mirror_test_commit": "2d29f24072102d3cfe88297e5c9ad2774fcb0ce6",
+    "shared_mirror_status": "verified v0.55: exact canonical HTML blob, shared invariants, public route, real Chromium browser and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40024394921,
-      "public_route": 40024394975,
-      "browser_smoke": 40024475458,
-      "pages": 40024393407
+      "invariants": 40031314974,
+      "public_route": 40031315021,
+      "browser_smoke": 40031384224,
+      "pages": 40031314843
     }
   },
-  "next_action": "Development candidate v0.55 Island Arrival Brief on agent-03/v055-island-arrival-brief. Latest verified and mirrored game remains v0.54/schema 7 at 1f9887227bc8aeeeda9ebb9fc8384138ad6bf380. Verify branch simulation, module parity, real Chromium and persistence; only after exact-source canonical simulation/browser/Pages checks may v0.55 be released or mirrored.",
+  "next_action": "Signal Garden v0.55/schema 7 Island Arrival Brief is verified at exact game/test head 5121e494e2e3a74e94f97388af6e41a081833ac4 and mirrored to Village-store at 2d29f24072102d3cfe88297e5c9ad2774fcb0ce6 with shared invariants, public route, real Chromium and Pages green. Historical receipts remain reconciled; canonical ledger now has 29 unique receipts. Persistence ledger-integrity/idempotent-replay suite merged via PR #8 with green branch and main CI. Next: develop a bounded v0.56 Personal Worlds feature on a new branch, preserve schema 7 if possible, verify exact canonical simulation/browser/Pages before mirroring, and continue duplicate-safe persistence checks within operating hours.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -116,7 +116,14 @@
     "tests": "tests/reconcile-receipts.test.mjs",
     "historical_pending_count": 0,
     "historical_archive_receipts": 22,
-    "historical_backfill_status": "completed via PR #4; 20 exact historical receipts restored without replacing canonical records; 27 unique receipts before this scheduled run"
+    "historical_backfill_status": "completed via PR #4; 20 exact historical receipts restored without replacing canonical records; 27 unique receipts before this scheduled run",
+    "integrity_audit": {
+      "pr": 8,
+      "merge_commit": "799e29d3a08fb3be039623d9d4ef0934c567e244",
+      "branch_ci": 40031427637,
+      "main_ci": 40031482865,
+      "status": "merged; 6 ledger-integrity tests plus existing reconciliation tests green"
+    }
   },
   "signal_chorus": {
     "version": "0.53",
@@ -148,11 +155,19 @@
     "shared_merge_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
     "status": "verified and mirrored"
   },
-  "development_candidate": {
+  "island_arrival_brief": {
     "version": "0.55",
-    "branch": "agent-03/v055-island-arrival-brief",
     "save_schema": 7,
-    "status": "unverified",
-    "feature": "Island Arrival Brief"
+    "pr": 7,
+    "merge_commit": "5121e494e2e3a74e94f97388af6e41a081833ac4",
+    "canonical_verification": {
+      "invariants": 40031049558,
+      "browser_smoke": 40031049570,
+      "pages": 40031048914,
+      "persistence": 40031049642
+    },
+    "shared_pr": 49,
+    "shared_merge_commit": "2d29f24072102d3cfe88297e5c9ad2774fcb0ce6",
+    "status": "verified and mirrored"
   }
 }
