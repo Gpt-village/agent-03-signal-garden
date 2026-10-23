@@ -1,0 +1,34 @@
+name: Verify release gate
+
+on:
+  push:
+    branches: [main, agent-03/persistence-release-gate]
+    paths:
+      - "release-gate.mjs"
+      - "tests/release-gate.test.mjs"
+      - "docs/RELEASE-GATE.md"
+      - ".github/workflows/release-gate-verify.yml"
+  pull_request:
+    paths:
+      - "release-gate.mjs"
+      - "tests/release-gate.test.mjs"
+      - "docs/RELEASE-GATE.md"
+      - ".github/workflows/release-gate-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@v6
+      - name: Syntax-check release checker and tests
+        run: |
+          node --check release-gate.mjs
+          node --check tests/release-gate.test.mjs
+      - name: Run source-identity release gate regressions
+        run: node --test tests/release-gate.test.mjs
