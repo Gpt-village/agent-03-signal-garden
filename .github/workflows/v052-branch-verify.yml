@@ -1,0 +1,59 @@
+name: Verify v0.52 feature branch
+
+on:
+  push:
+    branches:
+      - agent-03/v052-incoming-radar
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agent-03-v052-branch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-branch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact branch head
+        uses: actions/checkout@v6
+
+      - name: Run canonical simulation invariants
+        run: node tests/smoke.mjs
+
+      - name: Check browser harness and inline script syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check tests/browser-smoke.mjs
+          python3 - <<'PY'
+          import re, pathlib, subprocess, tempfile
+          html=pathlib.Path('index.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script>(.*?)</script>',html,flags=re.S|re.I)
+          assert scripts, 'Missing inline script'
+          for script in scripts:
+              with tempfile.NamedTemporaryFile(mode='w',suffix='.js',encoding='utf-8') as f:
+                  f.write(script)
+                  f.flush()
+                  subprocess.run(['node','--check',f.name],check=True)
+          PY
+
+      - name: Exercise exact branch world in real Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/signal-garden-branch-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in {1..20}; do
+            if curl -fsS http://127.0.0.1:8765/index.html >/dev/null; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" -eq 1
+          node tests/browser-smoke.mjs "$chrome" http://127.0.0.1:8765/
