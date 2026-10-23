@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.52 — Incoming Signal Radar
+
+- Adds a destination-first next-cycle arrival forecast alongside planned exports.
+- Lists islands with no arrivals; identifies multi-source convergence and mixed signal families.
+- Escapes imported island names and wraps long labels for narrow mobile layouts.
+- Reuses the existing deterministic forecast without changing simulation behavior or save schema (still 7).
+- Adds canonical invariant and Chromium coverage for empty, linked, and convergent forecasts.
+- Release rule: verify exact game/test source with simulation invariants, real-browser checks, and Pages before mirroring.
+
+
 ## v0.51 — Next-cycle forecast
 
 - Added a collapsible **Next cycle forecast** to the Actions surface.
