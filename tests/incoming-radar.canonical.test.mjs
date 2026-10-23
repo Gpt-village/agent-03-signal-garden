@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildIncomingRadar, renderIncomingRadar} from '../incoming-radar.mjs';
+import {buildIncomingRadar, summarizeIncomingRadar, renderIncomingRadar} from '../incoming-radar.mjs';
 
 const island = (id, name=`Island ${id}`) => ({id, name});
 
@@ -51,4 +51,36 @@ test('empty archipelago and singular arrival have accurate summaries', () => {
   assert.match(renderIncomingRadar(buildIncomingRadar([],[])),/0 of 0 islands expect 0 arrivals/);
   const rows=buildIncomingRadar([island(0),island(1)],[{from:0,to:1,type:'life'}]);
   assert.match(renderIncomingRadar(rows),/1 of 2 islands expect 1 arrival next cycle/);
+});
+
+test('signal chorus tallies every family and convergent destination without mutating projection', () => {
+  const islands=[island(0,'A'),island(1,'B'),island(2,'C'),island(3,'Quiet')];
+  const rows=buildIncomingRadar(islands,[
+    {from:0,to:2,type:'life'}, {from:1,to:2,type:'memory'},
+    {from:2,to:0,type:'strange'}
+  ]);
+  const before=JSON.stringify(rows);
+  const tally=summarizeIncomingRadar(rows);
+  assert.deepEqual(tally,{
+    islands:4,active:2,arrivals:3,
+    families:{life:1,memory:1,strange:1},
+    convergences:1,mixed:1
+  });
+  assert.equal(JSON.stringify(rows),before,'chorus must not mutate projection');
+  const html=renderIncomingRadar(rows);
+  assert.match(html,/Signal chorus: life 1, memory 1, strange 1/);
+  assert.match(html,/1 convergence destinations; 1 mixed-family destinations/);
+});
+
+test('quiet and repeated-family signals remain accurately counted', () => {
+  const empty=buildIncomingRadar([island(0)],[]);
+  assert.deepEqual(summarizeIncomingRadar(empty).families,{life:0,memory:0,strange:0});
+  const rows=buildIncomingRadar([island(0),island(1),island(2)],[
+    {from:0,to:2,type:'life'}, {from:1,to:2,type:'life'}, {from:99,to:2,type:'memory'}
+  ]);
+  const tally=summarizeIncomingRadar(rows);
+  assert.equal(tally.arrivals,2);
+  assert.deepEqual(tally.families,{life:2,memory:0,strange:0});
+  assert.equal(tally.convergences,1);
+  assert.equal(tally.mixed,0);
 });

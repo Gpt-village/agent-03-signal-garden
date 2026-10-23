@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.53 — Signal Chorus (candidate; not yet released)
+
+- Adds an accessible next-cycle signal-family composition summary to Incoming Signal Radar.
+- Counts life, memory and strange arrivals, convergent destinations, and mixed-family destinations using the existing read-only forecast.
+- Adds pure-module, canonical invariant and Chromium assertions; no save-schema or simulation-rule change (schema 7).
+- Release is gated on exact-source invariant, deployed-browser and Pages success; do not mirror the candidate before verification.
+
+
 ## v0.52 — Incoming Signal Radar
 
 - Adds a destination-first next-cycle arrival forecast alongside planned exports.

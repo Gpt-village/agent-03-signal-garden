@@ -1,0 +1,41 @@
+name: Verify v0.53 Signal Chorus candidate
+
+on:
+  push:
+    branches:
+      - agent-03/v053-signal-chorus
+    paths:
+      - "index.html"
+      - "incoming-radar.mjs"
+      - "tests/**"
+      - ".github/workflows/verify-v053-feature.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify canonical simulation invariants
+        run: node tests/smoke.mjs
+      - name: Verify pure radar module
+        run: node --test tests/incoming-radar.canonical.test.mjs
+      - name: Verify browser harness syntax
+        run: node --check tests/browser-smoke.mjs
+      - name: Verify inline game script syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          scripts = re.findall(r'<script>(.*?)</script>',Path('index.html').read_text(),flags=re.S|re.I)
+          assert scripts
+          for script in scripts:
+              with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False) as f:
+                  f.write(script)
+                  name=f.name
+              subprocess.run(['node','--check',name],check=True)
+          print('Inline game syntax verified')
+          PY
