@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.55 — Island Arrival Brief (development candidate)
+
+- Adds a read-only, selected-island next-cycle outlook to the island card, derived from the existing destination-first radar.
+- Names the selected island's planned source islands and signal families; shows quiet islands and convergence/mixed-family indicators.
+- Uses textContent for imported names, avoiding HTML injection, and does not create an additional live announcement.
+- Includes pure-module, canonical invariant and real-Chromium candidate tests. Save schema remains 7.
+- **Candidate only:** no canonical release or shared mirror until exact-source checks pass.
+
 ## v0.54 — Arrival Spotlight
 
 - Adds a read-only forecast spotlight naming busiest incoming destinations, tied leaders, leading signal families, and quiet destinations.
