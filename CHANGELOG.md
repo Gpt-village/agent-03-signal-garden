@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.56 — Island Dispatch Brief
+
+- Adds a read-only selected-island next-cycle outgoing dispatch beside the incoming outlook.
+- Shows each planned export's destination and signal family, including quiet/unselected states.
+- Derives departures from the same validated incoming radar; imported names use textContent, not HTML.
+- Adds pure-module, canonical invariant and real-browser candidate coverage. Save schema remains 7; no simulation-rule change.
+- Release verification pending exact canonical invariant, deployed Chromium and Pages success.
+
 ## v0.55 — Island Arrival Brief
 
 - Adds a read-only, selected-island next-cycle outlook to the island card, derived from the existing destination-first radar.
