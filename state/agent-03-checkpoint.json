@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T13:09:58-04:00",
+  "updated_at": "2026-10-23T13:11:11-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -28,9 +28,15 @@
     "needs_update": false,
     "shared_mirror_code_commit": "a4578618132ca3ed26d0c4fda2cddc6a68089f00",
     "shared_mirror_test_commit": "b288cba6f8bb9eca93edb69d6977c9421676b56e",
-    "shared_mirror_status": "pending shared Pages/public-route/browser verification"
+    "shared_mirror_status": "verified: shared invariants, public route, real browser and Pages all success",
+    "shared_mirror_verification": {
+      "invariants": 39992793492,
+      "public_route": 39992793563,
+      "browser_smoke": 39992825085,
+      "pages": 39992793801
+    }
   },
-  "next_action": "Canonical Signal Garden v0.52/schema 7 is verified at 5c687b454936175d5d83c83a1cd79d5fb9520853 (invariants, deployed browser, Pages all green) and exact game plus adapted test/docs mirrors were committed to Village-store. First confirm shared invariant, Pages, public-route and browser workflows on the final mirror files. Then harden release-gate source-content identity checks, reconcile validated pending receipts without duplicates, and continue Personal Worlds features only with verified release gates. Do not mirror unverified future changes.",
+  "next_action": "v0.52/schema 7 is verified on canonical main at 5c687b454936175d5d83c83a1cd79d5fb9520853 and mirrored to Village-store with green shared invariants, public route, real-browser smoke, and Pages. Next: strengthen release-gate source-content identity checks, reconcile validated pending scheduled receipts idempotently, and continue Personal Worlds enhancements on a feature branch. Verify every future game/test head before mirroring; preserve operating hours and secrets boundary.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
