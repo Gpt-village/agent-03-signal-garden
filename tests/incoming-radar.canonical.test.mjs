@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildIncomingRadar, summarizeIncomingRadar, renderIncomingRadar} from '../incoming-radar.mjs';
+import {buildIncomingRadar, summarizeIncomingRadar, summarizeArrivalSpotlight, renderIncomingRadar} from '../incoming-radar.mjs';
 
 const island = (id, name=`Island ${id}`) => ({id, name});
 
@@ -83,4 +83,43 @@ test('quiet and repeated-family signals remain accurately counted', () => {
   assert.deepEqual(tally.families,{life:2,memory:0,strange:0});
   assert.equal(tally.convergences,1);
   assert.equal(tally.mixed,0);
+});
+
+
+test('arrival spotlight handles a fully quiet world without inventing leaders', () => {
+  const rows=buildIncomingRadar([island(0,'A'),island(1,'B')],[]);
+  const before=JSON.stringify(rows);
+  assert.deepEqual(summarizeArrivalSpotlight(rows),{
+    peak:0,busiest:[],quiet:2,familyPeak:0,leadingFamilies:[]
+  });
+  assert.equal(JSON.stringify(rows),before);
+  assert.match(renderIncomingRadar(rows),/Arrival spotlight: all 2 destinations are quiet; no arrivals expected/);
+});
+
+test('arrival spotlight preserves tied destinations and leading families in source order', () => {
+  const islands=[island(0,'A'),island(1,'B'),island(2,'C'),island(3,'D'),island(4,'E')];
+  const transfers=[
+    {from:0,to:2,type:'life'}, {from:1,to:2,type:'memory'},
+    {from:0,to:3,type:'life'}, {from:1,to:3,type:'memory'}
+  ];
+  const rows=buildIncomingRadar(islands,transfers);
+  const before=JSON.stringify(rows);
+  assert.deepEqual(summarizeArrivalSpotlight(rows),{
+    peak:2,busiest:['C','D'],quiet:3,familyPeak:2,leadingFamilies:['life','memory']
+  });
+  assert.equal(JSON.stringify(rows),before);
+  assert.match(renderIncomingRadar(rows),/busiest destinations: C, D \(2 arrivals each\)/);
+  assert.match(renderIncomingRadar(rows),/leading families: life, memory \(2 each\); quiet destinations: 3/);
+});
+
+test('spotlight names are escaped and invalid transfers never create phantom leaders', () => {
+  const rows=buildIncomingRadar([island(0,'A'),island(1,'<script>alert(1)</script>')],[
+    {from:0,to:1,type:'strange'}, {from:99,to:1,type:'life'}
+  ]);
+  const spotlight=summarizeArrivalSpotlight(rows);
+  assert.equal(spotlight.peak,1);
+  assert.deepEqual(spotlight.leadingFamilies,['strange']);
+  const html=renderIncomingRadar(rows);
+  assert.ok(!html.includes('<script>alert(1)</script>'));
+  assert.match(html,/busiest destination: &lt;script&gt;alert\(1\)&lt;\/script&gt; \(1 arrival each\)/);
 });

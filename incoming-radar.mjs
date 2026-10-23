@@ -44,6 +44,17 @@ export function summarizeIncomingRadar(rows) {
 }
 
 /** Safe HTML view: all user-/save-derived names are escaped before insertion. */
+/** Read-only, tie-preserving summary of the next-cycle arrival leaders. */
+export function summarizeArrivalSpotlight(rows) {
+  const peak = rows.reduce((max, row) => Math.max(max, row.incoming.length), 0);
+  const busiest = peak ? rows.filter(row => row.incoming.length === peak).map(row => row.name) : [];
+  const quiet = rows.filter(row => row.incoming.length === 0).length;
+  const families = summarizeIncomingRadar(rows).families;
+  const familyPeak = Math.max(families.life, families.memory, families.strange);
+  const leadingFamilies = familyPeak ? ['life', 'memory', 'strange'].filter(type => families[type] === familyPeak) : [];
+  return {peak, busiest, quiet, familyPeak, leadingFamilies};
+}
+
 export function renderIncomingRadar(rows) {
   function escapeHtml(value) {
     return String(value).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -51,10 +62,20 @@ export function renderIncomingRadar(rows) {
   const tally = summarizeIncomingRadar(rows);
   const summary = `${tally.active} of ${tally.islands} islands expect ${tally.arrivals} ${tally.arrivals === 1 ? 'arrival' : 'arrivals'} next cycle.`;
   const chorus = `Signal chorus: life ${tally.families.life}, memory ${tally.families.memory}, strange ${tally.families.strange}. ${tally.convergences} convergence destinations; ${tally.mixed} mixed-family destinations.`;
+  const spotlight = summarizeArrivalSpotlight(rows);
+  const spotlightText = spotlight.peak
+    ? 'Arrival spotlight: busiest ' + (spotlight.busiest.length === 1 ? 'destination' : 'destinations') +
+      ': ' + spotlight.busiest.map(escapeHtml).join(', ') + ' (' + spotlight.peak +
+      ' ' + (spotlight.peak === 1 ? 'arrival' : 'arrivals') + ' each); leading ' +
+      (spotlight.leadingFamilies.length === 1 ? 'family' : 'families') + ': ' +
+      spotlight.leadingFamilies.join(', ') + ' (' + spotlight.familyPeak +
+      ' each); quiet destinations: ' + spotlight.quiet + '.'
+    : 'Arrival spotlight: all ' + spotlight.quiet + ' destinations are quiet; no arrivals expected.';
+
   return '<section class="discovery" aria-label="Incoming signal radar" style="overflow-wrap:anywhere">' +
     '<h3>Incoming signal radar</h3><p class="small">' + summary +
     ' Convergence means signals from multiple source islands; mixed families means different signal types.</p>' +
-    '<p class="small">' + chorus + '</p><ul>' +
+    '<p class="small">' + chorus + '</p><p class="small">' + spotlightText + '</p><ul>' +
     rows.map(row => {
       const arrivals = row.incoming.length
         ? row.incoming.map(entry => escapeHtml(entry.source) + ' → ' + escapeHtml(entry.type)).join('; ')
