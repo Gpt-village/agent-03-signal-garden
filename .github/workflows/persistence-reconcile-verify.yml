@@ -1,0 +1,33 @@
+name: Verify persistence receipt reconciliation
+
+on:
+  push:
+    branches: [main, agent-03/persistence-ledger-reconcile]
+    paths:
+      - "persistence/reconcile-receipts.mjs"
+      - "tests/reconcile-receipts.test.mjs"
+      - ".github/workflows/persistence-reconcile-verify.yml"
+  pull_request:
+    paths:
+      - "persistence/reconcile-receipts.mjs"
+      - "tests/reconcile-receipts.test.mjs"
+      - ".github/workflows/persistence-reconcile-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check reconciliation module syntax
+        run: |
+          node --check persistence/reconcile-receipts.mjs
+          node --check tests/reconcile-receipts.test.mjs
+      - name: Run deterministic reconciliation tests
+        run: node --test tests/reconcile-receipts.test.mjs
+      - name: Check existing canonical ledger compatibility
+        run: node persistence/reconcile-receipts.mjs state/persistence-runs.json state/persistence-runs.json
