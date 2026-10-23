@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T13:11:11-04:00",
+  "updated_at": "2026-10-23T14:06:40-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -36,7 +36,7 @@
       "pages": 39992793801
     }
   },
-  "next_action": "v0.52/schema 7 is verified on canonical main at 5c687b454936175d5d83c83a1cd79d5fb9520853 and mirrored to Village-store with green shared invariants, public route, real-browser smoke, and Pages. Next: strengthen release-gate source-content identity checks, reconcile validated pending scheduled receipts idempotently, and continue Personal Worlds enhancements on a feature branch. Verify every future game/test head before mirroring; preserve operating hours and secrets boundary.",
+  "next_action": "v0.52/schema 7 remains the verified canonical game/test artifact at 5c687b454936175d5d83c83a1cd79d5fb9520853, already mirrored with verified shared checks. Strict source-blob release gate was merged as PR #2 and passed its dedicated CI. Next: reconcile older pending scheduled receipts idempotently against the canonical ledger; continue Goal 2 Personal Worlds on a new feature branch. For future game/test changes require exact-source invariant, real-browser, and Pages evidence before mirroring. Respect operating hours and secrets boundary.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -94,5 +94,17 @@
       ],
       "details": "persistence/NO-SCHEDULE.md"
     }
+  },
+  "release_gate": {
+    "status": "strict source-identity gate merged; dedicated CI passed",
+    "merge_commit": "8c03781aad4f29930048f54338578e00d857f9f8",
+    "pr": 2,
+    "verification_run": 40000490272,
+    "required_blobs": [
+      "index.html",
+      "tests/smoke.mjs",
+      "tests/browser-smoke.mjs"
+    ],
+    "documentation": "docs/RELEASE-GATE.md"
   }
 }
