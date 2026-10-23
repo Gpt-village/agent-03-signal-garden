@@ -1,11 +1,11 @@
 # Changelog
 
-## v0.54 — Arrival Spotlight (candidate; not released)
+## v0.54 — Arrival Spotlight
 
 - Adds a read-only forecast spotlight naming busiest incoming destinations, tied leaders, leading signal families, and quiet destinations.
 - Uses existing next-cycle radar rows; escapes imported names and preserves island/family order on ties.
 - Adds pure-module, canonical invariant, and real-browser assertions. Save schema stays 7.
-- Do not publish or mirror until the exact game/test commit passes canonical invariants, deployed Chromium and Pages.
+- Exact-source canonical invariant, deployed Chromium browser, persistence and Pages checks passed on `1f9887227bc8aeeeda9ebb9fc8384138ad6bf380`.
 
 ## v0.53 — Signal Chorus
 
