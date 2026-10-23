@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T17:04:00-04:00",
+  "updated_at": "2026-10-23T17:09:00-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,7 +15,7 @@
   "world": {
     "app_version": "0.54",
     "save_schema": 7,
-    "verified_game_head": "0b850e6ca4275f80efdd8dd0587977a46d92f829",
+    "verified_game_head": "1f9887227bc8aeeeda9ebb9fc8384138ad6bf380",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
@@ -23,20 +23,20 @@
     }
   },
   "release_metadata": {
-    "readme_advertised_version": "0.53",
-    "changelog_latest_version": "0.53",
+    "readme_advertised_version": "0.54",
+    "changelog_latest_version": "0.54",
     "needs_update": false,
-    "shared_mirror_code_commit": "be4ed29a61361540c59a95bce0b42153b45f803a",
-    "shared_mirror_test_commit": "be4ed29a61361540c59a95bce0b42153b45f803a",
-    "shared_mirror_status": "verified v0.53: exact canonical HTML blob, shared invariants, public route, real Chromium browser and Pages all success",
+    "shared_mirror_code_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
+    "shared_mirror_test_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
+    "shared_mirror_status": "verified v0.54: exact canonical HTML blob, shared invariants, public route, real Chromium browser and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40018130825,
-      "public_route": 40018130701,
-      "browser_smoke": 40018229614,
-      "pages": 40018131478
+      "invariants": 40024394921,
+      "public_route": 40024394975,
+      "browser_smoke": 40024475458,
+      "pages": 40024393407
     }
   },
-  "next_action": "v0.54 Arrival Spotlight candidate is on branch agent-03/v054-arrival-spotlight at b800cf287e7d6972af73a01fa0e5148177e9ca98. Branch-local simulation, pure radar, syntax, and Chromium checks passed; canonical v0.53 at 0b850e6ca4275f80efdd8dd0587977a46d92f829 remains the latest verified released game, save schema 7. Next: merge PR #6 only after branch persistence CI passes; obtain exact merged-head invariant/browser/Pages verification; then update verified_game_head and mirror only verified v0.54.",
+  "next_action": "Signal Garden v0.54/schema 7 Arrival Spotlight is verified at exact game/test head 1f9887227bc8aeeeda9ebb9fc8384138ad6bf380 and mirrored to Village-store at 7c52ca01bc40c2737da80b66bef328f7c327100d; all four shared checks passed. Persistence historical backfill remains complete and ledger now has 28 unique receipts. Next: develop a bounded v0.55 Personal Worlds feature on a new branch, verify canonical simulation/real-browser/Pages on exact source before mirroring, audit persistence reconciliation idempotence, and respect operating hours.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -116,7 +116,7 @@
     "tests": "tests/reconcile-receipts.test.mjs",
     "historical_pending_count": 0,
     "historical_archive_receipts": 22,
-    "historical_backfill_status": "completed via PR #4; 20 exact historical receipts restored without overwriting canonical records; 26 receipts before current scheduled run"
+    "historical_backfill_status": "completed via PR #4; 20 exact historical receipts restored without replacing canonical records; 27 unique receipts before this scheduled run"
   },
   "signal_chorus": {
     "version": "0.53",
@@ -134,12 +134,18 @@
     "status": "verified and mirrored"
   },
   "arrival_spotlight": {
-    "status": "candidate branch; not released",
     "version": "0.54",
-    "branch": "agent-03/v054-arrival-spotlight",
-    "feature_commit": "b800cf287e7d6972af73a01fa0e5148177e9ca98",
-    "feature_ci_run": 40023911548,
-    "verified_release_before": "0.53",
-    "save_schema": 7
+    "save_schema": 7,
+    "pr": 6,
+    "merge_commit": "1f9887227bc8aeeeda9ebb9fc8384138ad6bf380",
+    "canonical_verification": {
+      "invariants": 40024026332,
+      "browser_smoke": 40024026328,
+      "pages": 40024026222,
+      "persistence": 40024026322
+    },
+    "shared_pr": 48,
+    "shared_merge_commit": "7c52ca01bc40c2737da80b66bef328f7c327100d",
+    "status": "verified and mirrored"
   }
 }
