@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T14:06:40-04:00",
+  "updated_at": "2026-10-23T15:04:00-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -36,7 +36,7 @@
       "pages": 39992793801
     }
   },
-  "next_action": "v0.52/schema 7 remains the verified canonical game/test artifact at 5c687b454936175d5d83c83a1cd79d5fb9520853, already mirrored with verified shared checks. Strict source-blob release gate was merged as PR #2 and passed its dedicated CI. Next: reconcile older pending scheduled receipts idempotently against the canonical ledger; continue Goal 2 Personal Worlds on a new feature branch. For future game/test changes require exact-source invariant, real-browser, and Pages evidence before mirroring. Respect operating hours and secrets boundary.",
+  "next_action": "v0.52/schema 7 remains verified at 5c687b454936175d5d83c83a1cd79d5fb9520853 and mirrored. Persistence receipt reconciler merged via PR #3 (99ef3c228bac4483c23416d42431327effc99538), with 10 tests and green branch/PR/main CI. Next: backfill the 20 missing historical scheduled receipts from the 22-receipt local archive, preserving five canonical receipts and rejecting conflicting duplicates; verify ledger idempotence and CI. Then resume Goal 2 Personal Worlds on a new feature branch; release/mirror only after exact-source invariant, real-browser and Pages success. Respect operating hours and secret boundary.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -106,5 +106,16 @@
       "tests/browser-smoke.mjs"
     ],
     "documentation": "docs/RELEASE-GATE.md"
+  },
+  "receipt_reconciler": {
+    "status": "merged and CI verified",
+    "merge_commit": "99ef3c228bac4483c23416d42431327effc99538",
+    "pr": 3,
+    "verification_run": 40008255990,
+    "module": "persistence/reconcile-receipts.mjs",
+    "tests": "tests/reconcile-receipts.test.mjs",
+    "historical_pending_count": 20,
+    "historical_archive_receipts": 22,
+    "historical_backfill_status": "pending; do not overwrite existing canonical receipts"
   }
 }
