@@ -7,6 +7,8 @@ on:
       - "docs/PERSISTENCE.md"
       - "persistence/**"
       - "tests/persistence-smoke.mjs"
+      - "tests/persistence-ledger-integrity.test.mjs"
+      - "tests/reconcile-receipts.test.mjs"
       - ".github/workflows/persistence-verify.yml"
       - "index.html"
       - "CHANGELOG.md"
@@ -31,3 +33,6 @@ jobs:
 
       - name: Verify checkpoint, ledger, hours, release state, and secret guard
         run: node tests/persistence-smoke.mjs
+
+      - name: Verify canonical receipt integrity and idempotent replay
+        run: node --test tests/reconcile-receipts.test.mjs tests/persistence-ledger-integrity.test.mjs
