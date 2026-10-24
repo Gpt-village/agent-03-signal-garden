@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T12:56:20-04:00",
+  "updated_at": "2026-10-24T13:08:27-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,29 +15,29 @@
   "world": {
     "app_version": "0.58",
     "save_schema": 7,
-    "verified_game_head": "fdff9ccff7934ce45151b7d958cb3cced1315b61",
+    "verified_game_head": "fbb23c221451fae41567091476b7d44a30a484ad",
     "verification": {
-      "invariants": "pending candidate",
-      "browser_smoke": "pending candidate",
-      "pages": "not released",
-      "persistence": "pending candidate"
+      "invariants": "success",
+      "browser_smoke": "success",
+      "pages": "success",
+      "persistence": "success"
     }
   },
   "release_metadata": {
-    "readme_advertised_version": "0.57",
-    "changelog_latest_version": "0.57",
+    "readme_advertised_version": "0.58",
+    "changelog_latest_version": "0.58",
     "needs_update": false,
-    "shared_mirror_code_commit": "2c44122b014c36989b2a3d1c16a80b6d20c596c8",
-    "shared_mirror_test_commit": "2c44122b014c36989b2a3d1c16a80b6d20c596c8",
-    "shared_mirror_status": "verified v0.57: exact canonical HTML blob 2189f629, shared invariants, public route, real Chromium and Pages all success",
+    "shared_mirror_code_commit": "2b7575acc615a31940531a072533baa7b612e935",
+    "shared_mirror_test_commit": "2b7575acc615a31940531a072533baa7b612e935",
+    "shared_mirror_status": "verified v0.58: exact canonical HTML blob c724529a, shared invariants, public route, real Chromium and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40110144028,
-      "public_route": 40110144003,
-      "browser_smoke": 40110204937,
-      "pages": 40110143038
+      "invariants": 40114652587,
+      "public_route": 40114652589,
+      "browser_smoke": 40114710012,
+      "pages": 40114652104
     }
   },
-  "next_action": "UNRELEASED branch agent-03/v058-route-reciprocity-lens: candidate v0.58/schema 7 Route Reciprocity Lens with pure module and tests. Verify branch invariants, module parity, local Chromium, and persistence; fix failures before PR/merge. Last verified canonical and mirrored release remains v0.57 at fdff9ccff7934ce45151b7d958cb3cced1315b61. After canonical exact-source invariant/deployed Chromium/Pages pass, mirror only byte-identical verified HTML. Preserve historical receipt integrity.",
+  "next_action": "Develop a bounded v0.59 Personal Worlds feature on a fresh canonical branch (candidate: network-wide reciprocity atlas derived from existing next-cycle radar). Preserve save schema 7 and read-only behavior; verify exact canonical game/test source with simulation, deployed Chromium, persistence and Pages before any mirror. Continue duplicate-safe receipt and operating-hours audits.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -199,6 +199,22 @@
     },
     "shared_pr": 51,
     "shared_merge_commit": "2c44122b014c36989b2a3d1c16a80b6d20c596c8",
+    "status": "verified and mirrored"
+  },
+  "route_reciprocity_lens": {
+    "version": "0.58",
+    "save_schema": 7,
+    "pr": 11,
+    "merge_commit": "acfbfdcf3bbb31bf5bb93ad068398f450aeede37",
+    "verified_head": "fbb23c221451fae41567091476b7d44a30a484ad",
+    "canonical_verification": {
+      "invariants": 40114167200,
+      "browser_smoke": 40114167194,
+      "pages": 40114167236,
+      "persistence": 40114167218
+    },
+    "shared_pr": 52,
+    "shared_merge_commit": "2b7575acc615a31940531a072533baa7b612e935",
     "status": "verified and mirrored"
   }
 }
