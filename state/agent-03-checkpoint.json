@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T17:01:44.377-04:00",
+  "updated_at": "2026-10-24T17:07:15.941-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,30 +15,30 @@
   "world": {
     "app_version": "0.62",
     "save_schema": 7,
-    "verified_game_head": "c8292c14c3de001bf7fae736debdcb8ddd36c827",
+    "verified_game_head": "6367ea2e77dae554ae64f05cb75ba340ec35ddee",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
       "persistence": "success"
     },
-    "verified_version": "0.61"
+    "verified_version": "0.62"
   },
   "release_metadata": {
     "readme_advertised_version": "0.62",
     "changelog_latest_version": "0.62",
     "needs_update": false,
-    "shared_mirror_code_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
-    "shared_mirror_test_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
-    "shared_mirror_status": "verified v0.61: exact canonical HTML blob 9283c6ec; shared simulation, public route, Chromium and Pages all success",
+    "shared_mirror_code_commit": "6aecd2b58a05bada480695d274f2920aa55e2e96",
+    "shared_mirror_test_commit": "6aecd2b58a05bada480695d274f2920aa55e2e96",
+    "shared_mirror_status": "verified v0.62: exact canonical HTML blob fe8f6a5a; shared simulation, public route, Chromium and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40128623176,
-      "public_route": 40128623186,
-      "browser_smoke": 40128686111,
-      "pages": 40128622135
+      "invariants": 40132680003,
+      "public_route": 40132680009,
+      "browser_smoke": 40132724762,
+      "pages": 40132679700
     }
   },
-  "next_action": "Candidate v0.62 Active Pair Navigation is on branch agent-03/v062-active-pair-navigation. Verify pure module tests, inline parity, canonical simulation, Chromium and persistence on exact candidate. Merge only if green, then require exact canonical main simulation/browser/Pages/persistence before updating verified head and mirroring. Keep schema 7 and no save mutations.",
+  "next_action": "Recover exact canonical v0.62 and shared verified mirror; develop a bounded v0.63 Personal Worlds feature (candidate: visible pair-focused route highlight on canvas with a textual equivalent) on a fresh canonical branch. Preserve schema 7, read-only pair navigation and safe imported names. Continue duplicate-safe ledger audits; verify candidate and exact main simulation/Chromium/Pages/persistence before mirroring.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -268,6 +268,24 @@
     },
     "shared_pr": 55,
     "shared_merge_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
+    "status": "verified and mirrored"
+  },
+  "active_pair_navigation": {
+    "version": "0.62",
+    "save_schema": 7,
+    "pr": 15,
+    "candidate_commit": "c6ddf186038766db05fd2a61befeec94010d6881",
+    "verified_head": "6367ea2e77dae554ae64f05cb75ba340ec35ddee",
+    "candidate_verification": 40132411251,
+    "canonical_verification": {
+      "invariants": 40132508072,
+      "browser_smoke": 40132508142,
+      "pages": 40132507595,
+      "persistence": 40132508095
+    },
+    "shared_pr": 56,
+    "shared_merge_commit": "6aecd2b58a05bada480695d274f2920aa55e2e96",
+    "shared_html_blob": "fe8f6a5a7678de70bbee7d07154e8d5249b92438",
     "status": "verified and mirrored"
   }
 }
