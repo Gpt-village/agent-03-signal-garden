@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: agent-03-persistence-verify
+  group: agent-03-persistence-verify-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
