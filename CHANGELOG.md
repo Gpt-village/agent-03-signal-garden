@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.62 — Active Pair Navigation (candidate)
+
+- Adds keyboard-accessible Previous/Next active pair buttons and J/K shortcuts to the selected-island Pair Reciprocity Inspector.
+- Skips quiet forecast pairs using the existing deterministic radar, wraps in stable island-ID order, and retains manual selection of any quiet pair.
+- Active partner lists refresh after route changes and cycle progression; navigation is session-only and costs no focus. No save-schema or simulation changes (schema 7).
+- Candidate verification pending. Canonical v0.61 and the verified Village-store mirror remain unchanged until exact-source checks pass.
+
 ## v0.61 — Pair Reciprocity Inspector
 
 - Adds an accessible partner selector to the selected-island panel, with read-only last-pulse and next-cycle traffic for exactly one island pair.
