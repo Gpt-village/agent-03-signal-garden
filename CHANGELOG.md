@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.60 — Reciprocity Momentum (candidate)
+
+- Adds a read-only comparison of the last completed migration pulse against the next-cycle reciprocity forecast.
+- Distinguishes new, ended, steady, retuned, reversed, and mutual/one-way transitions. Shows a clear no-prior-pulse state on a fresh visit.
+- Uses textContent for imported names; simulation, saves, and schema 7 remain unchanged.
+- Candidate verification pending; do not mirror until exact-source canonical simulation, Chromium, Pages and persistence succeed.
+
 ## v0.59 — Network Reciprocity Atlas
 
 - Adds a read-only archipelago-wide next-cycle atlas of mutual and one-way forecast pairs, signal families, and quiet islands.

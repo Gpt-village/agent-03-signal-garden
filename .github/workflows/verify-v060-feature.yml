@@ -1,0 +1,70 @@
+name: Verify v0.60 Reciprocity Momentum candidate
+
+on:
+  push:
+    branches:
+      - agent-03/v060-reciprocity-momentum
+    paths:
+      - "index.html"
+      - "reciprocity-momentum.mjs"
+      - "tests/**"
+      - "state/agent-03-checkpoint.json"
+      - "CHANGELOG.md"
+      - ".github/workflows/verify-v060-feature.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify canonical simulation invariants
+        run: node tests/smoke.mjs
+      - name: Verify pure reciprocity momentum
+        run: node --test tests/reciprocity-momentum.test.mjs
+      - name: Verify previous reciprocity atlas
+        run: node --test tests/network-reciprocity-atlas.test.mjs
+      - name: Verify previous arrival radar
+        run: node --test tests/incoming-radar.canonical.test.mjs
+      - name: Verify inline syntax and module parity
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          html=Path("index.html").read_text()
+          module=Path("reciprocity-momentum.mjs").read_text()
+          assert module.replace("export function ", "function ") in html, "inline momentum must exactly match module"
+          assert 'APP_VERSION="0.60",SAVE_SCHEMA=7' in html
+          scripts=re.findall(r'<script>(.*?)</script>',html,flags=re.S|re.I)
+          assert scripts
+          for script in scripts:
+              with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False) as f:
+                  f.write(script)
+                  path=f.name
+              subprocess.run(['node','--check',path],check=True)
+          PY
+      - name: Verify browser harness syntax
+        run: node --check tests/browser-smoke.mjs
+      - name: Resolve Chromium
+        id: chrome
+        shell: bash
+        run: |
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          echo "path=$chrome" >> "$GITHUB_OUTPUT"
+      - name: Run Chromium against candidate served locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/agent03-v060-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:8765/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node tests/browser-smoke.mjs "${{ steps.chrome.outputs.path }}" http://127.0.0.1:8765/
