@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.58 — Route Reciprocity Lens (UNRELEASED candidate)
+
+- Candidate: selected-island read-only forecast shows two-way and one-way next-cycle signal pairs.
+- Uses the existing destination-first radar; never changes routes, simulation rules, or save schema 7.
+- Imported names render as plain text, not HTML. Pure module and Chromium regression checks added.
+- Not released or mirrored until exact canonical game/test commit passes invariant, deployed Chromium, Pages and persistence verification.
+
 ## v0.57 — Island Flow Compass
 
 - Adds a read-only selected-island signal-flow compass beside arrival and dispatch briefs.
