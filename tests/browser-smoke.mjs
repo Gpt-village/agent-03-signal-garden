@@ -510,7 +510,7 @@ try{
   assert.match(linkedPair,/Next forecast: .*\/ .*\(mutual\)/,"pair inspector should show both directed families for the linked pair");
 
   const activeMapFocus=await evaluate("document.getElementById('pairMapFocusStatus').textContent");
-  assert.match(activeMapFocus,/Map pair focus: .* ↔ .*\\. Mutual forecast: send (life|memory|strange); receive (life|memory|strange)/,"linked pair should show bidirectional map legend");
+  assert.match(activeMapFocus,/Map pair focus: .* ↔ .*. Mutual forecast: send (life|memory|strange); receive (life|memory|strange)/,"linked pair should show bidirectional map legend");
   const pairMapFocusBefore=await evaluate("localStorage.getItem('agent03-signal-garden-v1')");
   await evaluate("document.getElementById('worldSection').scrollIntoView()");
   await sleep(550);
