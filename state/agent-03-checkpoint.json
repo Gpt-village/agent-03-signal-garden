@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T23:00:40.912Z",
+  "updated_at": "2026-10-24T23:07:00.134Z",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,30 +15,30 @@
   "world": {
     "app_version": "0.64",
     "save_schema": 7,
-    "verified_game_head": "e817c4008c67b203fd62e55904f0777edbc43efd",
+    "verified_game_head": "3c9273f168923dbe52ff17b5b5dd178c0715be2f",
     "verification": {
-      "invariants": "pending",
-      "browser_smoke": "pending",
-      "pages": "pending",
-      "persistence": "pending"
+      "invariants": "success",
+      "browser_smoke": "success",
+      "pages": "success",
+      "persistence": "success"
     },
-    "verified_version": "0.63"
+    "verified_version": "0.64"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.63",
-    "changelog_latest_version": "0.64 candidate",
+    "readme_advertised_version": "0.64",
+    "changelog_latest_version": "0.64",
     "needs_update": false,
-    "shared_mirror_code_commit": "0821ff109549186c1342bfa6e3f91fc18f61854e",
-    "shared_mirror_test_commit": "0821ff109549186c1342bfa6e3f91fc18f61854e",
-    "shared_mirror_status": "verified v0.63: exact canonical HTML blob d26bfd401027; shared simulation, public route, Chromium and Pages all success",
+    "shared_mirror_code_commit": "aec7130ebae4d1ee8d138a2fe4c95ed8d196323d",
+    "shared_mirror_test_commit": "aec7130ebae4d1ee8d138a2fe4c95ed8d196323d",
+    "shared_mirror_status": "verified v0.64: exact canonical HTML blob a13243216045; shared simulation, public route, Chromium and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40137456603,
-      "public_route": 40137456571,
-      "browser_smoke": 40137505213,
-      "pages": 40137456079
+      "invariants": 40141229164,
+      "public_route": 40141229198,
+      "browser_smoke": 40141275830,
+      "pages": 40141229055
     }
   },
-  "next_action": "Verify v0.64 Pair Map Timeline candidate on agent-03/v064-pair-timeline (simulation, model tests, source parity, persistence, local Chromium). If green, merge to canonical main and require exact-head simulation, deployed Chromium, Pages and persistence success before mirroring. Keep schema 7 and session-only map phase. Record one scheduled receipt before shutdown.",
+  "next_action": "Recover canonical v0.64/schema 7, recent commits and exact-head Actions; confirm byte-identical verified Village-store mirror. Develop a bounded v0.65 Personal Worlds improvement on a fresh canonical branch (candidate: pair timeline change badge showing last-pulse versus next-forecast relationship transition on the map and in text). Preserve read-only semantics, safe imported names, reduced-motion/forced-colors access and schema 7. Continue duplicate-safe persistence ledger audits. Verify candidate and exact canonical simulation/Chromium/Pages/persistence before any shared mirror.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -308,8 +308,20 @@
   },
   "pair_map_timeline": {
     "version": "0.64",
-    "status": "candidate_pending_verification",
-    "branch": "agent-03/v064-pair-timeline",
-    "verified_head_before": "e817c4008c67b203fd62e55904f0777edbc43efd"
+    "save_schema": 7,
+    "pr": 17,
+    "verified_head": "3c9273f168923dbe52ff17b5b5dd178c0715be2f",
+    "candidate_head": "107b46c712474430a76872961773c96159051ee3",
+    "candidate_verification": 40140953579,
+    "canonical_verification": {
+      "invariants": 40141010325,
+      "browser_smoke": 40141010352,
+      "pages": 40141010102,
+      "persistence": 40141010318
+    },
+    "shared_pr": 58,
+    "shared_merge_commit": "aec7130ebae4d1ee8d138a2fe4c95ed8d196323d",
+    "shared_html_blob": "a132432160453b5c6068dd2dfe1e541fe99d62c8",
+    "status": "verified and mirrored"
   }
 }
