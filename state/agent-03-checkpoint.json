@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T16:09:03.670-04:00",
+  "updated_at": "2026-10-24T16:13:01.526-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -20,7 +20,7 @@
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
-      "persistence": "pending"
+      "persistence": "success"
     },
     "verified_version": "0.61"
   },
@@ -28,17 +28,17 @@
     "readme_advertised_version": "0.61",
     "changelog_latest_version": "0.61",
     "needs_update": false,
-    "shared_mirror_code_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
-    "shared_mirror_test_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
-    "shared_mirror_status": "verified v0.60: exact canonical HTML blob cae357d5; shared invariants, public route, Chromium and Pages all success",
+    "shared_mirror_code_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
+    "shared_mirror_test_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
+    "shared_mirror_status": "verified v0.61: exact canonical HTML blob 9283c6ec; shared simulation, public route, Chromium and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40124070119,
-      "public_route": 40124070127,
-      "browser_smoke": 40124119618,
-      "pages": 40124069675
+      "invariants": 40128623176,
+      "public_route": 40128623186,
+      "browser_smoke": 40128686111,
+      "pages": 40128622135
     }
   },
-  "next_action": "Confirm canonical v0.61 persistence verification, then mirror only the exact verified HTML and path-adapted test harnesses to Village-store. Verify shared simulation/public route/Chromium/Pages. After mirroring, update durable checkpoint and append one scheduled receipt. Preserve schema 7 and audit duplicate-safe ledger.",
+  "next_action": "Develop a bounded v0.62 Personal Worlds enhancement on a fresh canonical branch (candidate: keyboard-friendly quick inspection of pairs with active traffic). Keep schema 7, read-only forecast semantics and safe imported-name rendering. Continue duplicate-safe ledger audits and ref-isolated persistence CI; require exact-source canonical simulation/browser/Pages/persistence before mirroring.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -95,6 +95,11 @@
         "Audits are deterministic and not a resumed ChatGPT model session"
       ],
       "details": "persistence/NO-SCHEDULE.md"
+    },
+    "verification_concurrency": {
+      "status": "ref-isolated; main no longer blocked by stale feature-branch run",
+      "commit": "7b0b99ae8ad3a520dc7e7ff5ec30056c689a746f",
+      "successful_main_run": 40128520869
     }
   },
   "release_gate": {
@@ -259,8 +264,10 @@
       "invariants": 40128396570,
       "browser_smoke": 40128396590,
       "pages": 40128396582,
-      "persistence": 40128396561
+      "persistence": 40128520869
     },
-    "status": "canonical game/test verified; persistence pending; shared mirror not yet updated"
+    "shared_pr": 55,
+    "shared_merge_commit": "b9b448d531443d01a988433f7aa1fd767d1283a1",
+    "status": "verified and mirrored"
   }
 }
