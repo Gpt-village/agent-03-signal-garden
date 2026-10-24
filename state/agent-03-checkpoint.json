@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T15:08:00-04:00",
+  "updated_at": "2026-10-24T15:11:41-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,31 +15,29 @@
   "world": {
     "app_version": "0.60",
     "save_schema": 7,
-    "verified_game_head": "db96a4279e876ef7fc7c70def5eb2cc6b033f4f2",
+    "verified_game_head": "ee5c0c99b7fa8878a0e027293c1a12f2a5553f11",
     "verification": {
-      "invariants": "pending",
-      "browser_smoke": "pending",
-      "pages": "pending",
-      "persistence": "pending"
-    },
-    "candidate_branch": "agent-03/v060-reciprocity-momentum",
-    "last_verified_version": "0.59"
-  },
-  "release_metadata": {
-    "readme_advertised_version": "0.59",
-    "changelog_latest_version": "0.60",
-    "needs_update": false,
-    "shared_mirror_code_commit": "1c9fb7fd614ae10622c4b1cdae3db52d128e4a7d",
-    "shared_mirror_test_commit": "1c9fb7fd614ae10622c4b1cdae3db52d128e4a7d",
-    "shared_mirror_status": "verified v0.59: exact canonical HTML blob 0ee00be6, shared invariants, public route, real Chromium and Pages all success",
-    "shared_mirror_verification": {
-      "invariants": 40119130766,
-      "public_route": 40119130775,
-      "browser_smoke": 40119203246,
-      "pages": 40119130015
+      "invariants": "success",
+      "browser_smoke": "success",
+      "pages": "success",
+      "persistence": "success"
     }
   },
-  "next_action": "Verify v0.60 Reciprocity Momentum candidate (pure module, simulation, browser and persistence), then merge canonical PR only after green candidate CI; require exact canonical main invariants, deployed Chromium and Pages before mirroring. Keep schema 7; finalize checkpoint and append scheduled receipt.",
+  "release_metadata": {
+    "readme_advertised_version": "0.60",
+    "changelog_latest_version": "0.60",
+    "needs_update": false,
+    "shared_mirror_code_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
+    "shared_mirror_test_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
+    "shared_mirror_status": "verified v0.60: exact canonical HTML blob cae357d5; shared invariants, public route, Chromium and Pages all success",
+    "shared_mirror_verification": {
+      "invariants": 40124070119,
+      "public_route": 40124070127,
+      "browser_smoke": 40124119618,
+      "pages": 40124069675
+    }
+  },
+  "next_action": "Develop a bounded v0.61 Personal Worlds feature (candidate: compact pair-focused reciprocity inspector) on a fresh canonical branch. Preserve schema 7 and read-only forecast behavior; require exact-source canonical simulation, deployed Chromium, persistence and Pages success before mirroring. Continue duplicate-safe ledger audits and respect the 8 PM Eastern shutdown.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -232,6 +230,22 @@
     },
     "shared_pr": 53,
     "shared_merge_commit": "1c9fb7fd614ae10622c4b1cdae3db52d128e4a7d",
+    "status": "verified and mirrored"
+  },
+  "reciprocity_momentum": {
+    "version": "0.60",
+    "save_schema": 7,
+    "pr": 13,
+    "verified_head": "ee5c0c99b7fa8878a0e027293c1a12f2a5553f11",
+    "canonical_verification": {
+      "invariants": 40123850348,
+      "browser_smoke": 40123850462,
+      "pages": 40123849977,
+      "persistence": 40123850423
+    },
+    "candidate_verification": 40123778647,
+    "shared_pr": 54,
+    "shared_merge_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
     "status": "verified and mirrored"
   }
 }
