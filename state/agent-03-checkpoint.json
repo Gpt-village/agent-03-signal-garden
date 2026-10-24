@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T16:06:49.475-04:00",
+  "updated_at": "2026-10-24T16:09:03.670-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,18 +15,17 @@
   "world": {
     "app_version": "0.61",
     "save_schema": 7,
-    "verified_game_head": "ee5c0c99b7fa8878a0e027293c1a12f2a5553f11",
+    "verified_game_head": "c8292c14c3de001bf7fae736debdcb8ddd36c827",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
-      "persistence": "success"
+      "persistence": "pending"
     },
-    "verified_version": "0.60",
-    "candidate_status": "unverified feature branch; verified_game_head still points to v0.60"
+    "verified_version": "0.61"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.60",
+    "readme_advertised_version": "0.61",
     "changelog_latest_version": "0.61",
     "needs_update": false,
     "shared_mirror_code_commit": "c0d832f7c5f598431fd16b1d3a1cd3547260bbd0",
@@ -39,7 +38,7 @@
       "pages": 40124069675
     }
   },
-  "next_action": "Complete v0.61 pair inspector candidate verification (simulation, pure-module tests, inline parity, Chromium, persistence), then merge canonical and require exact-head simulation/browser/Pages/persistence success before mirroring. Keep schema 7 and do not claim v0.61 verified prematurely.",
+  "next_action": "Confirm canonical v0.61 persistence verification, then mirror only the exact verified HTML and path-adapted test harnesses to Village-store. Verify shared simulation/public route/Chromium/Pages. After mirroring, update durable checkpoint and append one scheduled receipt. Preserve schema 7 and audit duplicate-safe ledger.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -252,8 +251,16 @@
   },
   "pair_reciprocity_inspector": {
     "version": "0.61",
-    "branch": "agent-03/v061-pair-reciprocity-inspector",
-    "verification": "pending",
-    "save_schema": 7
+    "save_schema": 7,
+    "pr": 14,
+    "verified_head": "c8292c14c3de001bf7fae736debdcb8ddd36c827",
+    "candidate_verification": 40128336704,
+    "canonical_verification": {
+      "invariants": 40128396570,
+      "browser_smoke": 40128396590,
+      "pages": 40128396582,
+      "persistence": 40128396561
+    },
+    "status": "canonical game/test verified; persistence pending; shared mirror not yet updated"
   }
 }
