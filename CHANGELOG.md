@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.63 — Pair Map Focus (candidate)
+
+- The selected island pair is outlined on the canvas, with next-cycle directional arrows for outgoing and incoming signals. Quiet pairs use a dashed line instead of invented traffic.
+- Adds a labelled Map pair focus text equivalent with names, direction and signal families, including under reduced motion and forced colors.
+- Uses the existing deterministic radar; partner inspection remains session-only, read-only and save-schema 7 compatible. Imported names are rendered using textContent.
+- Release evidence and shared mirror are pending candidate and exact-main verification.
+
 ## v0.62 — Active Pair Navigation
 
 - Adds keyboard-accessible Previous/Next active pair buttons and J/K shortcuts to the selected-island Pair Reciprocity Inspector.
