@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.61 — Pair Reciprocity Inspector (candidate)
+
+- Adds an accessible partner selector to the selected-island panel, with read-only last-pulse and next-cycle traffic for exactly one island pair.
+- Distinguishes mutual, one-way and quiet pairs, plus new, ended, steady, retuned, reversed, and mutual/one-way transitions.
+- Partner choice is session-only and never written to saves or specimen codes; imported names render with textContent and escaped option labels. Save schema stays 7.
+- Candidate verification pending. Do not mirror or advertise as verified until exact-source simulation, Chromium, persistence and Pages checks pass.
+
 ## v0.60 — Reciprocity Momentum
 
 - Adds a read-only comparison of the last completed migration pulse against the next-cycle reciprocity forecast.
