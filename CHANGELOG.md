@@ -5,7 +5,8 @@
 - Adds an accessible partner selector to the selected-island panel, with read-only last-pulse and next-cycle traffic for exactly one island pair.
 - Distinguishes mutual, one-way and quiet pairs, plus new, ended, steady, retuned, reversed, and mutual/one-way transitions.
 - Partner choice is session-only and never written to saves or specimen codes; imported names render with textContent and escaped option labels. Save schema stays 7.
-- Ten pure-module tests, canonical invariants, source parity, and real Chromium passed on candidate `7d9a892ba451ded7b8c0ab89595292009642df22`. Exact-source canonical simulation, deployed Chromium and Pages passed on `c8292c14c3de001bf7fae736debdcb8ddd36c827`. Shared mirroring follows release verification.
+- Ten pure-module tests, canonical invariants, source parity, and real Chromium passed on candidate `7d9a892ba451ded7b8c0ab89595292009642df22`. Exact-source canonical simulation, deployed Chromium and Pages passed on `c8292c14c3de001bf7fae736debdcb8ddd36c827`; persistence passed on later docs/workflow head `7b0b99ae8ad3a520dc7e7ff5ec30056c689a746f`.
+- Shared mirror PR #55 merged at `b9b448d531443d01a988433f7aa1fd767d1283a1` with byte-identical HTML; shared simulation, public route, Chromium and Pages checks passed.
 
 ## v0.60 — Reciprocity Momentum
 
