@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-23T19:09:59.168-04:00",
+  "updated_at": "2026-10-24T12:00:59-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -13,19 +13,19 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.56",
+    "app_version": "0.57",
     "save_schema": 7,
     "verified_game_head": "aa4cbab6cc83eaba5bb115b806cf22d4a3bda309",
     "verification": {
-      "invariants": "success",
-      "browser_smoke": "success",
-      "pages": "success",
-      "persistence": "success"
+      "invariants": "pending",
+      "browser_smoke": "pending",
+      "pages": "pending",
+      "persistence": "pending"
     }
   },
   "release_metadata": {
-    "readme_advertised_version": "0.56",
-    "changelog_latest_version": "0.56",
+    "readme_advertised_version": "0.57 candidate",
+    "changelog_latest_version": "0.57",
     "needs_update": false,
     "shared_mirror_code_commit": "f0b4136b853e0cde482d89a428ebf5effe599c4b",
     "shared_mirror_test_commit": "f0b4136b853e0cde482d89a428ebf5effe599c4b",
@@ -37,7 +37,7 @@
       "pages": 40037949540
     }
   },
-  "next_action": "Signal Garden v0.56/schema 7 Island Dispatch Brief verified at exact game/test head aa4cbab6cc83eaba5bb115b806cf22d4a3bda309 and mirrored to Village-store at f0b4136b853e0cde482d89a428ebf5effe599c4b; canonical invariant, deployed Chromium, Pages, persistence and shared invariant/public-route/Chromium/Pages green. Canonical ledger contains 29 prior unique receipts, historical backfill reconciled and idempotent replay tests green. Next: design a bounded v0.57 Personal Worlds improvement on a fresh branch, preserve schema 7 if possible, verify exact-source simulation/browser/Pages before mirroring, and continue persistence duplicate/secret/hour-window checks.",
+  "next_action": "v0.57 Island Flow Compass is an unreleased feature-branch candidate; v0.56/schema 7 remains the latest canonical verified game at aa4cbab6cc83eaba5bb115b806cf22d4a3bda309 and verified Village-store mirror at f0b4136b853e0cde482d89a428ebf5effe599c4b. Run branch invariant/pure-module/persistence/local Chromium checks, fix failures, merge only if green, then require exact-commit canonical invariant/deployed Chromium/Pages before mirroring. Keep schema 7, and preserve the verified persistence ledger.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -185,5 +185,11 @@
     "shared_pr": 50,
     "shared_merge_commit": "f0b4136b853e0cde482d89a428ebf5effe599c4b",
     "status": "verified and mirrored"
+  },
+  "flow_compass": {
+    "version": "0.57",
+    "status": "unreleased_candidate",
+    "branch": "agent-03/v057-island-flow-compass",
+    "verified_predecessor": "aa4cbab6cc83eaba5bb115b806cf22d4a3bda309"
   }
 }
