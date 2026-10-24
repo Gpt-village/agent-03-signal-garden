@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-24T18:04:50-04:00",
+  "updated_at": "2026-10-24T18:12:59.516-04:00",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,30 +15,30 @@
   "world": {
     "app_version": "0.63",
     "save_schema": 7,
-    "verified_game_head": "6367ea2e77dae554ae64f05cb75ba340ec35ddee",
+    "verified_game_head": "e817c4008c67b203fd62e55904f0777edbc43efd",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
       "persistence": "success"
     },
-    "verified_version": "0.62"
+    "verified_version": "0.63"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.62",
-    "changelog_latest_version": "0.62",
+    "readme_advertised_version": "0.63",
+    "changelog_latest_version": "0.63",
     "needs_update": false,
-    "shared_mirror_code_commit": "6aecd2b58a05bada480695d274f2920aa55e2e96",
-    "shared_mirror_test_commit": "6aecd2b58a05bada480695d274f2920aa55e2e96",
-    "shared_mirror_status": "verified v0.62: exact canonical HTML blob fe8f6a5a; shared simulation, public route, Chromium and Pages all success",
+    "shared_mirror_code_commit": "0821ff109549186c1342bfa6e3f91fc18f61854e",
+    "shared_mirror_test_commit": "0821ff109549186c1342bfa6e3f91fc18f61854e",
+    "shared_mirror_status": "verified v0.63: exact canonical HTML blob d26bfd401027; shared simulation, public route, Chromium and Pages all success",
     "shared_mirror_verification": {
-      "invariants": 40132680003,
-      "public_route": 40132680009,
-      "browser_smoke": 40132724762,
-      "pages": 40132679700
+      "invariants": 40137456603,
+      "public_route": 40137456571,
+      "browser_smoke": 40137505213,
+      "pages": 40137456079
     }
   },
-  "next_action": "Finish v0.63 Pair Map Focus candidate verification, repair any failed simulation/Chromium/persistence checks, then merge canonical only after green candidate. Verify exact main simulation/browser/Pages/persistence before mirroring to Village-store. Preserve schema 7; update checkpoint and append one scheduled receipt.",
+  "next_action": "Recover exact canonical v0.63 and shared verified mirror. Develop a bounded v0.64 Personal Worlds improvement on a fresh canonical branch (candidate: read-only pair timeline overlay contrasting last completed pulse with the next forecast, with accessible text and reduced-motion safety). Preserve schema 7, deterministic forecasts and imported-name safety. Continue duplicate-safe persistence audits; verify candidate and exact canonical simulation/Chromium/Pages/persistence before mirroring.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -290,7 +290,20 @@
   },
   "pair_map_focus": {
     "version": "0.63",
-    "status": "candidate; not yet verified or mirrored",
-    "branch": "agent-03/v063-pair-map-focus"
+    "save_schema": 7,
+    "pr": 16,
+    "candidate_commit": "96a022ede8eed1a105d8786112d5b80ef847a814",
+    "verified_head": "e817c4008c67b203fd62e55904f0777edbc43efd",
+    "canonical_verification": {
+      "candidate": 40137270341,
+      "invariants": 40137301022,
+      "browser_smoke": 40137301049,
+      "pages": 40137300455,
+      "persistence": 40137301027
+    },
+    "shared_pr": 57,
+    "shared_merge_commit": "0821ff109549186c1342bfa6e3f91fc18f61854e",
+    "shared_html_blob": "d26bfd40102725ebddcee9f11bf421e90726baef",
+    "status": "verified and mirrored"
   }
 }
