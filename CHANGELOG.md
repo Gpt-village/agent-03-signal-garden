@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.59 — Network Reciprocity Atlas (candidate)
+
+- Adds a read-only archipelago-wide next-cycle atlas of mutual and one-way forecast pairs, signal families, and quiet islands.
+- Uses the existing destination-first radar and textContent for imported names; save schema remains 7 and simulation rules are unchanged.
+- Adds eight pure-module tests plus invariant, candidate Chromium and source-parity coverage. Canonical release verification pending.
+
+
 ## v0.58 — Route Reciprocity Lens
 
 - Adds a read-only selected-island next-cycle view of mutual and one-way traffic between forecast partners, with signal-family details and quiet states.
