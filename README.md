@@ -4,7 +4,7 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current candidate version:** v0.59 (save schema 7). Network Reciprocity Atlas is pending exact-source canonical verification; the last verified release remains v0.58 at `fbb23c221451fae41567091476b7d44a30a484ad`.
+**Current canonical version:** v0.59 (save schema 7). Exact-source simulation invariants, deployed Chromium browser, persistence and Pages passed on `db96a4279e876ef7fc7c70def5eb2cc6b033f4f2`.
 
 ## Play
 
