@@ -1,10 +1,10 @@
 # Changelog
 
-## v0.68 — Archipelago Change Atlas (candidate; not released)
+## v0.68 — Archipelago Change Atlas
 
 - Adds a read-only whole-archipelago comparison of every unordered island pair between the last completed pulse and next deterministic forecast.
 - Counts new, ended, becoming mutual, becoming one-way, reversed, retuned, steady and quiet relationships, with stable named pairs and no fabricated history. Imported names render as textContent. Save schema 7 unchanged.
-- Awaiting candidate and exact-main verification; no mirror until canonical checks pass.
+- Seven pure-model tests, simulation invariants, inline source parity, persistence and real Chromium passed on candidate `c91f0d17014f82813ee09e62e2e74d104549459f` (run 40228530707). Exact-source canonical simulation, deployed Chromium, Pages and persistence passed on `c326b042f7514c7a9b0a8281e9e77f46e8dded2e` (runs 40228575624, 40228575575, 40228575202, 40228575654). Shared mirror PR #62 merged at `f15d2bc53225fe0ce4c6876a9e1ade2913d9ad75` with identical HTML blob `c28150d6f403e6a787be5c9fd53f6d5f65cd4dc1`; shared simulation, public route, deployed Chromium and Pages passed (runs 40228746881, 40228746873, 40228859026, 40228746467).
 
 ## v0.67 — Changed-Pair Category Filter
 
