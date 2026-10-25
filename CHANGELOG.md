@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.68 — Archipelago Change Atlas (candidate; not released)
+
+- Adds a read-only whole-archipelago comparison of every unordered island pair between the last completed pulse and next deterministic forecast.
+- Counts new, ended, becoming mutual, becoming one-way, reversed, retuned, steady and quiet relationships, with stable named pairs and no fabricated history. Imported names render as textContent. Save schema 7 unchanged.
+- Awaiting candidate and exact-main verification; no mirror until canonical checks pass.
+
 ## v0.67 — Changed-Pair Category Filter
 
 - Adds read-only change-category counts and a category selector for new, ended, becoming mutual, becoming one-way, reversed and retuned island relationships.
