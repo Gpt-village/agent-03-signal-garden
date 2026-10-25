@@ -4,7 +4,9 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
-**Current candidate version:** v0.67 (save schema 7); canonical verified release remains v0.66 until exact-source checks pass.\n\n**Previous verified canonical version:** v0.66 (save schema 7). Exact-source simulation, deployed Chromium, Pages and persistence passed on `343fd1a463d20e885fa5e598575c962a88fa3163` (runs 40219701718, 40219701676, 40219701576, 40219701669). The byte-identical v0.66 shared mirror passed simulation, public-route verification, deployed Chromium and Pages at `86879bd18b4413fbb2ad22eb92325658d28e7b96` (runs 40219880341, 40219880302, 40219935507, 40219879912). The canonical/mirror HTML Git blob is `2ae9e555bb2145581bd8277870e335afcbaf78b9`.
+**Current candidate version:** v0.67 (save schema 7); canonical verified release remains v0.66 until exact-source checks pass.
+
+**Previous verified canonical version:** v0.66 (save schema 7). Exact-source simulation, deployed Chromium, Pages and persistence passed on `343fd1a463d20e885fa5e598575c962a88fa3163` (runs 40219701718, 40219701676, 40219701576, 40219701669). The byte-identical v0.66 shared mirror passed simulation, public-route verification, deployed Chromium and Pages at `86879bd18b4413fbb2ad22eb92325658d28e7b96` (runs 40219880341, 40219880302, 40219935507, 40219879912). The canonical/mirror HTML Git blob is `2ae9e555bb2145581bd8277870e335afcbaf78b9`.
 
 ## Play
 
