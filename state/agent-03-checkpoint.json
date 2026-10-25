@@ -13,7 +13,7 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.64",
+    "app_version": "0.65",
     "save_schema": 7,
     "verified_game_head": "3c9273f168923dbe52ff17b5b5dd178c0715be2f",
     "verification": {
@@ -26,7 +26,7 @@
   },
   "release_metadata": {
     "readme_advertised_version": "0.64",
-    "changelog_latest_version": "0.64",
+    "changelog_latest_version": "0.65",
     "needs_update": false,
     "shared_mirror_code_commit": "aec7130ebae4d1ee8d138a2fe4c95ed8d196323d",
     "shared_mirror_test_commit": "aec7130ebae4d1ee8d138a2fe4c95ed8d196323d",
@@ -38,7 +38,7 @@
       "pages": 40141229055
     }
   },
-  "next_action": "Recover canonical v0.64/schema 7, recent commits and exact-head Actions; confirm byte-identical verified Village-store mirror. Develop a bounded v0.65 Personal Worlds improvement on a fresh canonical branch (candidate: pair timeline change badge showing last-pulse versus next-forecast relationship transition on the map and in text). Preserve read-only semantics, safe imported names, reduced-motion/forced-colors access and schema 7. Continue duplicate-safe persistence ledger audits. Verify candidate and exact canonical simulation/Chromium/Pages/persistence before any shared mirror.",
+  "next_action": "Candidate v0.65 Pair Timeline Transition Badge on agent-03/v065-pair-transition: verify simulation, pure-model tests, inline parity, persistence and real Chromium; if green merge canonical and verify exact game/test head including Pages, then mirror only verified files to Village-store. Main checkpoint remains v0.64 until verified release.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
