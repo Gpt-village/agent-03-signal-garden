@@ -25,7 +25,7 @@ test('new and ended across distinct pairs are each counted once',()=>{
   assert.deepEqual(x.entries.map(y=>[y.firstId,y.secondId,y.kind]),[[0,1,'new'],[2,3,'ended']]);
 });
 test('mutual, one-way, reversed, retuned and steady are distinct',()=>{
-  const rows=[row(0,[e(1,'memory'),e(2,'memory'),e(3,'strange')]),
+  const rows=[row(0,[e(1,'memory'),e(3,'strange')]),
     row(1,[e(0,'life')]),row(2,[e(0,'life')]),row(3),
     row(4,[e(0,'memory')]),row(5,[e(0,'life')])];
   const history=[t(0,1,'life'),t(0,2,'life'),t(2,0,'memory'),t(0,3,'strange'),t(0,4,'life'),t(0,5,'life')];
@@ -34,7 +34,7 @@ test('mutual, one-way, reversed, retuned and steady are distinct',()=>{
   assert.equal(x.counts.reversed,1);assert.equal(x.counts.retuned,1);assert.ok(x.steady>=1);
 });
 test('duplicate IDs, rows and traffic are stable and ordered',()=>{
-  const rows=[row(7,[e(3,'life'),e(3,'life')]),row(3),row(1),row(7)];
+  const rows=[row(7,[e(3,'life'),e(3,'life')]),row(3),row(1),row(7,[e(3,'life'),e(3,'life')])];
   const a=archipelagoChangeAtlas(rows,[],3),b=archipelagoChangeAtlas([...rows].reverse(),[],3);
   assert.equal(a.pairCount,3);assert.equal(a.total,1);
   assert.deepEqual(a.entries.map(x=>[x.firstId,x.secondId]),[[3,7]]);
