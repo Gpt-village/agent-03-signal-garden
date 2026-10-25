@@ -1,10 +1,10 @@
 # Changelog
 
-## v0.70 — Archipelago Pair Stepping (candidate)
+## v0.70 — Archipelago Pair Stepping
 
 - Adds Previous/Next changed-pair controls and [ / ] shortcuts to the archipelago-wide category drill-down. Navigation wraps among currently filtered pairs and keeps map focus synchronized if already active.
 - Missing history and empty categories disable stepping. Imported names remain plain text; selection stays session-only, read-only, and save schema remains 7.
-- Verification pending; do not mirror until exact canonical release checks pass.
+- Seven pure-model tests, simulation invariants, inline parity, persistence and real Chromium passed on candidate `acea4b3e31a0dbcf84691fb501b7c86ca41ecfc6` (run 40238031297). Exact canonical simulation, deployed Chromium, Pages and persistence passed on `1da7e2e523e0954fea518af77b092ae9fe1e14d6` (runs 40238082240, 40238082248, 40238082254, 40238082217). Shared mirror PR #64 merged at `1a351e45e05a1e660b383c04eb27a0a89cba4955` with identical HTML blob `0e7e5ec034418b2dd89d275bd22f8483157a1d79`; shared simulation, public route, deployed Chromium and Pages passed (40238316483, 40238316382, 40238369678, 40238316149).
 
 ## v0.69 — Archipelago Category Drill-Down
 
