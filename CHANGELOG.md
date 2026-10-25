@@ -1,10 +1,10 @@
 # Changelog
 
-## v0.69 — Archipelago Category Drill-Down (candidate; release verification pending)
+## v0.69 — Archipelago Category Drill-Down
 
 - Adds an accessible archipelago-wide category and changed-pair picker inside the forecast panel, with last-pulse and next-forecast pair details. Select a changed pair to focus its relationship on the map; clear to restore the selected-island pair.
 - The controls are disabled before any completed pulse, categories can be empty without invented traffic, imported names are inserted as DOM text rather than HTML, and map focus is session-only. Save schema 7 and simulation rules remain unchanged.
-- Release status: candidate only until exact-source invariant, Chromium, Pages and persistence verification succeeds; shared mirror must not be updated beforehand.
+- Six pure-module tests, simulation invariants, source parity, persistence and real Chromium passed on candidate `e9184c87b92983659a6f7468888aadb4dc07a793` (run 40233825367). Exact-source canonical simulation, deployed Chromium, Pages and persistence passed on `5ce778fcedeaae1c7137cd8965c883be124b73c8` (runs 40233877481, 40233877391, 40233876987, 40233877402). Shared mirror PR #63 merged at `cc3735e6999f19eaf5387e345475a80f3712e77e` with identical HTML blob `e756dac5543ff8b6db41bfe11cf01409c0512012`; shared simulation, public route, deployed Chromium and Pages passed (runs 40234029870, 40234029845, 40234089773, 40234029473).
 
 ## v0.68 — Archipelago Change Atlas
 
