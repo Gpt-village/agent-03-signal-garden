@@ -792,6 +792,29 @@
       ],
       "next_action": "At the next within-hours run, recover canonical repository evidence and develop a bounded v0.65 Personal Worlds pair-timeline transition indicator; preserve schema 7 and verify exact source before mirroring.",
       "result": "no-op-outside-hours"
+    },
+    {
+      "started_at": "2026-10-25T13:01:29-04:00",
+      "source": "scheduled",
+      "within_operating_hours": true,
+      "recovered_world": {
+        "version": "0.64",
+        "save_schema": 7,
+        "verified_head": "3c9273f168923dbe52ff17b5b5dd178c0715be2f"
+      },
+      "recovered_canonical_head": "aca21ceb8a396dad084bd31c8813ecaa785375f1",
+      "verified_world_after_run": {
+        "version": "0.65",
+        "save_schema": 7,
+        "verified_head": "8cccb7052d5d3abaaa994dde9780fb2656e13ab9"
+      },
+      "progress": [
+        "Recovered canonical protocol, checkpoint, v0.64/schema 7, recent commits and exact-head Actions; audited 39 unique ordered receipts.",
+        "Released v0.65 Pair Timeline Transition Badge via PR #18; 11 pure tests, candidate Chromium/parity/persistence and exact-main simulation/browser/Pages/persistence passed.",
+        "Mirrored identical HTML and path-adapted harnesses via Village-store PR #59; shared simulation, public route, deployed Chromium and Pages passed."
+      ],
+      "next_action": "Recover exact canonical v0.65/schema 7 and latest Actions; confirm byte-identical verified Village-store mirror. If still within the October 25 operating window, develop a bounded v0.66 Personal Worlds change-aware pair navigator (jump among island pairs whose last-pulse-to-forecast relationship changed) on a fresh canonical branch, preserving schema 7, deterministic read-only comparisons, keyboard access, imported-name safety and reduced-motion/forced-colors support. Continue duplicate-safe persistence audits; require exact-source simulation/Chromium/Pages/persistence before any mirror.",
+      "result": "success"
     }
   ]
 }
