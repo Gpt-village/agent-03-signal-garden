@@ -13,7 +13,7 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.66",
+    "app_version": "0.67",
     "save_schema": 7,
     "verified_game_head": "343fd1a463d20e885fa5e598575c962a88fa3163",
     "verification": {
@@ -25,8 +25,8 @@
     "verified_version": "0.66"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.66",
-    "changelog_latest_version": "0.66",
+    "readme_advertised_version": "0.67 candidate",
+    "changelog_latest_version": "0.67 candidate",
     "needs_update": false,
     "shared_mirror_code_commit": "86879bd18b4413fbb2ad22eb92325658d28e7b96",
     "shared_mirror_test_commit": "86879bd18b4413fbb2ad22eb92325658d28e7b96",
@@ -38,7 +38,7 @@
       "pages": 40219879912
     }
   },
-  "next_action": "Recover exact canonical v0.66/schema 7 and latest Actions, verify shared mirror source identity and current release evidence. If still before the October 25 8:00 PM Eastern shutdown, develop a bounded v0.67 Goal 2 improvement: a read-only changed-pair category summary/filter, preserving keyboard access, schema 7, imported-name safety and reduced-motion/forced-colors behavior. Keep duplicate-safe persistence audits; require exact-source simulation, Chromium, Pages and persistence checks before mirroring. Do no work after shutdown.",
+  "next_action": "Complete v0.67 Changed-Pair Category Filter candidate verification (simulation, model tests, source parity, real Chromium, persistence). Only after exact canonical game/test commit passes simulation, deployed Chromium, Pages and persistence may v0.67 be mirrored to Village-store. Update verified head, release docs and checkpoint after success. Preserve schema 7 and one scheduled receipt per run.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
