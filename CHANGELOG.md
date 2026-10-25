@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.66 — Change-Aware Pair Navigation (candidate)
+
+- Adds read-only Previous/Next changed-pair controls and Shift+J / Shift+K shortcuts. Uses the canonical last completed migration and next deterministic forecast to skip steady and quiet pairs while retaining ended exchanges.
+- Before a completed pulse, change navigation stays disabled. Navigation wraps in stable island-ID order, preserves manual pair selection, never changes save data or focus, and keeps schema 7. Accessible text explains empty states and shortcut behavior.
+- Release evidence pending exact-source candidate and main verification; no shared mirror until all gates pass.
+
+
 ## v0.65 — Pair Timeline Transition Badge
 
 - Adds a read-only, static transition badge to the inspected island pair on the map and an adjacent accessible text region. The badge compares the last completed pulse with the next deterministic forecast, classifying new, ended, steady, quiet, reversed, mutual, one-way and family-retuned relationships.
