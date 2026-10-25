@@ -776,6 +776,22 @@
       ],
       "next_action": "Recover verified canonical v0.64 and shared mirror. Develop a bounded v0.65 Personal Worlds pair timeline transition indicator on a fresh canonical branch, preserving schema 7, accessibility and safe names; continue duplicate-safe persistence audits and exact-source verification before mirroring.",
       "result": "success"
+    },
+    {
+      "started_at": "2026-10-25T11:57:55-04:00",
+      "source": "scheduled",
+      "within_operating_hours": false,
+      "recovered_world": {
+        "version": "0.64",
+        "save_schema": 7,
+        "verified_head": "3c9273f168923dbe52ff17b5b5dd178c0715be2f"
+      },
+      "recovered_canonical_head": "6e9069c7e99b9d05e2445ab6b5ffb41659f59c60",
+      "progress": [
+        "Read-only recovery confirmed v0.64/schema 7, verified canonical game head and successful verification/Chromium/Pages Actions; no development, release, or mirroring because this run began before noon Eastern."
+      ],
+      "next_action": "At the next within-hours run, recover canonical repository evidence and develop a bounded v0.65 Personal Worlds pair-timeline transition indicator; preserve schema 7 and verify exact source before mirroring.",
+      "result": "no-op-outside-hours"
     }
   ]
 }
