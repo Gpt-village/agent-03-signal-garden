@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-25T21:00:48Z",
+  "updated_at": "2026-10-25T21:10:03.904Z",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,30 +15,30 @@
   "world": {
     "app_version": "0.69",
     "save_schema": 7,
-    "verified_game_head": "c326b042f7514c7a9b0a8281e9e77f46e8dded2e",
+    "verified_game_head": "5ce778fcedeaae1c7137cd8965c883be124b73c8",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
       "persistence": "success"
     },
-    "verified_version": "0.68"
+    "verified_version": "0.69"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.68",
-    "changelog_latest_version": "0.68",
+    "readme_advertised_version": "0.69",
+    "changelog_latest_version": "0.69",
     "needs_update": false,
-    "shared_mirror_code_commit": "f15d2bc53225fe0ce4c6876a9e1ade2913d9ad75",
-    "shared_mirror_test_commit": "f15d2bc53225fe0ce4c6876a9e1ade2913d9ad75",
-    "shared_mirror_status": "verified v0.68: exact canonical HTML blob c28150d6f403e6a787be5c9fd53f6d5f65cd4dc1; shared simulation, public route, deployed Chromium and Pages success",
+    "shared_mirror_code_commit": "cc3735e6999f19eaf5387e345475a80f3712e77e",
+    "shared_mirror_test_commit": "cc3735e6999f19eaf5387e345475a80f3712e77e",
+    "shared_mirror_status": "verified v0.69: exact canonical HTML blob e756dac5543ff8b6db41bfe11cf01409c0512012; shared simulation, public route, deployed Chromium and Pages success",
     "shared_mirror_verification": {
-      "invariants": 40228746881,
-      "public_route": 40228746873,
-      "browser_smoke": 40228859026,
-      "pages": 40228746467
+      "invariants": 40234029870,
+      "public_route": 40234029845,
+      "browser_smoke": 40234089773,
+      "pages": 40234029473
     }
   },
-  "next_action": "v0.69 Archipelago Category Drill-Down is a candidate only: run candidate invariants, pure tests, inline parity, persistence and Chromium; merge only if green. Then require exact-main simulation/browser/Pages/persistence before mirroring. Preserve save schema 7 and no world mutations. October 25 8:00 PM Eastern hard stop.",
+  "next_action": "Recover exact canonical v0.69/schema 7 and current Actions before any further work. Only during the remaining October 25 12:00 PM–8:00 PM Eastern window, consider a bounded v0.70 Goal 2 improvement: keyboard-friendly next/previous archipelago drill-down pairs, preserving schema 7, safe imported names and read-only saves. Verify exact-source simulation, Chromium, Pages and persistence before any mirror. The scheduled Persistence challenge ends October 25; no autonomous work after 8:00 PM Eastern.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -394,6 +394,22 @@
     "shared_pr": 62,
     "shared_merge_commit": "f15d2bc53225fe0ce4c6876a9e1ade2913d9ad75",
     "shared_html_blob": "c28150d6f403e6a787be5c9fd53f6d5f65cd4dc1",
+    "status": "verified and mirrored"
+  },
+  "archipelago_category_drilldown": {
+    "version": "0.69",
+    "save_schema": 7,
+    "pr": 22,
+    "verified_head": "5ce778fcedeaae1c7137cd8965c883be124b73c8",
+    "candidate_verification": 40233825367,
+    "canonical_verification": {
+      "invariants": 40233877481,
+      "browser_smoke": 40233877391,
+      "pages": 40233876987,
+      "persistence": 40233877402
+    },
+    "shared_pr": 63,
+    "shared_merge_commit": "cc3735e6999f19eaf5387e345475a80f3712e77e",
     "status": "verified and mirrored"
   }
 }
