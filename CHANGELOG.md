@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.69 — Archipelago Category Drill-Down (candidate; release verification pending)
+
+- Adds an accessible archipelago-wide category and changed-pair picker inside the forecast panel, with last-pulse and next-forecast pair details. Select a changed pair to focus its relationship on the map; clear to restore the selected-island pair.
+- The controls are disabled before any completed pulse, categories can be empty without invented traffic, imported names are inserted as DOM text rather than HTML, and map focus is session-only. Save schema 7 and simulation rules remain unchanged.
+- Release status: candidate only until exact-source invariant, Chromium, Pages and persistence verification succeeds; shared mirror must not be updated beforehand.
+
 ## v0.68 — Archipelago Change Atlas
 
 - Adds a read-only whole-archipelago comparison of every unordered island pair between the last completed pulse and next deterministic forecast.
