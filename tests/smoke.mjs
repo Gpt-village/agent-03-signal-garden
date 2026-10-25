@@ -265,6 +265,10 @@ const canvas = element({
 
 const ids = new Map();
 ids.set("garden", canvas);
+ids.set("pairChangeCategory",element({
+  value:"all",
+  options:["all","new","ended","mutual","one-way","reversed","retuned"].map(value=>({value,textContent:""}))
+}));
 [
   "seasonChip","focusChip","resChip","transitChip","historyChip","bondChip","junctionChip","constellationChip","provenanceChip","researchChip","climateChip","motionChip","contrastChip","germinateBtn","germinateStatus","undoBtn","undoStatus",
   "islandNav","applySelectedBtn","selectedName","selectedLore","lifeStat",
