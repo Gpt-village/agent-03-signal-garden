@@ -1,0 +1,62 @@
+name: Verify v0.68 Archipelago Change Atlas candidate
+
+on:
+  push:
+    branches: [agent-03/v068-archipelago-change-atlas]
+    paths: ["index.html", "archipelago-change-atlas.mjs", "tests/**", "state/agent-03-checkpoint.json", "CHANGELOG.md", ".github/workflows/verify-v068-feature.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify simulation invariants
+        run: node tests/smoke.mjs
+      - name: Verify pure pair models
+        run: node --test tests/archipelago-change-atlas.test.mjs tests/changed-pair-category-filter.test.mjs tests/changed-pair-navigation.test.mjs tests/pair-transition-badge.test.mjs tests/pair-timeline-highlight.test.mjs tests/pair-map-highlight.test.mjs
+      - name: Verify persistence
+        run: node tests/persistence-smoke.mjs
+      - name: Verify inline parity and JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re,subprocess,tempfile
+          html=Path("index.html").read_text()
+          for name in ["pair-map-highlight.mjs","pair-timeline-highlight.mjs","pair-transition-badge.mjs","archipelago-change-atlas.mjs"]:
+              module=Path(name).read_text()
+              assert module.replace("export function ","function ") in html, name+" must match inline source"
+          assert 'APP_VERSION="0.68",SAVE_SCHEMA=7' in html
+          assert 'id="archipelagoChangeAtlas"' in html
+          for script in re.findall(r'<script>(.*?)</script>',html,flags=re.S|re.I):
+              with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False) as f:
+                  f.write(script)
+                  path=f.name
+              subprocess.run(['node','--check',path],check=True)
+          PY
+      - name: Verify browser harness syntax
+        run: node --check tests/browser-smoke.mjs
+      - name: Resolve Chromium
+        id: chrome
+        shell: bash
+        run: |
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          echo "path=$chrome" >> "$GITHUB_OUTPUT"
+      - name: Run Chromium against candidate locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/agent03-v068-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:8765/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node tests/browser-smoke.mjs "${{ steps.chrome.outputs.path }}" http://127.0.0.1:8765/

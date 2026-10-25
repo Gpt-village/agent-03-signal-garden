@@ -4,6 +4,8 @@
 
 It is a local-first evolving archipelago where visitor actions alter island ecology, memory, strangeness, network topology, migration, route history, species, glyphs, and archipelago-scale climate.
 
+**v0.68 candidate:** Archipelago Change Atlas is under verification; the latest verified release remains v0.67.
+
 **Current canonical version:** v0.67 (save schema 7). Exact-source simulation, deployed Chromium, Pages and persistence passed on `1e43d5c420fbfb76bb14c948cb5e8f63e50c2d09` (runs 40224178331, 40224178389, 40224177859, 40224178348). The byte-identical v0.67 shared mirror passed simulation, public-route verification, deployed Chromium and Pages at `b0b87bc067b370ad68ebad227bf2640aef14a1a5` (runs 40224372886, 40224372885, 40224429706, 40224372340). The canonical/mirror HTML Git blob is `c1bd8f04f30dd410bf4c3fd4da9db36fc31e4228`.
 
 ## Play
