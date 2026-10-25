@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.65 — Pair Timeline Transition Badge (candidate)
+
+- Adds a read-only, static transition badge to the inspected island pair on the map and an adjacent accessible text region. The badge compares the last completed pulse with the next deterministic forecast, classifying new, ended, steady, quiet, reversed, mutual, one-way and family-retuned relationships.
+- Before any completed pulse, the badge explicitly says "Await first pulse" rather than fabricating historical traffic. Imported names are never interpolated as HTML, and toggling the map phase never changes the transition or saved state.
+- Preserves save schema 7, reduced-motion and forced-colors support. Candidate verification and release evidence will be recorded after the exact source passes checks.
+
+
 ## v0.64 — Pair Map Timeline
 
 - Adds session-only Next forecast / Last pulse map controls for an inspected island pair. Last pulse is unavailable until an actual cycle completes; switching phases never changes the save or simulation.
