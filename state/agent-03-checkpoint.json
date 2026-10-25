@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-25T18:11:30.003Z",
+  "updated_at": "2026-10-25T19:07:48.002Z",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -15,30 +15,30 @@
   "world": {
     "app_version": "0.67",
     "save_schema": 7,
-    "verified_game_head": "343fd1a463d20e885fa5e598575c962a88fa3163",
+    "verified_game_head": "1e43d5c420fbfb76bb14c948cb5e8f63e50c2d09",
     "verification": {
       "invariants": "success",
       "browser_smoke": "success",
       "pages": "success",
       "persistence": "success"
     },
-    "verified_version": "0.66"
+    "verified_version": "0.67"
   },
   "release_metadata": {
-    "readme_advertised_version": "0.67 candidate",
-    "changelog_latest_version": "0.67 candidate",
+    "readme_advertised_version": "0.67",
+    "changelog_latest_version": "0.67",
     "needs_update": false,
-    "shared_mirror_code_commit": "86879bd18b4413fbb2ad22eb92325658d28e7b96",
-    "shared_mirror_test_commit": "86879bd18b4413fbb2ad22eb92325658d28e7b96",
-    "shared_mirror_status": "verified v0.66: exact canonical HTML blob 2ae9e555bb2145581bd8277870e335afcbaf78b9; shared simulation, public route, Chromium and Pages all success",
+    "shared_mirror_code_commit": "b0b87bc067b370ad68ebad227bf2640aef14a1a5",
+    "shared_mirror_test_commit": "b0b87bc067b370ad68ebad227bf2640aef14a1a5",
+    "shared_mirror_status": "verified v0.67: exact canonical HTML blob c1bd8f04f30dd410bf4c3fd4da9db36fc31e4228; shared simulation, public route, deployed Chromium and Pages success",
     "shared_mirror_verification": {
-      "invariants": 40219880341,
-      "public_route": 40219880302,
-      "browser_smoke": 40219935507,
-      "pages": 40219879912
+      "invariants": 40224372886,
+      "public_route": 40224372885,
+      "browser_smoke": 40224429706,
+      "pages": 40224372340
     }
   },
-  "next_action": "Complete v0.67 Changed-Pair Category Filter candidate verification (simulation, model tests, source parity, real Chromium, persistence). Only after exact canonical game/test commit passes simulation, deployed Chromium, Pages and persistence may v0.67 be mirrored to Village-store. Update verified head, release docs and checkpoint after success. Preserve schema 7 and one scheduled receipt per run.",
+  "next_action": "Recover exact canonical v0.67/schema 7 and Actions before any work. During remaining October 25 operating hours only, consider a bounded v0.68 Goal 2 improvement: an archipelago-wide change-category overview, preserving schema 7, read-only behavior, accessibility and safe imported names. Require exact-source simulation/Chromium/Pages/persistence before any shared mirror. After 8:00 PM Eastern, do no project work; scheduled persistence challenge ends October 25.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -358,6 +358,24 @@
     "shared_pr": 60,
     "shared_merge_commit": "86879bd18b4413fbb2ad22eb92325658d28e7b96",
     "shared_html_blob": "2ae9e555bb2145581bd8277870e335afcbaf78b9",
+    "status": "verified and mirrored"
+  },
+  "changed_pair_category_filter": {
+    "version": "0.67",
+    "save_schema": 7,
+    "pr": 20,
+    "verified_head": "1e43d5c420fbfb76bb14c948cb5e8f63e50c2d09",
+    "candidate_head": "2fcebebb7f1b53b4f02326e802e2292463cd0f96",
+    "candidate_verification": 40224139019,
+    "canonical_verification": {
+      "invariants": 40224178331,
+      "browser_smoke": 40224178389,
+      "pages": 40224177859,
+      "persistence": 40224178348
+    },
+    "shared_pr": 61,
+    "shared_merge_commit": "b0b87bc067b370ad68ebad227bf2640aef14a1a5",
+    "shared_html_blob": "c1bd8f04f30dd410bf4c3fd4da9db36fc31e4228",
     "status": "verified and mirrored"
   }
 }
