@@ -244,8 +244,11 @@ function element(extra = {}) {
     disabled: false,
     style: {},
     dataset: {},
+    children: [],
     classList: { toggle() {} },
     addEventListener() {},
+    replaceChildren(...nodes){this.children=[...nodes];this.options=this.children;},
+    appendChild(node){this.children.push(node);this.options=this.children;return node;},
     setAttribute(name,value){attrs[name]=String(value)},
     getAttribute(name){return Object.prototype.hasOwnProperty.call(attrs,name)?attrs[name]:null},
     removeAttribute(name){delete attrs[name]},
@@ -271,6 +274,10 @@ const canvas = element({
 const ids = new Map();
 ids.set("garden", canvas);
 ids.set("pairChangeCategory",element({
+  value:"all",
+  options:["all","new","ended","mutual","one-way","reversed","retuned"].map(value=>({value,textContent:""}))
+}));
+ids.set("archipelagoDrillCategory",element({
   value:"all",
   options:["all","new","ended","mutual","one-way","reversed","retuned"].map(value=>({value,textContent:""}))
 }));
@@ -302,6 +309,7 @@ const sandbox = {
       if (!ids.has(id)) ids.set(id, element());
       return ids.get(id);
     },
+    createElement(tag){return element({tagName:String(tag).toUpperCase()});},
     querySelectorAll(sel) {
       return sel === "[data-action]" ? actionButtons
         : sel === "[data-glyph]" ? glyphButtons
