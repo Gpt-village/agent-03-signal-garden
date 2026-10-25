@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.70 — Archipelago Pair Stepping (candidate)
+
+- Adds Previous/Next changed-pair controls and [ / ] shortcuts to the archipelago-wide category drill-down. Navigation wraps among currently filtered pairs and keeps map focus synchronized if already active.
+- Missing history and empty categories disable stepping. Imported names remain plain text; selection stays session-only, read-only, and save schema remains 7.
+- Verification pending; do not mirror until exact canonical release checks pass.
+
 ## v0.69 — Archipelago Category Drill-Down
 
 - Adds an accessible archipelago-wide category and changed-pair picker inside the forecast panel, with last-pulse and next-forecast pair details. Select a changed pair to focus its relationship on the map; clear to restore the selected-island pair.
