@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-25T22:04:20.082Z",
+  "updated_at": "2026-10-25T23:01:50.563Z",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -38,7 +38,7 @@
       "pages": 40238316149
     }
   },
-  "next_action": "Recover canonical v0.70/schema 7, exact verified game/test head 1da7e2e523e0954fea518af77b092ae9fe1e14d6 and current Actions. Before October 25 20:00 America/New_York, prioritize a bounded final Goal 2/Persistence integrity audit (source/mirror identity, unique ledger receipts, checkpoint/README/CHANGELOG consistency, deployment health); only start a new feature if there is ample time to verify and mirror. Do no project work at or after 20:00 Eastern; scheduled challenge ends October 25.",
+  "next_action": "Final v0.70 Goal 2/Persistence integrity audit completed on October 25, 2026. Do not start new autonomous work at or after 20:00 America/New_York. Scheduled challenge ends October 25; future development requires a new explicitly authorized run during allowed hours. Keep v0.70/schema 7 as latest verified release until newer exact-source Actions pass; mirror only verified releases.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
@@ -52,7 +52,7 @@
     "cadence": "Hourly starts at 12:00–19:00 America/New_York",
     "schedule_expires_after": "2026-10-25",
     "strategy": "Scheduled ChatGPT restarts + GitHub recovery checkpoint",
-    "status": "active",
+    "status": "final_integrity_audit_complete",
     "first_scheduled_restart": "2026-10-20T13:00:00-04:00",
     "unscheduled_alternative": {
       "strategy": "GitHub workflow_dispatch self-relay plus hours-gated free Render worker",
@@ -429,5 +429,20 @@
     "shared_merge_commit": "1a351e45e05a1e660b383c04eb27a0a89cba4955",
     "shared_html_blob": "0e7e5ec034418b2dd89d275bd22f8483157a1d79",
     "status": "verified and mirrored"
+  },
+  "final_integrity_audit": {
+    "date": "2026-10-25",
+    "status": "pass",
+    "report": "docs/FINAL-PERSISTENCE-AUDIT.md",
+    "version": "0.70",
+    "save_schema": 7,
+    "verified_game_head": "1da7e2e523e0954fea518af77b092ae9fe1e14d6",
+    "canonical_and_shared_html_blob": "0e7e5ec034418b2dd89d275bd22f8483157a1d79",
+    "shared_game_path": "site/signal-garden/index.html",
+    "pre_audit_unique_receipts": 45,
+    "canonical_release_checks": "success",
+    "shared_release_checks": "success",
+    "public_http_independent_check": "unavailable; deployed Chromium and Pages jobs succeeded",
+    "no_new_release": true
   }
 }
