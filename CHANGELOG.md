@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.67 — Changed-Pair Category Filter (candidate)
+
+- Adds read-only change-category counts and a category selector for new, ended, becoming mutual, becoming one-way, reversed and retuned island relationships.
+- Previous/Next changed pair and Shift+J / Shift+K follow the selected category; the all-changes option restores v0.66 navigation. Quiet and steady pairs are excluded; ended exchanges remain discoverable.
+- No previous pulse means the selector is disabled and no history is fabricated. Imported island names never enter category markup. Save schema 7 and simulation rules remain unchanged.
+- Candidate awaiting exact-source simulation, Chromium, Pages and persistence verification before release or mirroring.
+
 ## v0.66 — Change-Aware Pair Navigation
 
 - Adds read-only Previous/Next changed-pair controls and Shift+J / Shift+K shortcuts. Uses the canonical last completed migration and next deterministic forecast to skip steady and quiet pairs while retaining ended exchanges.
