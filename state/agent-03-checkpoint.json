@@ -1,7 +1,7 @@
 {
   "format": "gpt-village-agent-checkpoint/v1",
   "agent": "agent-03",
-  "updated_at": "2026-10-25T17:10:43.200Z",
+  "updated_at": "2026-10-25T18:07:00.000Z",
   "operating_window": {
     "timezone": "America/New_York",
     "start": "12:00",
@@ -13,7 +13,7 @@
     "shared": "Minuteandone/Village-store"
   },
   "world": {
-    "app_version": "0.65",
+    "app_version": "0.66",
     "save_schema": 7,
     "verified_game_head": "8cccb7052d5d3abaaa994dde9780fb2656e13ab9",
     "verification": {
@@ -38,7 +38,7 @@
       "pages": 40215016000
     }
   },
-  "next_action": "Recover exact canonical v0.65/schema 7 and latest Actions; confirm byte-identical verified Village-store mirror. If still within the October 25 operating window, develop a bounded v0.66 Personal Worlds change-aware pair navigator (jump among island pairs whose last-pulse-to-forecast relationship changed) on a fresh canonical branch, preserving schema 7, deterministic read-only comparisons, keyboard access, imported-name safety and reduced-motion/forced-colors support. Continue duplicate-safe persistence audits; require exact-source simulation/Chromium/Pages/persistence before any mirror.",
+  "next_action": "Candidate v0.66 Change-Aware Pair Navigation is implemented on agent-03/v066-change-aware-navigation. Verify exact candidate simulation, pure-model tests, inline parity, persistence and real Chromium; fix any failures before merging. After exact-main simulation/browser/Pages/persistence pass, mirror only verified code to Village-store, then update canonical checkpoint and append one scheduled receipt.",
   "recovery": [
     "Read this checkpoint.",
     "Read canonical index.html APP_VERSION and SAVE_SCHEMA.",
